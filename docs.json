@@ -1,68 +1,100 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Intain Markets Credit Facility Documentation",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#1E40AF",
+    "light": "#3B82F6",
+    "dark": "#1E3A8A"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "User Guide",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "user-guide/overview",
+              "user-guide/registration",
+              "user-guide/authentication"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Credit Facility Flow",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "user-guide/credit-facility/overview",
+              "user-guide/credit-facility/term-sheet",
+              "user-guide/credit-facility/master-commitment",
+              "user-guide/credit-facility/funding-request",
+              "user-guide/credit-facility/funding-notice",
+              "user-guide/credit-facility/loan-mapping"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Document Management",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "user-guide/documents/docusign-integration",
+              "user-guide/documents/ipfs-storage",
+              "user-guide/documents/file-uploads"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Servicer Operations",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "user-guide/servicer/loan-tape-upload",
+              "user-guide/servicer/monthly-reporting",
+              "user-guide/servicer/loan-management"
+            ]
+          },
+          {
+            "group": "Role-Based Access",
+            "pages": [
+              "user-guide/roles/issuer",
+              "user-guide/roles/facility-agent",
+              "user-guide/roles/lender",
+              "user-guide/roles/servicer"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "API Reference",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Credit Facility APIs",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/credit-facility/overview",
+              "api-reference/credit-facility/term-sheet-apis",
+              "api-reference/credit-facility/master-commitment-apis",
+              "api-reference/credit-facility/funding-request-apis",
+              "api-reference/credit-facility/funding-notice-apis"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Authentication & User Management",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/auth/authentication",
+              "api-reference/auth/user-registration",
+              "api-reference/auth/role-management"
+            ]
+          },
+          {
+            "group": "Document & File Management",
+            "pages": [
+              "api-reference/documents/docusign",
+              "api-reference/documents/ipfs",
+              "api-reference/documents/file-upload"
+            ]
+          },
+          {
+            "group": "Loan & Servicer APIs",
+            "pages": [
+              "api-reference/loans/loan-tape-upload",
+              "api-reference/loans/loan-mapping",
+              "api-reference/loans/servicer-operations"
             ]
           }
         ]

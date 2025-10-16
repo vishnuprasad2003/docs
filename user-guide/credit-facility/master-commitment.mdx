@@ -1,0 +1,294 @@
+---
+title: "Master Commitment Configuration"
+description: "Complete guide to master commitment setup, lender management, and activation"
+---
+
+## Master Commitment Overview
+
+The Master Commitment is the formal credit facility agreement that is automatically created when a term sheet is approved. It contains detailed terms, lender groups, collateral rules, and commitment amounts that govern the entire credit facility relationship.
+
+## Auto-Creation Process
+
+### **Trigger Event**
+When a term sheet reaches "Accepted" status, the system automatically:
+1. **Creates Master Commitment** with "Draft" status
+2. **Pre-populates Data** from the approved term sheet
+3. **Sets Read-Only Fields** from term sheet information
+4. **Provides Editable Fields** for facility agent configuration
+
+### **Pre-Populated Data (Read-Only)**
+- Term sheet information and terms
+- Issuer organization details
+- Basic facility parameters
+- Original requested amounts
+
+### **Editable Fields (Facility Agent)**
+- Lender groups and commitments
+- Collateral eligibility rules
+- Detailed facility terms
+- Servicer organization assignment
+
+## Master Commitment Configuration
+
+### **Step 1: Access Master Commitment**
+
+1. **Login** as Facility Agent (Underwriter)
+2. **Navigate** to Credit Facility section
+3. **Find** the auto-created master commitment
+4. **Click** to open for configuration
+
+### **Step 2: Configure Lender Groups**
+
+#### **Lender Group Structure**
+```json
+{
+  "lenderGroups": [
+    {
+      "lenderGroupId": "uuid-generated",
+      "lenderName": "ABC Bank",
+      "lenderOrgId": "LENDER-ORG-12345",
+      "commitmentAmount": 25000000,
+      "votingPercentage": 50,
+      "lenderEmail": "contact@abcbank.com",
+      "lenderContactPerson": "John Doe",
+      "lenderPhone": "+1-555-0123",
+      "notes": "Primary lender",
+      "status": "Active"
+    }
+  ]
+}
+```
+
+#### **Lender Group Fields**
+- **Lender Name**: Legal name of the lender
+- **Lender Organization ID**: Unique identifier for lender
+- **Commitment Amount**: Amount this lender is committing
+- **Voting Percentage**: Percentage of voting rights
+- **Contact Information**: Primary contact details
+- **Status**: Active/Inactive status
+
+### **Step 3: Configure Collateral Rules**
+
+#### **Collateral Rule Structure**
+```json
+{
+  "collateralRules": [
+    {
+      "ruleGroupNumber": 1,
+      "ruleGroupName": "Loan Eligibility Rules",
+      "rules": [
+        {
+          "ruleId": "uuid-generated",
+          "ruleType": "loanTypeEligibility",
+          "loanType": "Residential Mortgage",
+          "minFICO": 680,
+          "maxLTV": 80,
+          "minLoanAmount": 100000,
+          "isActive": true
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### **Rule Types**
+- **Loan Type Eligibility**: Eligible loan types
+- **Credit Score Requirements**: Minimum FICO scores
+- **Loan-to-Value Limits**: Maximum LTV ratios
+- **Loan Amount Limits**: Minimum/maximum loan amounts
+- **Geographic Restrictions**: Eligible geographic areas
+- **Property Type Limits**: Eligible property types
+
+### **Step 4: Set Facility Parameters**
+
+#### **Commitment Details**
+- **Total Commitment Amount**: Sum of all lender commitments
+- **Advance Rate**: Percentage of collateral value
+- **Pricing Terms**: Interest rate structure
+- **Maturity Date**: Facility expiration
+- **Draw Frequency**: How often funds can be drawn
+
+#### **Servicer Assignment**
+- **Servicer Organization ID**: Assigned loan servicer
+- **Servicer Contact**: Primary servicer contact
+- **Servicing Terms**: Servicing fee structure
+- **Reporting Requirements**: Monthly reporting obligations
+
+## Status Management
+
+### **Status Flow**
+```
+Draft → PendingLenderApproval → ACTIVE
+```
+
+### **Status Descriptions**
+
+#### **Draft**
+- **Editable**: Facility agent can modify all fields
+- **Auto-Save**: Changes automatically saved
+- **Private**: Only visible to facility agent
+- **Actions**: Can edit, save, submit for lender approval
+
+#### **PendingLenderApproval**
+- **Read-Only**: Cannot be edited
+- **Lender Review**: Available to selected lenders
+- **DocuSign Ready**: Lenders can sign electronically
+- **Actions**: Any selected lender can approve
+
+#### **ACTIVE**
+- **Operational**: Available for funding requests
+- **Read-Only**: Cannot be modified
+- **Funding Ready**: Can accept funding requests
+- **Actions**: Can create funding requests against it
+
+## Lender Approval Process
+
+### **Approval Workflow**
+
+1. **Facility Agent Finalization**
+   - Complete all required fields
+   - Click "Submit for Lender Approval"
+   - Status changes to "PendingLenderApproval"
+
+2. **Lender Notification**
+   - Selected lenders receive notification
+   - Master commitment becomes visible to lenders
+   - DocuSign envelope is prepared
+
+3. **Lender Review**
+   - Lenders review terms and conditions
+   - Can access all facility details
+   - Can communicate with facility agent
+
+4. **Lender Approval**
+   - Any selected lender can approve
+   - DocuSign completion required
+   - Status changes to "ACTIVE"
+
+### **Approval Requirements**
+- **Any Lender**: Any selected lender can approve
+- **DocuSign Required**: Electronic signature mandatory
+- **No Threshold**: Simple approval (not majority-based)
+- **Immediate Activation**: Status changes immediately upon approval
+
+## Auto-Save Functionality
+
+### **Real-Time Saving**
+- **Automatic Saving**: Changes saved as you type
+- **Draft Status**: Remains in "Draft" status during editing
+- **No Data Loss**: Prevents accidental data loss
+- **Resume Anytime**: Continue editing from where you left off
+
+### **Auto-Save Fields**
+- Lender group information
+- Collateral rule configurations
+- Facility parameters
+- Servicer assignments
+- Notes and comments
+
+## Validation Rules
+
+### **Required Fields**
+- At least one lender group
+- Total commitment amount
+- Collateral eligibility rules
+- Servicer organization assignment
+- Contact information for all parties
+
+### **Business Rules**
+- **Commitment Sum**: Total lender commitments must equal facility amount
+- **Voting Percentages**: Must sum to 100%
+- **Lender Uniqueness**: No duplicate lender organizations
+- **Rule Completeness**: All rule groups must have at least one rule
+
+## Best Practices
+
+### **Lender Group Management**
+- **Diversify Lenders**: Include multiple lenders for risk distribution
+- **Clear Communication**: Maintain open communication with lenders
+- **Realistic Commitments**: Ensure lenders can fulfill commitments
+- **Contact Information**: Keep all contact details current
+
+### **Collateral Rules**
+- **Comprehensive Coverage**: Cover all relevant loan types
+- **Realistic Criteria**: Set achievable eligibility criteria
+- **Regular Review**: Periodically review and update rules
+- **Documentation**: Clearly document all rule logic
+
+### **Facility Configuration**
+- **Thorough Review**: Review all terms before submission
+- **Stakeholder Input**: Get input from all relevant parties
+- **Documentation**: Maintain complete documentation
+- **Testing**: Test all configurations before activation
+
+## Troubleshooting
+
+### **Common Issues**
+
+#### **Cannot Edit Master Commitment**
+- **Check Status**: Ensure status is "Draft"
+- **Verify Permissions**: Confirm you have facility agent role
+- **Refresh Page**: Try refreshing the browser
+- **Contact Support**: If issues persist, contact support
+
+#### **Lender Approval Issues**
+- **Check Lender Status**: Verify lender is active and selected
+- **DocuSign Problems**: Ensure DocuSign integration is working
+- **Communication**: Contact lender directly if needed
+- **Support**: Contact support for technical issues
+
+#### **Validation Errors**
+- **Review Required Fields**: Ensure all required fields are completed
+- **Check Business Rules**: Verify all business rules are met
+- **Data Integrity**: Check for data inconsistencies
+- **Save and Retry**: Try saving and submitting again
+
+## API Integration
+
+### **Get Master Commitment**
+```http
+GET /cf/master-commitments/:masterCommitmentId
+Authorization: Bearer <token>
+```
+
+### **Auto-Save Field**
+```http
+POST /cf/autoSaveField/:masterCommitmentId
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "fieldName": "totalCommitmentAmount",
+  "fieldValue": 75000000
+}
+```
+
+### **Submit for Lender Approval**
+```http
+POST /cf/createMasterCommitment
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "termSheetId": "TS-20241201-1701234567-abc123",
+  "payingAgentOrgId": "PA-ORG-12345",
+  "totalCommitmentAmount": 50000000,
+  "collateralRules": [...],
+  "lenderGroups": [...]
+}
+```
+
+## Next Steps
+
+<Card title="Funding Request Process" icon="money-bill-wave" href="/user-guide/credit-facility/funding-request">
+  Learn how to create funding requests against active master commitments
+</Card>
+
+<Card title="DocuSign Integration" icon="signature" href="/user-guide/documents/docusign-integration">
+  Understand DocuSign electronic signature workflows
+</Card>
+
+<Card title="API Documentation" icon="code" href="/api-reference/credit-facility/master-commitment-apis">
+  Explore master commitment API endpoints
+</Card>
