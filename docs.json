@@ -8,53 +8,60 @@
     "dark": "#1E3A8A"
   },
   "favicon": "/favicon.svg",
-  "navigation": [
-    {
-      "group": "Getting Started",
-      "pages": [
-        "index",
-        "user-guide/overview",
-        "user-guide/registration",
-        "user-guide/authentication"
-      ]
-    },
-    {
-      "group": "Credit Facility Workflow",
-      "pages": [
-        "user-guide/credit-facility/overview",
-        "user-guide/credit-facility/term-sheet",
-        "user-guide/credit-facility/master-commitment",
-        "user-guide/credit-facility/funding-request",
-        "user-guide/credit-facility/funding-notice",
-        "user-guide/credit-facility/loan-mapping"
-      ]
-    },
-    {
-      "group": "Document Management",
-      "pages": [
-        "user-guide/documents/docusign-integration",
-        "user-guide/documents/ipfs-storage",
-        "user-guide/documents/file-uploads"
-      ]
-    },
-    {
-      "group": "Servicer Operations",
-      "pages": [
-        "user-guide/servicer/loan-tape-upload",
-        "user-guide/servicer/monthly-reporting",
-        "user-guide/servicer/loan-management"
-      ]
-    },
-    {
-      "group": "Role-Based Access",
-      "pages": [
-        "user-guide/roles/issuer",
-        "user-guide/roles/facility-agent",
-        "user-guide/roles/lender",
-        "user-guide/roles/servicer"
-      ]
-    }
-  ],
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "User Guide",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "index",
+              "user-guide/overview",
+              "user-guide/registration",
+              "user-guide/authentication"
+            ]
+          },
+          {
+            "group": "Credit Facility Workflow",
+            "pages": [
+              "user-guide/credit-facility/overview",
+              "user-guide/credit-facility/term-sheet",
+              "user-guide/credit-facility/master-commitment",
+              "user-guide/credit-facility/funding-request",
+              "user-guide/credit-facility/funding-notice",
+              "user-guide/credit-facility/loan-mapping"
+            ]
+          },
+          {
+            "group": "Document Management",
+            "pages": [
+              "user-guide/documents/docusign-integration",
+              "user-guide/documents/ipfs-storage",
+              "user-guide/documents/file-uploads"
+            ]
+          },
+          {
+            "group": "Servicer Operations",
+            "pages": [
+              "user-guide/servicer/loan-tape-upload",
+              "user-guide/servicer/monthly-reporting",
+              "user-guide/servicer/loan-management"
+            ]
+          },
+          {
+            "group": "Role-Based Access",
+            "pages": [
+              "user-guide/roles/issuer",
+              "user-guide/roles/facility-agent",
+              "user-guide/roles/lender",
+              "user-guide/roles/servicer"
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "global": {
     "anchors": [
       {
