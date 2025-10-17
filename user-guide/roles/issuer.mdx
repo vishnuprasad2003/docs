@@ -1,0 +1,312 @@
+---
+title: "Issuer Guide"
+description: "Complete guide for borrowers and issuers using the Intain Markets platform"
+---
+
+# Issuer Guide
+
+This comprehensive guide covers all aspects of the Intain Markets platform for borrowers and issuers, from initial setup to ongoing facility management.
+
+## Overview
+
+As an issuer, you have access to:
+
+- **Term Sheet Creation** - Create and manage term sheets
+- **Master Commitment Review** - Review auto-generated master commitments
+- **Funding Request Management** - Submit and manage funding requests
+- **Funding Notice Processing** - Handle funding notices and token management
+- **Loan Mapping** - Map loans to credit facilities
+- **Document Management** - Upload and manage documents
+
+## Getting Started
+
+### Initial Setup
+
+**Account Setup:**
+1. **Registration** - Complete user registration
+2. **Organization Setup** - Set up your organization
+3. **Profile Completion** - Complete your profile
+4. **Verification** - Complete identity verification
+
+**Platform Access:**
+1. **Login** - Access the platform
+2. **Dashboard** - Navigate to your dashboard
+3. **Facility Overview** - Review your facilities
+4. **Documentation** - Access relevant documentation
+
+<Image src="/images/issuerCreditFacilityDashboard.png" alt="Issuer Credit Facility Dashboard" />
+
+## Term Sheet Management
+
+### Creating Term Sheets
+
+**Step 1: Access Creation**
+1. Navigate to **"Create Term Sheet"**
+2. Select **"New Term Sheet"**
+3. Choose facility type
+4. Begin term sheet creation
+
+**Step 2: Complete Details**
+- **Facility Information** - Basic facility details
+- **Financial Terms** - Interest rates, amounts, terms
+- **Collateral Information** - Collateral details
+- **Supporting Documents** - Required documentation
+
+**Step 3: DocuSign Process**
+1. **Review Document** - Review term sheet details
+2. **Initiate DocuSign** - Start electronic signature process
+3. **Complete Signature** - Sign electronically
+4. **Submit for Review** - Submit to facility agent
+
+<Image src="/images/termSheet Creation.png" alt="Term Sheet Creation Interface" />
+
+### Term Sheet Status Management
+
+**Status Workflow:**
+```
+Draft → BorrowerSigned → FAReview → Accepted ✅
+```
+
+**Status Descriptions:**
+- **Draft** - Initial creation, fully editable
+- **BorrowerSigned** - After DocuSign completion
+- **FAReview** - Submitted for facility agent review
+- **Accepted** - Approved by facility agent
+
+## Master Commitment Process
+
+### Auto-Generation
+
+**Automatic Process:**
+- Master commitments are **auto-generated** when term sheets are approved
+- No manual creation required
+- Pre-populated with term sheet data
+- Status starts as **Draft**
+
+**Review Process:**
+1. **Notification** - Receive notification of auto-generation
+2. **Review Details** - Review master commitment details
+3. **Monitor Progress** - Track facility agent progress
+4. **Await Activation** - Wait for lender approval
+
+### Master Commitment Status
+
+**Status Progression:**
+```
+Draft → PendingLenderApproval → ACTIVE
+```
+
+**Key Points:**
+- **Draft** - Facility agent configuring details
+- **PendingLenderApproval** - Waiting for lender approval
+- **ACTIVE** - Available for funding requests
+
+## Funding Request Process
+
+### Creating Funding Requests
+
+**Prerequisites:**
+- Master commitment status must be **ACTIVE**
+- All required documentation ready
+- Borrowing capacity available
+
+**Step 1: Access Creation**
+1. Navigate to **ACTIVE** master commitment
+2. Click **"Create Funding Request"**
+3. Select **"New Funding Request"**
+4. Begin request creation
+
+**Step 2: Complete Request**
+- **Request Amount** - Amount to borrow
+- **Purpose** - Detailed purpose description
+- **Collateral Description** - Collateral details
+- **Supporting Documents** - Required documentation
+
+**Step 3: Submit for Review**
+1. **Review Details** - Verify all information
+2. **Submit Request** - Submit for facility agent review
+3. **Monitor Status** - Track review progress
+4. **Respond to Changes** - Address any change requests
+
+<Image src="/images/fundingRequest.png" alt="Funding Request Interface" />
+
+### Funding Request Status
+
+**Status Workflow:**
+```
+DRAFT → FAReview → APPROVED ✅
+```
+
+**Status Descriptions:**
+- **DRAFT** - Initial creation, fully editable
+- **FAReview** - Submitted for facility agent review
+- **APPROVED** - Approved by facility agent
+
+## Funding Notice Management
+
+### Auto-Generation Process
+
+**Automatic Generation:**
+- Funding notices are **auto-generated** when funding requests are approved
+- No manual creation required
+- Pre-populated with funding request data
+- Status starts as **PENDING_ESIGN**
+
+**Process Steps:**
+1. **Notification** - Receive notification of generation
+2. **DocuSign Process** - Complete electronic signature
+3. **Token Creation** - FT tokens created automatically
+4. **Token Approval** - Approve token transfers
+
+### Funding Notice Status
+
+**Status Progression:**
+```
+PENDING_ESIGN → ESIGN_COMPLETED → ISSUED
+```
+
+**Key Actions:**
+- **PENDING_ESIGN** - Complete DocuSign process
+- **ESIGN_COMPLETED** - Approve token transfers
+- **ISSUED** - Visible to lenders
+
+## Loan Mapping
+
+### Mapping Process
+
+**Step 1: Access Mapping**
+1. Navigate to **ACTIVE** master commitment
+2. Click **"Map Loans to Facility"**
+3. Select loans to map
+4. Complete mapping process
+
+**Step 2: Loan Selection**
+- **Individual Selection** - Choose specific loans
+- **Bulk Selection** - Select multiple loans
+- **Filter Options** - Use filters to narrow selection
+- **Validation** - Ensure loan eligibility
+
+**Step 3: Complete Mapping**
+1. **Review Selection** - Verify selected loans
+2. **Submit Mapping** - Complete mapping process
+3. **Monitor Status** - Track mapping progress
+4. **Verify Results** - Confirm successful mapping
+
+<Image src="/images/addLoansToFacility.png" alt="Add Loans to Facility Interface" />
+
+## Document Management
+
+### Document Upload
+
+**Upload Process:**
+1. **Access Upload** - Navigate to document upload
+2. **Select Files** - Choose files to upload
+3. **Upload Files** - Upload to IPFS storage
+4. **Verify Upload** - Confirm successful upload
+
+**Document Types:**
+- **Financial Statements** - Current financial information
+- **KYC Documents** - Identity verification
+- **Legal Documents** - Legal documentation
+- **Supporting Materials** - Additional documentation
+
+### Document Access
+
+**Access Features:**
+- **View Documents** - View uploaded documents
+- **Download Documents** - Download for offline use
+- **Share Documents** - Share with relevant parties
+- **Version Control** - Track document versions
+
+## Dashboard and Monitoring
+
+### Issuer Dashboard
+
+**Key Features:**
+- **Facility Overview** - Overview of all facilities
+- **Status Tracking** - Track all facility statuses
+- **Performance Metrics** - Key performance indicators
+- **Document Management** - Access to all documents
+
+**Dashboard Sections:**
+- **Active Facilities** - Currently active facilities
+- **Pending Actions** - Actions requiring attention
+- **Recent Activity** - Recent platform activity
+- **Notifications** - Important notifications
+
+### Performance Monitoring
+
+**Monitoring Features:**
+- **Real-time Updates** - Live status updates
+- **Performance Metrics** - Key performance indicators
+- **Alert System** - Automated alerts
+- **Reporting** - Performance reports
+
+## Best Practices
+
+### Term Sheet Creation
+
+**Best Practices:**
+- **Complete Information** - Provide detailed information
+- **Accurate Data** - Ensure data accuracy
+- **Supporting Documents** - Upload required documents
+- **Review Process** - Review before submission
+
+### Funding Request Management
+
+**Best Practices:**
+- **Realistic Amounts** - Request realistic amounts
+- **Clear Purpose** - Provide clear purpose descriptions
+- **Complete Documentation** - Upload all required documents
+- **Timely Submission** - Submit requests promptly
+
+### Document Management
+
+**Best Practices:**
+- **Organized Files** - Maintain organized file structure
+- **Descriptive Names** - Use descriptive filenames
+- **Version Control** - Track document versions
+- **Regular Updates** - Keep documents current
+
+## Troubleshooting
+
+### Common Issues
+
+**Cannot Create Term Sheet:**
+- Check account verification status
+- Ensure all required information provided
+- Verify document uploads
+- Contact support if issues persist
+
+**Funding Request Issues:**
+- Verify master commitment status (must be ACTIVE)
+- Check borrowing capacity
+- Ensure all required fields completed
+- Verify document uploads
+
+**Document Upload Problems:**
+- Check file format and size
+- Verify internet connection
+- Try different browser
+- Contact support for assistance
+
+### Getting Help
+
+**Support Resources:**
+1. **Documentation** - Review this guide
+2. **Support Team** - Contact support@intain.com
+3. **Facility Agent** - Contact your facility agent
+4. **Community** - Access user community
+
+## Next Steps
+
+After completing initial setup:
+
+1. **Create Term Sheet** - Begin with term sheet creation
+2. **Monitor Progress** - Track facility agent progress
+3. **Prepare Funding Requests** - Prepare for funding requests
+4. **Manage Documents** - Maintain document library
+
+<Card title="Facility Agent Guide" icon="user-tie" href="/user-guide/roles/facility-agent">
+  Learn about facility agent capabilities and responsibilities.
+</Card>

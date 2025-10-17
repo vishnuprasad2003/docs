@@ -1,0 +1,242 @@
+---
+title: "Loan Mapping to Credit Facility"
+description: "Complete guide to mapping loans to credit facilities and managing loan portfolios"
+---
+
+# Loan Mapping to Credit Facility
+
+Loan mapping allows borrowers to associate specific loans with their credit facilities. This process is essential for collateral management and borrowing base calculations.
+
+## Overview
+
+The loan mapping process includes:
+
+1. **Loan Selection** - Choose loans to map to credit facility
+2. **Validation** - Ensure loans meet eligibility requirements
+3. **Mapping Process** - Associate loans with credit facility
+4. **Borrowing Base Calculation** - Calculate available borrowing capacity
+5. **Ongoing Management** - Monitor and update loan mappings
+
+## Prerequisites
+
+Before mapping loans, ensure:
+
+- Master commitment status is **ACTIVE**
+- Loans are properly uploaded and processed
+- Loan data is complete and validated
+- Servicer organization is assigned
+
+## Accessing Loan Mapping
+
+### Step 1: Navigate to Loan Mapping
+
+1. Go to your **Issuer Dashboard**
+2. Select an **ACTIVE** master commitment
+3. Click **"Map Loans to Facility"**
+
+<Image src="/images/addLoansToFacility.png" alt="Add Loans to Facility Interface" />
+
+### Step 2: Select Loans
+
+**Available Options:**
+- **Select All** - Map all eligible loans
+- **Individual Selection** - Choose specific loans
+- **Filter by Criteria** - Use filters to narrow selection
+
+**Selection Criteria:**
+- Loans must belong to the same issuer
+- Loans must not be already mapped to another facility
+- Loans must have "Contract Digitized" = "Yes"
+
+## Loan Selection Process
+
+### Individual Loan Selection
+
+1. **Review Loan List** - Browse available loans
+2. **Check Eligibility** - Verify loan meets requirements
+3. **Select Loans** - Choose loans to map
+4. **Review Selection** - Confirm selected loans
+5. **Submit Mapping** - Complete the mapping process
+
+### Bulk Selection
+
+**Select All Option:**
+- Automatically selects all eligible loans
+- Validates all loans meet requirements
+- Processes mapping in batch
+
+**Filtered Selection:**
+- Use filters to narrow loan list
+- Apply criteria-based selection
+- Review filtered results before mapping
+
+## Validation Process
+
+### Loan Eligibility Checks
+
+**Required Validations:**
+- **Contract Digitized** - Must be "Yes"
+- **Issuer Match** - Must belong to same issuer
+- **Not Already Mapped** - Cannot be mapped to another facility
+- **Data Completeness** - All required fields populated
+
+### System Validation
+
+**Automatic Checks:**
+- Loan ID consistency between PostgreSQL and MongoDB
+- Data integrity validation
+- Eligibility rule compliance
+- Capacity calculations
+
+## Mapping Process
+
+### Submission Details
+
+**Required Information:**
+- **Job ID** - Unique identifier for mapping job
+- **Selected Loans** - Array of loan IDs
+- **Issuer ID** - Borrower identifier
+- **Deal ID** - Deal identifier
+- **Issuer Org ID** - Organization identifier
+- **Deal Name** - Credit facility name
+
+### Processing Steps
+
+1. **Validation** - Validate all selected loans
+2. **Update Loans** - Update loan records with facility mapping
+3. **Update Previews** - Update loan preview records
+4. **Confirmation** - Confirm successful mapping
+
+## Borrowing Base Calculation
+
+### Calculation Process
+
+**Automatic Calculation:**
+- System calculates borrowing base based on mapped loans
+- Applies collateral eligibility rules
+- Determines available borrowing capacity
+- Updates facility capacity metrics
+
+### Key Metrics
+
+**Borrowing Base Components:**
+- **Total Loan Value** - Sum of mapped loan values
+- **Advance Rate** - Percentage from master commitment
+- **Eligible Amount** - Calculated borrowing capacity
+- **Available Capacity** - Remaining borrowing capacity
+
+## Loan Portfolio Management
+
+### Portfolio Overview
+
+**Dashboard Features:**
+- **Total Loans Mapped** - Count of mapped loans
+- **Total Value** - Aggregate loan value
+- **Borrowing Base** - Available borrowing capacity
+- **Utilization** - Current utilization percentage
+
+### Individual Loan Management
+
+**Loan Details:**
+- **Loan ID** - Unique loan identifier
+- **Loan Value** - Original loan amount
+- **Current Balance** - Outstanding balance
+- **Status** - Loan status and performance
+- **Mapping Date** - When loan was mapped
+
+## Best Practices
+
+### Loan Selection
+
+**Quality Considerations:**
+- **Performance History** - Review loan performance
+- **Documentation** - Ensure complete documentation
+- **Compliance** - Verify regulatory compliance
+- **Risk Assessment** - Evaluate loan risk factors
+
+### Portfolio Management
+
+**Ongoing Monitoring:**
+- **Regular Reviews** - Monitor loan performance
+- **Update Mappings** - Adjust mappings as needed
+- **Performance Tracking** - Track key metrics
+- **Risk Management** - Manage portfolio risk
+
+## Troubleshooting
+
+### Common Issues
+
+**Cannot Map Loans:**
+- Check master commitment status (must be ACTIVE)
+- Verify loan eligibility requirements
+- Ensure loans are not already mapped
+- Confirm servicer organization assignment
+
+**Mapping Failed:**
+- Check loan data completeness
+- Verify contract digitization status
+- Ensure stable network connection
+- Contact support if issue persists
+
+**Borrowing Base Issues:**
+- Review collateral eligibility rules
+- Check loan value calculations
+- Verify advance rate settings
+- Consult with facility agent
+
+### Data Consistency
+
+**PostgreSQL vs MongoDB:**
+- System checks consistency between databases
+- Reports missing loan IDs
+- Validates data integrity
+- Ensures accurate calculations
+
+## Integration Points
+
+### Servicer Integration
+
+**Servicer Role:**
+- **Loan Data Upload** - Upload monthly loan tapes
+- **Data Validation** - Ensure data accuracy
+- **Performance Reporting** - Provide performance reports
+- **Ongoing Management** - Manage loan portfolio
+
+### Facility Agent Integration
+
+**Facility Agent Role:**
+- **Rule Configuration** - Set collateral eligibility rules
+- **Capacity Management** - Monitor borrowing capacity
+- **Performance Review** - Review loan performance
+- **Risk Assessment** - Assess portfolio risk
+
+## Reporting and Analytics
+
+### Portfolio Reports
+
+**Available Reports:**
+- **Loan Summary** - Overview of mapped loans
+- **Performance Metrics** - Key performance indicators
+- **Risk Analysis** - Portfolio risk assessment
+- **Capacity Utilization** - Borrowing capacity usage
+
+### Real-time Updates
+
+**Live Monitoring:**
+- **Status Updates** - Real-time status changes
+- **Performance Tracking** - Live performance metrics
+- **Capacity Alerts** - Capacity threshold notifications
+- **Risk Alerts** - Risk threshold notifications
+
+## Next Steps
+
+After loan mapping:
+
+1. **Monitor Performance** - Track loan performance metrics
+2. **Update Mappings** - Adjust mappings as needed
+3. **Regular Reviews** - Conduct periodic portfolio reviews
+4. **Reporting** - Provide required reporting to stakeholders
+
+<Card title="Servicer Operations" icon="cogs" href="/user-guide/servicer/loan-tape-upload">
+  Learn about servicer operations and loan tape uploads.
+</Card>
