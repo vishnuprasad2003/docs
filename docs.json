@@ -1,135 +1,89 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Intain Markets Credit Facility Documentation",
+  "name": "Intain Markets",
   "colors": {
     "primary": "#1E40AF",
     "light": "#3B82F6",
     "dark": "#1E3A8A"
   },
   "favicon": "/favicon.svg",
-  "navigation": {
-    "tabs": [
-      {
-        "tab": "User Guide",
-        "groups": [
-          {
-            "group": "Getting Started",
-            "pages": [
-              "index",
-              "user-guide/overview",
-              "user-guide/registration",
-              "user-guide/authentication"
-            ]
-          },
-          {
-            "group": "Credit Facility Flow",
-            "pages": [
-              "user-guide/credit-facility/overview",
-              "user-guide/credit-facility/term-sheet",
-              "user-guide/credit-facility/master-commitment",
-              "user-guide/credit-facility/funding-request",
-              "user-guide/credit-facility/funding-notice",
-              "user-guide/credit-facility/loan-mapping"
-            ]
-          },
-          {
-            "group": "Document Management",
-            "pages": [
-              "user-guide/documents/docusign-integration",
-              "user-guide/documents/ipfs-storage",
-              "user-guide/documents/file-uploads"
-            ]
-          },
-          {
-            "group": "Servicer Operations",
-            "pages": [
-              "user-guide/servicer/loan-tape-upload",
-              "user-guide/servicer/monthly-reporting",
-              "user-guide/servicer/loan-management"
-            ]
-          },
-          {
-            "group": "Role-Based Access",
-            "pages": [
-              "user-guide/roles/issuer",
-              "user-guide/roles/facility-agent",
-              "user-guide/roles/lender",
-              "user-guide/roles/servicer"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "Credit Facility APIs",
-            "pages": [
-              "api-reference/credit-facility/overview",
-              "api-reference/credit-facility/term-sheet-apis",
-              "api-reference/credit-facility/master-commitment-apis",
-              "api-reference/credit-facility/funding-request-apis",
-              "api-reference/credit-facility/funding-notice-apis"
-            ]
-          },
-          {
-            "group": "Authentication & User Management",
-            "pages": [
-              "api-reference/auth/authentication",
-              "api-reference/auth/user-registration",
-              "api-reference/auth/role-management"
-            ]
-          },
-          {
-            "group": "Document & File Management",
-            "pages": [
-              "api-reference/documents/docusign",
-              "api-reference/documents/ipfs",
-              "api-reference/documents/file-upload"
-            ]
-          },
-          {
-            "group": "Loan & Servicer APIs",
-            "pages": [
-              "api-reference/loans/loan-tape-upload",
-              "api-reference/loans/loan-mapping",
-              "api-reference/loans/servicer-operations"
-            ]
-          }
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "index",
+        "user-guide/overview",
+        "user-guide/registration",
+        "user-guide/authentication"
+      ]
+    },
+    {
+      "group": "Credit Facility Workflow",
+      "pages": [
+        "user-guide/credit-facility/overview",
+        "user-guide/credit-facility/term-sheet",
+        "user-guide/credit-facility/master-commitment",
+        "user-guide/credit-facility/funding-request",
+        "user-guide/credit-facility/funding-notice",
+        "user-guide/credit-facility/loan-mapping"
+      ]
+    },
+    {
+      "group": "Document Management",
+      "pages": [
+        "user-guide/documents/docusign-integration",
+        "user-guide/documents/ipfs-storage",
+        "user-guide/documents/file-uploads"
+      ]
+    },
+    {
+      "group": "Servicer Operations",
+      "pages": [
+        "user-guide/servicer/loan-tape-upload",
+        "user-guide/servicer/monthly-reporting",
+        "user-guide/servicer/loan-management"
+      ]
+    },
+    {
+      "group": "Role-Based Access",
+      "pages": [
+        "user-guide/roles/issuer",
+        "user-guide/roles/facility-agent",
+        "user-guide/roles/lender",
+        "user-guide/roles/servicer"
       ]
     }
+  ],
+  "global": {
+    "anchors": [
+      {
+        "anchor": "Intain Markets",
+        "href": "https://intain.com",
+        "icon": "building"
+      },
+      {
+        "anchor": "Platform",
+        "href": "https://platform.intain.com",
+        "icon": "rocket"
+      }
+    ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/intainLogo.jpeg",
+    "dark": "/logo/intainLogo.jpeg"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@intain.com"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Platform Access",
+      "href": "https://platform.intain.com"
     }
   },
   "contextual": {
@@ -146,9 +100,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "linkedin": "https://linkedin.com/company/intain",
+      "twitter": "https://twitter.com/intain"
     }
   }
 }
