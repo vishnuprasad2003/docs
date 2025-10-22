@@ -84,21 +84,16 @@
       {
         "label": "Support",
         "href": "mailto:support@intain.com"
+      },
+      {
+        "label": "Test Network",
+        "href": "https://imuat.intainmarkets.us/"
       }
     ],
     "primary": {
-      "type": "dropdown",
+      "type": "button",
       "label": "Platform Access",
-      "items": [
-        {
-          "label": "Production",
-          "href": "https://intainmarkets.us/"
-        },
-        {
-          "label": "Test Network",
-          "href": "https://imuat.intainmarkets.us/"
-        }
-      ]
+      "href": "https://intainmarkets.us/"
     }
   },
   "contextual": {
