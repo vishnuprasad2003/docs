@@ -116,6 +116,7 @@
   "footer": {
     "socials": {
       "linkedin": "https://linkedin.com/company/intain"
-    }
+    },
+    "hidePoweredBy": true
   }
 }
