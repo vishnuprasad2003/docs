@@ -87,9 +87,18 @@
       }
     ],
     "primary": {
-      "type": "button",
+      "type": "dropdown",
       "label": "Platform Access",
-      "href": "https://platform.intain.com"
+      "items": [
+        {
+          "label": "Production",
+          "href": "https://intainmarkets.us/"
+        },
+        {
+          "label": "Test Network",
+          "href": "https://imuat.intainmarkets.us/"
+        }
+      ]
     }
   },
   "contextual": {
