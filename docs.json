@@ -81,9 +81,7 @@
     "width": 180,
     "height": 40
   },
-  "favicon": {
-    "href": "/logo/favicon.png"
-  },
+  "favicon": "/logo/favicon.ico",
   "navbar": {
     "links": [
       {
@@ -113,10 +111,10 @@
      "vscode"
    ]
   },
+  "hidePoweredBy": true,
   "footer": {
     "socials": {
       "linkedin": "https://linkedin.com/company/intain"
-    },
-    "hidePoweredBy": true
+    }
   }
 }
