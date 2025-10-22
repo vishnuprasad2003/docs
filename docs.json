@@ -81,11 +81,12 @@
     "width": 180,
     "height": 40
   },
+  "favicon": "/logo/favicon.png",
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:support@intain.com"
+        "href": "mailto:support@intainft.com"
       },
       {
         "label": "Test Network",
