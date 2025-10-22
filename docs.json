@@ -81,7 +81,9 @@
     "width": 180,
     "height": 40
   },
-  "favicon": "/logo/favicon.png",
+  "favicon": {
+    "href": "/logo/favicon.png"
+  },
   "navbar": {
     "links": [
       {
@@ -113,8 +115,7 @@
   },
   "footer": {
     "socials": {
-      "linkedin": "https://linkedin.com/company/intain",
-      "twitter": "https://twitter.com/intain"
+      "linkedin": "https://linkedin.com/company/intain"
     }
   }
 }
