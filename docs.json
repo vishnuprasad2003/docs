@@ -7,6 +7,7 @@
     "light": "#3B82F6",
     "dark": "#1E3A8A"
   },
+  "favicon": "/favicon.png",
   "navigation": {
     "tabs": [
       {
@@ -81,7 +82,6 @@
     "width": 180,
     "height": 40
   },
-  "favicon": "/logo/favicon.ico",
   "navbar": {
     "links": [
       {
