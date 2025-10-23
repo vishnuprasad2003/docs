@@ -1,0 +1,290 @@
+---
+title: "Funding Notice & Token Management"
+description: "Complete guide to funding notices, FT token creation, and lender distribution process"
+---
+
+# Funding Notice & Token Management
+
+Funding notices are automatically generated when funding requests are approved. This guide covers the complete process from generation to fund distribution.
+
+## Overview
+
+The funding notice process includes:
+
+1. **Auto-Generation** - Created automatically when funding request is approved
+2. **DocuSign Process** - Borrower signs funding notice electronically
+3. **FT Token Creation** - Tokens created for borrower after DocuSign
+4. **Token Transfer Approval** - Borrower approves token transfers to lenders
+5. **Lender Distribution** - Individual lenders confirm fund transfers
+
+## Auto-Generation Process
+
+### Trigger Conditions
+
+Funding notices are automatically created when:
+
+- Funding request status changes to **APPROVED**
+- Master commitment status is **ACTIVE**
+- All required validations pass
+
+### Generation Details
+
+**Automatic Process:**
+1. System generates unique funding notice ID
+2. Copies data from approved funding request
+3. Calculates token distribution for each lender
+4. Sets initial status to **PENDING_ESIGN**
+5. Prepares DocuSign envelope
+
+**Pre-populated Data:**
+- Request amount from funding request
+- Master commitment details
+- Lender group information
+- Token distribution calculations
+
+## DocuSign Process
+
+### Signing Workflow
+
+1. **Envelope Creation** - DocuSign envelope automatically created
+2. **Borrower Notification** - Email sent to borrower for signing
+3. **Electronic Signature** - Borrower completes DocuSign process
+4. **Status Update** - Funding notice status: **ESIGN_COMPLETED**
+5. **FT Token Creation** - Tokens automatically created
+
+### Signing Requirements
+
+**Borrower Must:**
+- Complete DocuSign authentication
+- Review funding notice details
+- Provide electronic signature
+- Confirm understanding of terms
+
+## FT Token Management
+
+### Token Creation
+
+After DocuSign completion:
+
+1. **Contract Deployment** - FT contract deployed to blockchain
+2. **Token Minting** - Tokens minted for borrower
+3. **Distribution Setup** - Lender token allocation prepared
+4. **Status Tracking** - Individual lender status initialized
+
+### Token Distribution
+
+**Per-Lender Tracking:**
+Each lender has individual status tracking:
+
+- **tokensAllocated** - Amount of tokens allocated
+- **mintingStatus** - Token transfer status (pending/completed)
+- **lenderApprovalStatus** - Lender approval (PENDING/APPROVED/REJECTED)
+- **amountTransferred** - Fund transfer confirmation (pending/transferred)
+
+## Borrower Actions
+
+### Approve Token Transfer
+
+**Purpose:** Make funding notice visible to lenders
+
+**Process:**
+1. Navigate to funding notice details
+2. Review token distribution
+3. Click **"Approve Token Transfer"**
+4. Confirm transaction
+
+**Result:**
+- Status changes to **ISSUED**
+- Funding notice becomes visible to lenders
+- Lenders can confirm fund transfers
+
+### Token Transfer Approval
+
+**Requirements:**
+- Funding notice status: **ESIGN_COMPLETED**
+- FT tokens created successfully
+- Borrower wallet connected
+
+**Steps:**
+1. Connect wallet to platform
+2. Review token distribution details
+3. Approve token transfer privilege
+4. Confirm blockchain transaction
+
+## Lender Actions
+
+### Fund Transfer Confirmation
+
+**Process:**
+1. Lender receives notification of funding notice
+2. Reviews funding notice details
+3. Confirms fund transfer completion
+4. Updates individual status
+
+**Status Updates:**
+- **amountTransferred**: pending → transferred
+- **lenderApprovalStatus**: PENDING → APPROVED
+
+### Individual Lender Tracking
+
+Each lender's participation is tracked separately:
+
+```json
+{
+  "lenderOrgId": "LENDER-123",
+  "lenderName": "ABC Bank",
+  "tokensAllocated": 5000000,
+  "mintingStatus": "completed",
+  "lenderApprovalStatus": "APPROVED",
+  "amountTransferred": "transferred"
+}
+```
+
+## Status Workflow
+
+### Complete Status Flow
+
+```
+Funding Request APPROVED → Auto-Generate Funding Notice → PENDING_ESIGN
+                                    ↓
+                            DocuSign for Funding Notice
+                                    ↓
+                            ESIGN_COMPLETED (FT tokens created)
+                                    ↓
+                            Borrower Approves Token Transfer
+                                    ↓
+                            ISSUED (visible to lenders)
+                                    ↓
+                            Individual Lenders Confirm Fund Transfer
+                                    ↓
+                            Each lender's status updated in tokenDistribution
+```
+
+### Status Descriptions
+
+- **PENDING_ESIGN** - Auto-generated, ready for DocuSign
+- **ESIGN_COMPLETED** - DocuSign completed, FT tokens created
+- **ISSUED** - Borrower approved token transfer, visible to lenders
+
+## Token Distribution Details
+
+### Calculation Method
+
+Token allocation calculated based on:
+
+- **Lender Voting Percentage** - From master commitment
+- **Request Amount** - From funding request
+- **Proportional Distribution** - Each lender gets their percentage
+
+**Formula:**
+```
+Lender Tokens = (Lender Voting % / 100) × Request Amount
+```
+
+### Distribution Tracking
+
+**Per-Lender Information:**
+- **lenderGroupId** - Unique identifier
+- **lenderOrgId** - Organization identifier
+- **lenderName** - Lender organization name
+- **votingPercentage** - Voting percentage from master commitment
+- **commitmentAmount** - Lender's commitment amount
+- **tokensAllocated** - Calculated token allocation
+- **tokenContractAddress** - FT contract address
+- **mintedAt** - Token minting timestamp
+- **transactionHash** - Blockchain transaction hash
+
+## Best Practices
+
+### For Borrowers
+
+**Before DocuSign:**
+- Review all funding notice details carefully
+- Verify token distribution calculations
+- Ensure wallet is properly connected
+- Confirm understanding of terms
+
+**After Token Creation:**
+- Monitor token transfer status
+- Respond promptly to lender confirmations
+- Keep records of all transactions
+- Maintain communication with facility agent
+
+### For Lenders
+
+**Fund Transfer Process:**
+- Review funding notice details thoroughly
+- Confirm fund transfer completion promptly
+- Update status accurately
+- Maintain transaction records
+
+**Communication:**
+- Respond to notifications quickly
+- Provide clear confirmation details
+- Report any issues immediately
+- Coordinate with other lenders if needed
+
+## Troubleshooting
+
+### Common Issues
+
+**DocuSign Not Working:**
+- Check email for DocuSign invitation
+- Verify DocuSign account access
+- Contact support if invitation missing
+- Ensure stable internet connection
+
+**Token Creation Failed:**
+- Verify wallet connection
+- Check blockchain network status
+- Ensure sufficient gas fees
+- Contact technical support
+
+**Token Transfer Issues:**
+- Verify wallet permissions
+- Check token contract status
+- Ensure sufficient balance for gas
+- Review transaction logs
+
+### Getting Help
+
+**Technical Issues:**
+1. Check platform status page
+2. Verify network connectivity
+3. Review transaction logs
+4. Contact support@intainft.com
+
+**Process Questions:**
+1. Review this documentation
+2. Check with facility agent
+3. Consult with legal team
+4. Contact support team
+
+## Integration Points
+
+### Blockchain Integration
+
+- **FT Contract Deployment** - Automated contract creation
+- **Token Minting** - Automatic token generation
+- **Transaction Tracking** - Blockchain transaction monitoring
+- **Status Synchronization** - Real-time status updates
+
+### Document Management
+
+- **IPFS Storage** - Decentralized document storage
+- **DocuSign Integration** - Electronic signature workflow
+- **Document Versioning** - Version control and history
+- **Secure Access** - Role-based document access
+
+## Next Steps
+
+After funding notice completion:
+
+1. **Monitor Status** - Track individual lender confirmations
+2. **Fund Management** - Manage received funds according to plan
+3. **Reporting** - Provide required reporting to facility agent
+4. **Ongoing Management** - Continue with loan servicing
+
+<Card title="Loan Mapping" icon="link" href="/user-guide/credit-facility/loan-mapping">
+  Learn how to map loans to your credit facility.
+</Card>
