@@ -37,10 +37,7 @@
             "group": "Whole Loan Workflow",
             "pages": [
               "user-guide/whole-loan/overview",
-              "user-guide/whole-loan/origination",
-              "user-guide/whole-loan/servicing",
-              "user-guide/whole-loan/investment",
-              "user-guide/whole-loan/reporting"
+              "user-guide/whole-loan/workflow-overview"
             ]
           },
           {

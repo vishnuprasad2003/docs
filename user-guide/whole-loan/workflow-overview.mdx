@@ -1,0 +1,1861 @@
+---
+title: "Whole Loan Flow - Complete Workflow"
+description: "End-to-end guide for whole loan transactions from pool creation to NFT transfer and ongoing servicing"
+---
+
+## Whole Loan Flow — Complete Workflow
+
+This guide explains how a whole-loan transaction moves from pool creation to investor ownership in Intain Markets. It covers all roles (Issuer, Underwriter, Investor, Paying Agent, Servicer, Verification Agent), required screens/actions, and state changes.
+
+<Info>
+**Key Difference from Securitization**: Whole-Loan uses **NFTs** (Non-Fungible Tokens) to represent individual whole-loan assets (one NFT per loan), whereas Securitization uses **FTs** (Fungible Tokens) representing tranche classes.
+</Info>
+
+## Participants & Responsibilities
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| **Issuer** | Creates pool, uploads/matches loan tape, submits for verification, accepts pool submission, approves NFT transfers, publishes deal |
+| **Underwriter** | Reviews Preview pool, accepts pool (converts to Deal), configures Deal (general, files, accounts), collects commitments and moves to invest stage, publishes to Issuer for NFT approval |
+| **Verification Agent (VA)** | Verifies/certifies loans pre-underwriting (batch → review → certify → verify) |
+| **Investor** | Reviews published deal, commits to buy specific loan(s), wires funds during "Invest" stage, receives NFTs |
+| **Paying Agent (PA)** | Verifies off-chain receipts, transfers NFTs to investors, runs Deal Recurring and reporting |
+| **Servicer** | Monthly loan tape ingestion, mapping, summarize & commit to ledger; supports ongoing reporting |
+
+</Table>
+
+## Prerequisites
+
+<Warning>
+**Payment Settings** must be configured before NFT approval. Issuer/Investor/PA should set up Off-chain bank (and On-chain where applicable) under User Profile → Payment Settings.
+</Warning>
+
+### User Accounts & Access
+Confirm each participant has an active Intain Markets account with correct Role assigned: Issuer, Underwriter, Investor, Paying Agent, Servicer, Verification Agent.
+
+### Payment Settings (Profile → Payment Settings)
+Set these before NFT approvals and investor funding:
+- **Off-chain Bank Details** (per role as applicable): Account Holder Name, Bank Name, Branch/Address, Account Number/IBAN, SWIFT/IFSC, Currency
+- **On-chain (C-Chain) Settings** (Issuer mandatory): C-Chain Address shown in profile. Approval Method for Issuer's NFT transfers: either Upload wallet JSON/keystore (encrypted) and enter passphrase at approval time, or Paste private key at approval time (recommended only if policy allows)
+
+### Loan Onboarding & Verification
+Issuer uploads Loan Tape (Excel) → Map Fields to the Intain standard schema → Create Verification Batch with selected loans → Submit to VA → VA reviews → certifies → verifies (NFT/verified state available)
+
+### Status Model (Overview)
+- **Pool**: Created → Submitted → Accepted (→ Deal created) / Rejected → Closed
+- **Deal**: Created → Awaiting Approval (Issuer NFT approvals) → Open (published) → Closed
+- **Loan/Batch (VA)**: Pending → Reviewed → Certified → Verified (eligible)
+
+---
+
+## Phase 1 — Issuer Creates and Readies a Loan Pool
+
+**Create Whole Loan Pool → Upload & Map Loans → Submit for VA Verification**
+
+🎯 **Objective**
+
+To allow the Issuer to:
+- Create a new Whole Loan Pool
+- Upload and map raw loan tapes
+- Verify data quality and completeness
+- Optionally share the pool with the Underwriter/Investor/VA for preview or comments
+- Submit the pool for Verification Agent (VA) certification
+
+**This phase mirrors the first step of securitization but with a focus on direct whole loan sale preparation rather than tranche-based structuring.**
+
+### 🧭 Actors Involved
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| **Issuer** | Creates pool, uploads and maps loans, submits for verification |
+| **Verification Agent (VA)** | Reviews, verifies, and certifies loan data |
+| **Investor / Underwriter** | Later preview and price the pool (Phase 2 onward) |
+
+</Table>
+
+### ⚙️ 1. Create Pool (Whole Loan Type)
+
+**Navigation Path**: Issuer → **Pools** → Set Up Pool
+
+**Purpose**: To create a loan pool specifically for Whole Loan transaction type.
+
+**Steps**:
+1. Click **Set Up Pool**
+2. Enter details:
+   - **Pool Name** (e.g., IM Whole Loan Portfolio 2025A)
+   - **Asset Class** (e.g., Auto Loans, Consumer, Mortgages, etc.)
+   - **Transaction Type**: Select **Whole Loan** (instead of Securitization)
+   - **Description** — free text summary of pool
+3. Click **Save**
+
+**System Behavior**:
+- Pool created with status = **Draft**
+- Tabs activated: **Loan Tape, Summary, Documents, Feedback**
+- Serves as the logical container for verified loans that will later be sold
+
+<Warning>
+**Critical**: Select **Transaction Type = Whole Loan** to enable NFT-based workflow instead of FT securitization.
+</Warning>
+
+### ⚙️ 2. Upload Loan Tape
+
+**Navigation Path**: Loans → **Add Loans** → Upload Excel
+
+**Purpose**: To upload the Issuer's source loan data for verification and sale preparation.
+
+**Steps**:
+1. Navigate to **Loans → Add Loans**
+2. Upload Excel (.xlsx) file containing raw loan-level data:
+   - Loan ID
+   - Borrower information
+   - Principal Balance / Outstanding
+   - Interest Rate / Coupon Rate
+   - Maturity Date
+   - Origination Date
+   - Payment Status
+   - Collateral details (if applicable)
+   - Additional loan attributes
+3. System reads headers and prepares for field mapping
+
+### 🗺️ 3. Map Fields to Intain Standard Schema
+
+**Navigation Path**: Continue from Upload → **Map Fields**
+
+**Purpose**: To standardize the uploaded loan tape so it can be processed by Verification Agent and seen by potential Investors in consistent format.
+
+**Steps**:
+
+1. **In Map Fields interface**, match each column from the uploaded file to a **Standard Intain Field**:
+
+   <Table>
+   
+   | Uploaded Column | Map To Intain Field |
+   |----------------|---------------------|
+   | Loan ID | Loan_Number |
+   | Borrower | Obligor_Name |
+   | Principal Outstanding | Principal_Balance |
+   | Coupon Rate | Interest_Rate |
+   | Maturity Date | Maturity |
+   | Origination Date | Origination_Date |
+   | Payment Status | Payment_Status |
+   
+   </Table>
+
+2. **Use Preview Map Fields** to validate mapping:
+   - Check data types match (numeric/date/text)
+   - Verify required fields mapped
+   - Review mapped data preview
+
+3. **Save mapping**:
+   - Mapping template stored for reuse in later uploads
+   - System validates all mandatory fields
+
+**System Validation**:
+- ✅ Checks all mandatory fields (Loan ID, Principal, Interest Rate, etc.)
+- ✅ Flags mismatched or empty mappings
+- ✅ Stores mapping template for reuse in later uploads
+
+### 🔍 4. Map Loans to the Pool
+
+**Navigation Path**: Loans → **Map Loans** → Select Pool
+
+**Purpose**: To assign mapped and verified loans to the new Whole Loan Pool.
+
+**Steps**:
+1. From mapped loan list, **select required loans**
+2. **Choose target pool** from dropdown (the pool you created in Step 1)
+3. Click **Map to Pool**
+4. Navigate to Pool Details tab — verify loans now listed
+
+**System Behavior**:
+- Loans are now linked to the Pool ID
+- **Stratification and summary data** become available automatically
+- Loan status changes: **Unmapped** → **Mapped** once assigned to pool
+
+**Verification**:
+- Preview/Strat/Summary tabs provide analytics
+- Issuer checks data quality before submission
+- Loan count and aggregate metrics displayed
+
+### 🧩 5. Submit for Verification (VA Certification)
+
+**Navigation Path**: Pool Details → **Submit for Verification**
+
+**Purpose**: To send the pool's loans to the Verification Agent for validation and certification.
+
+**Steps**:
+1. From **Pool Details** page
+2. Click **Submit for Verification**
+3. Choose loans or batches to include
+4. Confirm submission
+
+**System Behavior**:
+- Batch created in VA module
+- Status updated to **Submitted for Verification**
+- VA notified via dashboard
+- Pool locked pending VA review
+
+**Data Validation and Lock**:
+- Once submitted, Issuer cannot modify loan data
+- All edits disabled until VA either accepts or rejects batch
+- Ensures data integrity during verification
+
+### 📊 Outputs of Phase 1
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| Created Pool (Whole Loan Type) | Container for asset data ready for verification |
+| Mapped Loan Dataset | Clean, standardized, system-recognized fields |
+| Batch for Verification | Submitted to VA for certification |
+| Status: Submitted for Verification | Pool locked pending VA review |
+
+</Table>
+
+### 🧠 Why Phase 1 Is Critical
+
+**Ensures Clean and Standardized Data**:
+- Early data integrity before VA review
+- Avoids post-sale disputes
+- Creates professional data presentation
+
+**Establishes Data Integrity**:
+- Pre-validated loan information
+- Consistent format across all loans
+- Ready for investor review
+
+**Creates Traceable Linkage**:
+- Between Issuer's origination data and future ownership transfer
+- Complete audit trail from upload
+- Linkage to verification certificates
+
+### 🧩 Phase 1 Flow Summary
+
+```
+Issuer uploads raw loan data
+        ↓
+Map Fields → Intain Standard
+        ↓
+Map Loans to Pool (Whole Loan Type)
+        ↓
+Submit Pool for Verification (VA)
+        ↓
+Pool locked pending VA certification
+```
+
+✅ **End of Phase 1**
+
+---
+
+## Phase 2 — Verification Agent (VA) Review & Certification
+
+**Validate Each Loan → Issue Certificate → Enable Sale Eligibility**
+
+🎯 **Objective**
+
+To ensure all loans in the pool:
+- Match the source documentation
+- Are data-complete and accurate
+- Meet all asset-level and pool-level verification checks
+
+**Once certified, these loans can be offered to investors.**
+
+### 🧭 Actors Involved
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| **Verification Agent (VA)** | Reviews batches, checks data, certifies verified loans |
+| **Issuer** | Responds to VA feedback, corrects and resubmits if needed |
+| **System (Intain)** | Tracks batch statuses and certificates; prevents uncertified loans from sale |
+
+</Table>
+
+### ⚙️ 1. VA Accesses Submitted Batch
+
+**Navigation Path**: Verification Agent → **Batches** → [Submitted by Issuer]
+
+**Purpose**: To view all loan batches awaiting verification.
+
+**Steps**:
+1. VA opens **Batches** tab
+2. Locates new batch submitted by Issuer (status = **Pending**)
+3. Click **View Loans**
+
+**Batch Information Displayed**:
+- Batch ID and submission date
+- Issuer information
+- Loan count in batch
+- Pool name and asset class
+- Current status (Pending Verification)
+
+### 🔍 2. Loan-level Review
+
+**Navigation Path**: Batches → **View Loans**
+
+**Purpose**: To verify loan details against loan contracts, servicer records, or LMS extracts.
+
+**Checks Include**:
+
+**Principal & Terms Verification**:
+- Principal outstanding
+- Coupon rate
+- Maturity date
+- Origination date
+- Loan term validation
+
+**Borrower & Collateral Details**:
+- Borrower name and information
+- Collateral details and valuation
+- Geographic information
+
+**Data Consistency**:
+- Consistency between uploaded data and supporting documents
+- Cross-reference with origination documents
+- Verify against servicer records
+
+**Optional Checks**:
+- Compliance parameters
+- Performance parameters (delinquency status)
+- Regulatory requirements
+
+**System Support**:
+- **Edit mode** for correcting obvious mismatches
+- **"Flag / Comment"** function for discrepancies
+- **Bulk status updates** (Accept / Reject)
+
+**Review Process**:
+1. VA opens each loan record
+2. Reviews loan details
+3. Compares against source documents
+4. Flags any discrepancies
+5. Adds comments or corrections
+6. Marks loan as reviewed
+
+### 🧾 3. Approve / Reject Loans
+
+**Navigation Path**: Continue from View Loans
+
+**Purpose**: To finalize which loans are verified and certified.
+
+**Steps**:
+
+1. **After Review**, VA marks each loan as:
+   - **Verified** → passes all checks
+   - **Rejected** → fails or incomplete
+
+2. **Add comments or feedback** for rejected loans:
+   - Document specific issues
+   - Provide recommendations
+   - Note missing information
+   - Issuer will see this feedback
+
+3. **Save results**
+
+**System Behavior**:
+- Status updated for each loan record in batch
+- **Rejected loans automatically visible under Reconsider tab** for Issuer
+- Verified loans eligible for sale
+
+**Loan Statuses After Review**:
+- **Verified**: Ready for underwriting/sale
+- **Rejected**: Needs correction by Issuer
+- **Needs Review**: Requires additional information
+
+### 📜 4. Certify the Batch
+
+**Navigation Path**: Batches → **Generate Certificate**
+
+**Purpose**: To produce an official Verification Certificate for the batch.
+
+**Steps**:
+
+1. **Once all loans in the batch are reviewed**:
+   - All loans marked as Verified or Rejected
+   - All discrepancies documented
+
+2. **Click Certify Batch**
+
+3. **Upload or e-sign the verification certificate**:
+   - Upload PDF certificate document
+   - OR use e-signature functionality
+   - Generate official VA Certificate
+
+4. **The system generates a downloadable VA Certificate** attached to that batch
+
+**System Behavior**:
+- Enables **"Download Certificate"** icon in batch list
+- Marks batch status as **Certified**
+- Marks individual loans as **Verified** (for approved loans)
+- Issues official verification certificate
+
+**Certificate Details**:
+- Batch ID and date
+- Number of loans verified
+- Number of loans rejected
+- VA signature and certification date
+- Issuer information
+- Downloadable PDF format
+
+### 📤 5. Issuer Notification
+
+**System Behavior**:
+- Issuer receives notification: **"Batch Verified / Certified"**
+- Rejected loans appear separately under **"Reconsider"** tab
+- Issuer can view VA feedback and corrections
+- Issuer can correct and resubmit rejected loans in a new batch if needed
+
+**Issuer Actions After Notification**:
+- View verified loans (ready for sale)
+- Review rejected loans in Reconsider tab
+- Correct rejected loans and resubmit
+- Download VA Certificate for records
+
+### 🔒 6. Verification Data Integrity Controls
+
+<Table>
+
+| Control | Description |
+|--------|-------------|
+| **Immutable Certificate Record** | Each VA certificate timestamped and locked after upload |
+| **Loan Status Gating** | Only loans marked Verified can be offered for sale or transfer |
+| **Audit Logs** | All VA comments, actions, and certifications logged |
+| **Document Links** | Certificate stored under Documents tab for Issuer and Investor review |
+
+</Table>
+
+**Additional Controls**:
+- **Batch-level certification** required
+- **Individual loan status** tracked
+- **Certificate version control** maintained
+- **Complete audit trail** preserved
+
+### 📊 Outputs of Phase 2
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| Verified / Certified Loans | Ready for Investor Preview or Sale |
+| VA Certificate | Official verification document for the batch |
+| Rejected Loans Report | Sent to Issuer for correction |
+| Audit Log & Certificate Metadata | Stored on ledger for traceability |
+
+</Table>
+
+### 🧠 Why Phase 2 Is Critical
+
+**Establishes Data Authenticity**:
+- Data authenticity and trust between Issuer and Investor
+- Verified loan data prevents disputes
+- Transparent verification process
+
+**Prevents Inaccurate Data Sale**:
+- Prevents sale of incomplete or inaccurate loan data
+- Data quality assurance
+- Investor confidence
+
+**Ensures Regulatory Audit Readiness**:
+- Full transparency for regulatory audits
+- Complete verification documentation
+- Certificate trail for compliance
+
+**Provides Verifiable Digital Certificate**:
+- VA certificate travels with loan through lifecycle
+- Permanent verification record
+- Blockchain-level certification
+
+### 🧩 Phase 2 Flow Summary
+
+```
+Issuer submits loan batch for verification
+        ↓
+VA accesses batch → reviews loans
+        ↓
+Approve / Reject individual loans
+        ↓
+Certify batch → Generate VA Certificate
+        ↓
+System marks loans as Verified / Certified
+        ↓
+Issuer notified; rejected loans moved to Reconsider
+```
+
+✅ **End of Phase 2**
+
+---
+
+## Phase 3 — Investor Preview, Pricing, and Bid Submission
+
+**Make Verified Pool Available for Bidding → Investor Reviews & Bids → Issuer Reviews & Accepts Bid**
+
+🎯 **Objective**
+
+To make verified and certified loan pools available for Investor preview and bidding — enabling price discovery, negotiation, and selection of buyers.
+
+**This phase ensures**:
+- Transparency between Issuer and Investor
+- A competitive process for pricing verified loans
+- A controlled approval path before sale finalization
+
+### 🧭 Actors Involved
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| **Issuer** | Publishes verified loan pool for Investor preview; reviews investor bids |
+| **Investor(s)** | Reviews verified loan data; places bids with proposed price and quantity |
+| **Underwriter (optional)** | Oversees process and ensures compliance with trading rules |
+| **Verification Agent** | Passive role — verification already complete |
+
+</Table>
+
+### ⚙️ 1. Publish Verified Loan Pool to Investors
+
+**Navigation Path**: Issuer → **Pools** → Verified Pool → **Publish to Investors**
+
+**Purpose**: To make the verified loan pool visible to approved Investors on the Intain platform.
+
+**Steps**:
+
+1. **Issuer opens Pool Details** of a verified pool
+
+2. **Confirm prerequisites**:
+   - Verification certificate attached
+   - Loan list and summary are correct
+   - VA certification completed (from Phase 2)
+   - Pool status = Verified/Certified
+
+3. **Click Publish to Investors**
+
+4. **Confirm action** → System changes pool status to **Open for Bids**
+
+**System Behavior**:
+- Pool appears in **Investor → Opportunities → Whole Loans**
+- Investors receive notification that a new verified pool is available for review
+- Pool becomes searchable and visible to whitelisted investors
+
+### 📑 2. Investor Reviews Pool Details
+
+**Navigation Path**: Investor → **Opportunities** → Whole Loan Pool → View Details
+
+**Purpose**: To provide investors with all the information they need to make an informed pricing decision.
+
+**Sections Visible**:
+
+**Loan Tape**:
+- View loan-level data (anonymized borrower-level details)
+- Loan IDs, principals, rates, terms
+- Filter and sort capability
+
+**Summary**:
+- Aggregated balances
+- Weighted average coupon (WAC)
+- Weighted average maturity (WAM)
+- Yield analysis
+- Geographic distribution
+- Vintage analysis
+
+**Verification Certificate**:
+- Download or view VA certificate
+- Certification date and details
+- VA signature
+
+**Documents**:
+- Credit memo
+- Performance history
+- Due diligence package
+- Term sheet (if available)
+- Additional supporting documents
+
+**Feedback Section**:
+- Investors can leave queries or clarifications for Issuer
+- Two-way communication enabled
+- Query resolution before bidding
+
+**This gives investors full transparency into the pool's characteristics and quality.**
+
+### 💸 3. Investor Bidding / Price Submission
+
+**Navigation Path**: Investor → **Opportunities** → Pool → **Bid / Price Submission**
+
+**Purpose**: To allow Investors to offer pricing and purchase intent for part or all of the verified pool.
+
+**Steps**:
+
+1. **Investor clicks Submit Bid**
+
+2. **Enter bid details**:
+   
+   **Bid Type**: Full pool or partial
+   - Full: Purchase entire pool
+   - Partial: Specific loan count or dollar amount
+   
+   **Bid Price (% of par)**: e.g., 98.25%
+   - Percentage of face value
+   - Reflects investor's valuation
+   
+   **Bid Amount / Loan Count**:
+   - Dollar amount willing to invest
+   - Number of loans desired
+   
+   **Yield / IRR** (optional input):
+   - Expected yield calculation
+   - Internal rate of return estimate
+   
+   **Comments or Special Terms** (if applicable):
+   - Special conditions
+   - Questions or clarifications
+   - Timeline preferences
+
+3. **Click Submit**
+
+**System Behavior**:
+- Bid recorded in platform as **Pending Review**
+- Issuer (and optionally Underwriter) can view all investor bids side by side
+- Bid timestamped and digitally signed
+- Investor receives confirmation
+
+<Info>
+Investors can see only their own bids (not others) to maintain pricing confidentiality.
+</Info>
+
+### ⚙️ 4. Issuer Reviews Investor Bids
+
+**Navigation Path**: Issuer → **Pools** → View Bids
+
+**Purpose**: To evaluate all investor offers, compare pricing, and decide on sale execution.
+
+**Steps**:
+
+1. **Issuer opens pool** → **Investor Bids Tab**
+
+2. **Reviews all bids** side by side:
+   
+   <Table>
+   
+   | Bid Details | Description |
+   |-------------|-------------|
+   | **Investor Name** | Identity of bidder |
+   | **Bid Price (%)** | Percentage of par |
+   | **Bid Amount / Coverage** | Dollar amount or loan count |
+   | **Total Consideration** | Calculated purchase price |
+   | **Yield / IRR** | Expected returns |
+   | **Comments / Conditions** | Special terms or requests |
+   
+   </Table>
+
+3. **Evaluation Process**:
+   - Compare bids on multiple dimensions
+   - Consider investor profile and track record
+   - Assess bid terms and conditions
+   - Optionally communicate via feedback panel for clarifications
+
+4. **Select Accept / Reject** for each bid
+
+**System Behavior**:
+- Accepted bid marked as **Approved**
+- Rejected bids automatically marked **Closed**
+- Once a bid is accepted, the system locks that investor's allocation
+- Pool status changes to **Awaiting Sale Approval**
+
+**Multiple Bid Scenarios**:
+- Issuer accepts highest/best bid
+- May accept partial bids if multiple investors
+- System supports splitting pool among multiple investors
+
+### 🔒 5. Security / Compliance Controls
+
+<Table>
+
+| Control | Description |
+|--------|-------------|
+| **Investor Whitelisting** | Only approved investor wallets can view or bid on pools |
+| **Price Visibility** | Investors can see only their own bids (not others) |
+| **Immutable Record** | Each bid timestamped, digitally signed, and stored for audit |
+| **Bid Lock** | Accepted bid cannot be altered; system locks pool to prevent double sale |
+
+</Table>
+
+**Additional Controls**:
+- **Bid Validity Period**: Time-bound bidding windows
+- **Minimum Bid Requirements**: Automated validation
+- **Compliance Checks**: KYC/AML verification for investors
+- **Audit Trail**: Complete logging of all bid actions
+
+### 📊 Outputs of Phase 3
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| Published Verified Pool | Visible to investors in Opportunities |
+| Investor Bids | Recorded, timestamped, and compared |
+| Accepted Bid Record | Defines winning investor and sale terms |
+| Pool Status = Awaiting Sale Approval | Ready for sale execution in next phase |
+
+</Table>
+
+### 🧠 Why Phase 3 Is Critical
+
+**Introduces Price Discovery**:
+- Competitive bidding establishes market price
+- Multiple investors create auction dynamics
+- Transparent pricing mechanism
+
+**Ensures Only Verified Loans Are Marketed**:
+- Hard prerequisite of VA certification
+- Prevents sale of unverified loans
+- Maintains data quality standards
+
+**Maintains Full Transparency**:
+- Complete audit trail of all investor interactions
+- All bids recorded immutably
+- Issuer sees all bids for comparison
+
+**Sets Stage for Sale Execution**:
+- Clean ownership transfer prepared
+- Terms defined and accepted
+- Clear path to finalization
+
+### 🧩 Phase 3 Flow Summary
+
+```
+Issuer publishes verified pool → Status: Open for Bids
+        ↓
+Investors review data, submit bids (price, amount)
+        ↓
+Issuer reviews and accepts investor bid
+        ↓
+Pool locked to winning investor
+        ↓
+Status: Awaiting Sale Approval
+```
+
+✅ **End of Phase 3**
+
+---
+
+## Phase 4 — Sale Finalization & Loan Transfer (Payment + NFT Ownership Change)
+
+**Execute Sale → Verify Payment → Transfer NFTs → Update Ownership**
+
+🎯 **Objective**
+
+To execute the sale of verified whole loans between the Issuer and the winning Investor, complete off-chain payment verification, and perform on-chain transfer of ownership (NFT or loan token).
+
+**This phase ensures**:
+- Payment reconciliation through Paying Agent
+- Digital token transfer from Issuer → Investor
+- Update of ownership and deal closure
+
+### 🧭 Actors Involved
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| **Issuer** | Confirms sale details, provides transfer authority (wallet key) |
+| **Investor** | Executes payment via off-chain wire transfer |
+| **Paying Agent (PA)** | Verifies payment receipts, triggers NFT/loan token transfer |
+| **Underwriter (optional)** | Oversight role; may record transaction economics |
+| **Platform (Intain)** | Handles on-chain asset transfer and ledger updates |
+
+</Table>
+
+### ⚙️ 1. Sale Approval
+
+**Navigation Path**: Issuer → **Pools** → View Accepted Bid → **Approve Sale**
+
+**Purpose**: To confirm the selected investor bid and initiate payment/transfer workflow.
+
+**Steps**:
+
+1. **Issuer reviews winning bid details**:
+   - Investor name and profile
+   - Agreed price and amount
+   - Terms and conditions
+   - Special notes or requirements
+
+2. **Confirms final price and amount**:
+   - Review total consideration
+   - Verify payment terms
+   - Confirm sale structure
+
+3. **Click Approve Sale**
+
+4. **System prompts confirmation** → updates status to **Sale Approved / Awaiting Payment**
+
+**System Behavior**:
+- Notifies **Paying Agent** and **Investor**
+- Locks further bids and edits on pool
+- Generates sale agreement details
+- Creates payment instructions
+
+<Warning>
+Once sale is approved, the pool is locked and cannot be withdrawn or sold to another investor.
+</Warning>
+
+### 💸 2. Investor Payment (Off-Chain)
+
+**Navigation Path**: Investor → **Deals** → [Whole Loan Purchase]
+
+**Purpose**: Investor pays the Issuer's designated account (via Paying Agent).
+
+**Steps**:
+
+1. **Investor receives notification**:
+   - Sale approved
+   - Payment instructions provided
+   - Deadline for payment
+
+2. **Investor views wire instructions**:
+   - Navigate to deal
+   - Access **More → Account & Transaction Details**
+   - View wire instructions:
+     - Beneficiary Bank
+     - Account Number / IBAN
+     - SWIFT / Routing Number
+     - Currency
+     - Reference Code (unique to investor)
+     - Payment Amount
+     - Deadline
+
+3. **Investor transfers purchase amount via bank wire** (off-chain):
+   - Initiate wire transfer from their bank
+   - Include reference code in wire
+   - Complete external bank transfer
+
+4. **Return to platform** → click **Mark Payment Completed**:
+   - Upload wire confirmation (optional)
+   - Enter payment reference number
+   - Mark transaction as sent
+
+**System Behavior**:
+- Transaction record created with status = **Pending Verification**
+- Paying Agent is notified to confirm receipt
+- Investor records payment as complete
+
+### 🏦 3. Paying Agent Verifies Receipt
+
+**Navigation Path**: Paying Agent → **Deals** → More → **Account & Transaction Details**
+
+**Purpose**: To validate off-chain fund transfers and trigger tokenized asset transfer.
+
+**Steps**:
+
+1. **PA accesses transaction details**:
+   - Open the whole-loan deal
+   - Navigate to **More → Account & Transaction Details**
+   - View investor payment record
+
+2. **PA checks actual bank receipts vs. transaction entries**:
+   - Review bank statement
+   - Verify wire reference code matches
+   - Confirm amount received
+   - Check receipt date
+
+3. **If verified, marks payment Completed**:
+   - Update status → **Completed**
+   - Enter verification details:
+     - Receipt amount
+     - Receipt date
+     - Bank confirmation reference
+     - Comments if needed
+   - Click **Save**
+
+4. **System updates transaction status** → **Verified**
+
+**Purpose**: Verification ensures that the asset transfer happens only after real money settlement.
+
+**Validation Checklist**:
+- [ ] Funds received in designated account
+- [ ] Amount matches expected payment
+- [ ] Reference code confirmed
+- [ ] Receipt date within expected timeframe
+- [ ] No discrepancies or issues
+
+### 🪙 4. On-chain Transfer (NFT / Loan Token Ownership Change)
+
+**Navigation Path**: Paying Agent → Deal Actions → **Transfer NFT**
+
+**Purpose**: To digitally transfer ownership of the verified loan(s) from Issuer → Investor.
+
+**Prerequisites**:
+- Payment verified by Paying Agent
+- Issuer's C-Chain wallet authorized (from initial setup)
+- NFT transfer authority granted
+
+**Steps**:
+
+1. **When PA marks payment verified**, **Transfer NFT** becomes active
+
+2. **Paying Agent clicks Transfer NFT / Loan Token**
+
+3. **The system executes transfer**:
+   
+   **Uses Issuer's C-Chain wallet** (already authorized during initial setup):
+   - NFT transfer via authorized C-Chain account
+   - Each NFT corresponds to a specific whole loan
+   - NFTs transferred to investor's registered wallet
+   
+   **Transaction Details**:
+   - Transaction hash recorded
+   - Timestamp recorded
+   - New owner wallet recorded
+   - Investor now holds the NFT representing legal ownership
+
+4. **System records transaction details**:
+   - On-chain transaction hash
+   - Blockchain confirmation
+   - Transfer timestamp
+   - Investor address confirmation
+
+**Investor Receives**:
+- NFT in their registered wallet
+- Each NFT represents ownership of a specific whole loan
+- Transaction confirmation with hash
+- Legal ownership established on blockchain
+
+**System Behavior**:
+- Loan ownership changes to **Investor**
+- Pool status = **Closed / Sold**
+- Transaction hash displayed in deal record for both Issuer and Investor
+- Irreversible transfer completed
+
+### 📑 5. Post-Sale Updates
+
+**System Updates for All Parties**:
+
+**Issuer's Dashboard**:
+- Pool shown as **Sold**
+- Sale details recorded
+- NFT ownership transferred
+- Payment received confirmation
+
+**Investor's Dashboard**:
+- Shows **Acquired Loans / NFTs**
+- Owned whole-loan NFT portfolio
+- Transaction history
+- Payment records
+
+**Paying Agent's Ledger**:
+- Updated with completed transfer
+- Payment verified record
+- Transfer transaction hash
+
+**Documentation**:
+- All supporting documents attached under Documents tab:
+  - VA Certificate
+  - Payment Proof
+  - Transfer Record (transaction hash)
+  - Sale Agreement
+  - Audit Trail
+
+### 🔒 6. Security & Integrity Controls
+
+<Table>
+
+| Control | Description |
+|--------|-------------|
+| **Two-Step Verification** | Sale executes only after Issuer approval and PA payment verification |
+| **On-Chain Transfer Authorization** | NFT transfer uses only pre-approved C-Chain wallet key |
+| **Immutable Record** | Payment, verification, and transfer hashes stored permanently |
+| **No Double Sale** | System locks sold loans to prevent re-transfer |
+| **Audit Traceability** | Every bid, payment, and transfer timestamped and signed |
+
+</Table>
+
+**Additional Security**:
+- **Payment Verification Gate**: Cannot transfer NFTs until payment verified
+- **Authorization Check**: Issuer's transfer approval must exist
+- **Transaction Finality**: On-chain transfer is permanent
+- **Identity Recording**: All actions attributed to respective users
+
+### 📊 Outputs of Phase 4
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| Verified Off-chain Payment | Confirmed by Paying Agent |
+| NFT / Token Transfer Completed | Ownership moved from Issuer to Investor |
+| Pool Closed | Status = Sold |
+| Immutable Blockchain Record | Transfer hash logged |
+| Final Documents | VA Certificate + Payment Proof + Transfer Record |
+
+</Table>
+
+### 🧠 Why Phase 4 Is Critical
+
+**Establishes Legal and Financial Settlement**:
+- Sale executed with proper payment verification
+- Legal ownership transferred via NFT
+- Financial settlement complete
+
+**Guarantees Payment-Before-Transfer**:
+- Aligns blockchain records with real cash flow
+- Ensures money received before asset transfer
+- Protects both parties
+
+**Provides Audit-Grade Traceability**:
+- For regulators and investors
+- Complete audit trail
+- Immutable records
+
+**Finalizes Ownership Rights**:
+- Through immutable NFT representation
+- Clear ownership transfer
+- Blockchain-level proof
+
+### 🧩 Phase 4 Flow Summary
+
+```
+Issuer accepts investor bid → Approves sale
+        ↓
+Investor wires payment (off-chain)
+        ↓
+Paying Agent verifies receipt
+        ↓
+Transfer NFT / Loan Token (on-chain)
+        ↓
+Ownership changes: Issuer → Investor
+        ↓
+Pool marked as Sold / Closed
+```
+
+✅ **End of Phase 4**
+## Phase 5 — Servicer Ongoing Loan Performance & Collections Reporting
+
+**Upload Monthly Loan Tapes → Map Fields → Summarize → Commit to Ledger for Whole Loan Portfolio**
+
+🎯 **Objective**
+
+After ownership transfer, the Servicer must continue providing transparent, timely data about each loan's performance — covering repayments, delinquencies, prepayments, and recoveries.
+
+**The goal of this phase is to keep both the Investor (now owner) and Paying Agent informed through committed, auditable performance data on the Digital Ledger.**
+
+### 🧭 Actors & Responsibilities
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| **Servicer** | Prepares and uploads periodic loan-level tapes for the purchased whole-loan pool |
+| **Paying Agent (PA)** | Consumes the committed data for consolidation and investor reporting (Phase 6) |
+| **Investor / Issuer** | View-only: monitor performance and cash inflows |
+| **Platform (Intain)** | Validates data schema, enforces commit logic, and maintains immutable ledger records |
+
+</Table>
+
+### ⚙️ 1. Upload Loan Tape (Periodic Servicing Cycle)
+
+**Navigation Path**: Servicer → **Loans** → Process Loan Tape
+
+**Purpose**: To upload updated loan-level performance data for the purchased whole-loan pool.
+
+**Steps**:
+
+1. **Select the Whole Loan deal**:
+   - Navigate to **Deals** section
+   - Select Whole Loan deal (pool ID or investor deal ID)
+   - Click **Process Loan Tape**
+
+2. **Click Process Loan Tape**
+
+3. **Upload Excel file** (.xlsx):
+   - Select **Reporting Period / Payment Date** from dropdown
+   - Click **Upload Excel**
+   - Upload file with updated loan-level data for current cycle
+
+**Fields typically include**:
+- Loan ID
+- Borrower
+- Principal Outstanding
+- Interest Collected
+- Payment Date
+- Delinquency Status
+- Recoveries
+- Next Due Date
+
+4. **Click Upload**
+
+**System Behavior**:
+- **File parsed** → temporary holding table
+- **Validations run**:
+  - Missing headers flagged
+  - Duplicate loan IDs detected
+  - Incorrect date formats flagged
+- System prepares for field mapping
+
+### 🗺️ 2. Map Fields → Intain Standard Schema
+
+**Navigation Path**: Continue from Upload → **Map Fields**
+
+**Purpose**: Standardize the Servicer's fields to Intain's canonical loan schema for Whole Loans.
+
+**Steps**:
+
+1. **Map each uploaded column to standard fields**:
+
+   <Table>
+   
+   | Uploaded Column | Map To Intain Field |
+   |----------------|---------------------|
+   | Loan ID | Loan_Number |
+   | Principal Balance | Principal_Outstanding |
+   | Interest Received | Interest_Collected |
+   | Payment Date | Last_Payment_Date |
+   | Delinquency Flag | Delinquency_Status |
+   | Borrower | Obligor_Name |
+   | Recoveries | Recoveries_Amount |
+   | Next Due Date | Next_Payment_Date |
+   
+   </Table>
+
+2. **Use Preview Map Fields** to verify:
+   - Mapping accuracy
+   - Datatype integrity
+   - Required fields present
+
+3. **Save mapping template** for next cycle:
+   - Mapping stored for reuse
+   - Consistent across monthly uploads
+
+**System Validation**:
+- ✅ **Mandatory fields must exist**
+- ✅ **Numeric/date fields auto-validated**
+- ✅ **Warnings shown for new loans** not in previous cycle (set as additions)
+- ✅ **Data type checks** (number, date, text)
+
+### 📊 3. Preview and Summarize
+
+**Navigation Path**: Continue from Map Fields → **Preview** → **Summarize**
+
+**Purpose**: To review and aggregate loan-level data into portfolio-level metrics.
+
+**Steps**:
+
+1. **Click Preview Loan Tape** → grid view of mapped data
+
+2. **Review mapped data**:
+   - Verify loan count
+   - Check data completeness
+   - Validate against expectations
+
+3. **Click Summarize** to generate Servicer summary
+
+**System Computes**:
+
+<Table>
+
+| Metric | Description |
+|--------|-------------|
+| **Total Outstanding Principal** | Aggregate remaining principal balance |
+| **Interest Collected for Period** | Total interest received in cycle |
+| **Principal Collected for Period** | Total principal payments received |
+| **Defaults / Recoveries** | Defaulted loans and recovery amounts |
+| **Delinquency %** | Percentage of delinquent loans |
+| **Prepayment Rate** | Loans paid ahead of schedule |
+| **Weighted Average Coupon** | Pool-level average interest rate |
+| **Weighted Average Maturity** | Remaining term analysis |
+
+</Table>
+
+**Outcome**: Servicer Summary created and ready for commit.
+
+### 💾 4. Commit Servicer Data to Digital Ledger
+
+**Navigation Path**: Servicer → Summary → **Commit to Digital Ledger**
+
+**Steps**:
+
+1. **Review summary for accuracy**:
+   - Check calculated totals
+   - Verify loan count
+   - Confirm performance metrics
+
+2. **Click Commit to Digital Ledger**
+
+3. **Confirm action** → System locks data and records ledger entry
+
+**System Behavior**:
+- **Status = Processed = YES** for that payment date
+- **Immutable entry created** with timestamp and Servicer ID
+- **PA notified automatically** that new data is available
+- **Data locked** (cannot edit after commit)
+
+### 🔒 5. Integrity Controls
+
+<Table>
+
+| Control | Description |
+|--------|-------------|
+| **Schema Validation** | Ensures mapping matches standard fields |
+| **Commit Lock** | After commit, data cannot be edited (retains audit integrity) |
+| **Cross-Cycle Reconciliation** | Compares previous period totals to detect anomalies |
+| **Ledger Timestamp** | Commit date/time and Servicer ID stored immutably |
+
+</Table>
+
+**Additional Controls**:
+- **Required Fields**: All mandatory fields must be present
+- **Data Type Validation**: Numeric, date, text types checked
+- **Duplicate Prevention**: Cannot commit same payment date twice
+- **Identity Recording**: Servicer ID tied to each commit
+
+### 📊 Outputs of Phase 5
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| Servicer Loan Tape Upload | Monthly performance file for whole loan pool |
+| Servicer Summary | Aggregated portfolio performance metrics |
+| Ledger Commit | Immutable record for reporting period |
+| Status Processed = YES | Marks period as complete and ready for aggregation |
+
+</Table>
+
+### 🧠 Why Phase 5 Is Critical
+
+**Ensures Ongoing Transparency**:
+- Loan performance transparency for investors
+- Post-purchase asset health monitoring
+- Real-time visibility into portfolio status
+
+**Feeds Accurate Cash-flow Data**:
+- Provides accurate data to Paying Agent
+- Supports payment distribution calculations
+- Enables investor reporting
+
+**Maintains Regulatory and Audit Trail**:
+- Via ledger records
+- Complete audit trail preserved
+- Regulatory compliance support
+
+**Keeps Investors Confident**:
+- In post-purchase asset health
+- Transparent performance tracking
+- Proactive monitoring capabilities
+
+### 🧩 Phase 5 Flow Summary
+
+```
+Servicer retrieves updated loan data
+        ↓
+Upload Loan Tape → Map Fields
+        ↓
+Preview → Summarize
+        ↓
+Commit Summary to Digital Ledger
+        ↓
+Status: Processed = YES → Notify Paying Agent
+```
+
+✅ **End of Phase 5**
+
+---
+
+## Phase 6 — Paying Agent Consolidation & Investor Reporting
+
+**Aggregate Servicer Data → Validate → Commit Summary → Generate Investor Reports**
+
+🎯 **Objective**
+
+To convert the Servicer's committed data into investor-level financial reporting.
+
+**The Paying Agent aggregates results, validates reconciliations, runs periodic calculations (cash flow distributions, interest accruals), and finalizes reports for both the Investor and Issuer.**
+
+### 🧭 Actors & Responsibilities
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| **Paying Agent (PA)** | Aggregates and commits summary data; prepares investor reports |
+| **Servicer** | Provides validated loan data input |
+| **Investor** | Views portfolio performance and cash receipts |
+| **Issuer / Underwriter** | View-only; monitor post-sale portfolio status |
+| **Platform (Intain)** | Enforces data reconciliation and ledger integrity |
+
+</Table>
+
+### ⚙️ 1. Access Aggregate Summary
+
+**Navigation Path**: Paying Agent → **Loans** → View Aggregate Summary
+
+**Purpose**: To consolidate Servicer data for the given payment period.
+
+**Steps**:
+
+1. **Open Whole Loan deal**
+
+2. **Click View Aggregate Summary**
+
+3. **System auto-aggregates**:
+   - **Total interest collected** (Servicer reported)
+   - **Principal collections and recoveries**
+   - **Default balances and prepayments**
+   - **Delinquency and cure rates**
+   
+4. **Compare aggregate totals to Servicer's prior period data** → validate accuracy
+
+**Summary Metrics Displayed**:
+- Total outstanding principal
+- Total interest collected
+- Total principal collected
+- Default rates
+- Delinquency percentages
+- Prepayment activity
+- Performance trends
+
+### 💾 2. Commit Aggregate Summary to Digital Ledger
+
+**Navigation Path**: Paying Agent → **Loans** → View Aggregate Summary → **Commit to Ledger**
+
+**Steps**:
+
+1. **Validate aggregated metrics**:
+   - Check totals reconcile
+   - Verify period consistency
+   - Review for anomalies
+
+2. **Click Commit to Digital Ledger**
+
+3. **Confirm action** → Ledger record created
+
+**System Behavior**:
+- **Payment Date flag = YES** (Processed)
+- **Ledger record captures**:
+  - Deal ID
+  - Payment Date
+  - Summary metrics
+  - Timestamp
+  - PA ID
+- **Immutable record** created on blockchain
+
+### 📊 3. Run Periodic Calculations (Whole Loan Yields & Collections)
+
+**Navigation Path**: Paying Agent → **Deal Recurring** → Edit → **Deal**
+
+**Purpose**: To calculate actual cash distribution and performance for investors based on Servicer data.
+
+**Steps**:
+
+1. **Open Deal Recurring**
+
+2. **Ensure Servicer status = Processed (YES)**:
+   - Verify data is committed
+   - Confirm payment date processed
+   - Check calculation prerequisites
+
+3. **Click Calculate**
+
+**System Behavior**:
+
+**Computes**:
+- **Investor yield** and cash flows received
+- **Interest income** for period
+- **Principal return** for period
+- **Current balances** and remaining amounts
+
+**Updates**:
+- **Investor dashboard** with current returns and remaining balance
+- **Performance metrics** and yield calculations
+- **Cash flow summary** for reporting
+
+### 📄 4. Generate Reports & Distribute to Stakeholders
+
+**Navigation Path**: Deal → **Reports** section
+
+**Purpose**: To provide transparent insight to Investors and Issuer.
+
+**Reports Produced**:
+
+<Table>
+
+| Report | Description |
+|--------|-------------|
+| **Investor Report** | Shows cash received, current balance, yield to date |
+| **Deal Summary** | Aggregated pool performance metrics |
+| **Delinquency Report** | Details non-performing loans and recoveries |
+| **Ledger Summary** | Hash references of committed data for audit |
+
+</Table>
+
+**Distribution**:
+- Reports uploaded under **Documents** tab
+- **Investor and Issuer** receive notifications
+- All reports **timestamped and stored** on ledger
+- Downloadable in **PDF and Excel** formats
+
+**Report Content**:
+- Payment period (date range)
+- Cash received (interest + principal)
+- Current balances
+- Performance metrics (yield, collections)
+- Delinquency and default information
+- Transaction hash references
+
+### 🔒 5. Security & Audit Controls
+
+<Table>
+
+| Control | Purpose |
+|--------|---------|
+| **Reconciliation Validation** | Ensures Servicer data = PA aggregates |
+| **Ledger Immutability** | Once committed, cannot alter summary |
+| **Version Tracking** | Each new calculation cycle creates versioned report |
+| **Access Permissions** | Only authorized roles can commit or view raw data |
+
+</Table>
+
+**Additional Security**:
+- **Calculation Integrity**: Validated before report generation
+- **Data Reconciliation**: Cross-check Servicer vs PA totals
+- **Identity Recording**: All actions attributed to PA user
+- **Audit Logging**: Complete trail of all actions
+
+### 📊 Outputs of Phase 6
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| Committed Aggregate Summary | Official deal-level performance snapshot |
+| Investor Cash-flow Calculation | Computed yield and income for the period |
+| Generated Reports | Investor and Issuer report packages |
+| Ledger Entries | Immutable records for regulatory audit |
+
+</Table>
+
+### 🧠 Why Phase 6 Is Critical
+
+**Converts Raw Loan Data to Financial Outcomes**:
+- Servicing data into investor financial results
+- Transparent performance reporting
+- Clear yield and return calculations
+
+**Provides Ongoing Transparency**:
+- Continuous performance monitoring
+- Investor visibility into asset health
+- Real-time reporting
+
+**Creates Permanent, Auditable Records**:
+- On ledger for regulatory compliance
+- Complete audit trail maintained
+- Immutable historical record
+
+**Supports Regulatory and Investor Reporting Requirements**:
+- Compliance documentation
+- Investor reporting
+- Performance tracking
+
+### 🧩 Phase 6 Flow Summary
+
+```
+Servicer commits loan data to ledger
+        ↓
+Paying Agent views aggregate summary
+        ↓
+Validate → Commit to Ledger
+        ↓
+Run calculations (Investor yield, cash collections)
+        ↓
+Generate and publish Investor Reports
+        ↓
+Payment date flagged as Processed = YES
+```
+
+✅ **End of Phase 6**
+
+---
+
+## Phase 7 — Deal Closure, Loan Payoff, and Investor Redemption
+
+**Final Reconciliation → NFT Burn → Investor Redemption → Deal Archival**
+
+🎯 **Objective**
+
+This is the end-of-life phase of the whole loan transaction.
+
+**It occurs when**:
+- All loans in the pool have matured, prepaid, or been fully collected
+- Investors have received all principal and interest payments
+- The Paying Agent and Servicer reconcile final balances and mark the deal as closed
+
+**At this stage, the platform ensures**:
+- Complete reconciliation of cashflows vs. outstanding balances
+- Secure closure of loan tokens (NFTs) or their burn on-chain
+- Final investor redemption reporting and deal archival
+
+### 🧭 Actors & Responsibilities
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| **Servicer** | Reports loan closures (payoff, maturity, charge-off, recovery) |
+| **Paying Agent (PA)** | Verifies all redemptions and commits final ledger entries |
+| **Investor** | Confirms receipt of all payments and final yield realization |
+| **Issuer** | Passive; monitors closure and receives archival notification |
+| **Platform (Intain)** | Executes NFT burn/closure and locks records immutably |
+
+</Table>
+
+### ⚙️ 1. Servicer Marks Loan Payoffs / Maturities
+
+**Navigation Path**: Servicer → **Loans** → Process Loan Tape → Final Cycle
+
+**Purpose**: To report that individual loans in the pool are fully paid off, prepaid, or charged off.
+
+**Steps**:
+
+1. **Upload final servicing tape** for the pool
+
+2. **Include for each loan**:
+   - **Loan Status**: Paid Off / Matured / Charged Off
+   - **Final Principal and Interest** received
+   - **Closure Date**
+   - **Recovery amounts** (if applicable)
+
+3. **Map and validate fields** (similar to Phase 5):
+   - Map uploaded columns to Intain standard fields
+   - Validate data integrity
+   - Preview mapped data
+
+4. **Generate Servicer Summary** → **Commit to Digital Ledger**
+
+**System Behavior**:
+- Loans marked as **Closed** in system records
+- Pool's outstanding balance auto-updated
+- **System flags pool as Fully Paid / Near Closure** if total balance = 0
+
+**Loan Closure Scenarios**:
+- **Paid Off**: Borrower completed all payments
+- **Matured**: Loan reached maturity date
+- **Prepaid**: Borrower paid ahead of schedule
+- **Charged Off**: Defaulted loan written off
+- **Recovered**: Charged off loan with recovery
+
+### 💾 2. Paying Agent Verifies Final Reconciliation
+
+**Navigation Path**: Paying Agent → **Loans** → View Aggregate Summary (Final Cycle)
+
+**Purpose**: To ensure all loans in the deal are reconciled and paid in full before closure.
+
+**Steps**:
+
+1. **Open Aggregate Summary** for final cycle
+
+2. **Validate**:
+   - **Outstanding Principal = 0**
+   - **Interest and recoveries** tally with Servicer report
+   - **All prior periods are committed**
+
+3. **If reconciled**, mark as **Final Summary = Verified**
+
+4. **Commit to Digital Ledger**
+
+**System Behavior**:
+- Marks deal as **Settled / Redeemed**
+- Locks all prior records
+- **Investor notified** of final reconciliation
+
+**Final Reconciliation Checklist**:
+- [ ] All loans paid off or matured
+- [ ] Outstanding principal = $0
+- [ ] Final interest payments received
+- [ ] Recoveries reconciled
+- [ ] All prior periods committed
+- [ ] Total reconciled with Servicer
+
+### 🪙 3. Investor Redemption & Confirmation
+
+**Navigation Path**: Investor → **Deals** → View Redemption Summary
+
+**Purpose**: To display the investor's total realized value and confirm redemption.
+
+**Details Displayed**:
+
+<Table>
+
+| Metric | Description |
+|--------|-------------|
+| **Total Principal Received** | Sum of all principal payments |
+| **Total Interest Income** | Total interest collected over life |
+| **Final Yield to Date (%)** | Realized yield on investment |
+| **Redemption Date and Reference** | Closure date and transaction ID |
+| **NFT / Token Burn Transaction Hash** | On-chain burn proof |
+
+</Table>
+
+**Additional Information**:
+- Deal ID and name
+- Investment timeline
+- Payment history
+- Performance metrics
+- Final statement
+
+**Investor Action**:
+1. Review final redemption summary
+2. Verify all payments received
+3. Check yield realization
+4. Click **Acknowledge Redemption** to confirm closure
+
+**System Behavior**:
+- Updates investor dashboard → **Deal Status: Closed / Redeemed**
+- Generates **Redemption Certificate (PDF)** containing:
+  - Deal ID
+  - Investor wallet
+  - Total returns
+  - NFT transfer/burn hash
+  - Final yield
+  - Timeline
+
+### 🔥 4. On-chain Loan Token (NFT) Burn / Closure
+
+**Navigation Path**: Automatic (triggered by system)
+
+**Purpose**: To finalize the blockchain record by retiring the loan tokens from circulation once ownership has matured or payoff is complete.
+
+**Prerequisites**:
+- Final reconciliation committed by Paying Agent
+- Investor redemption confirmed
+- All loans closed or paid off
+
+**Mechanics**:
+
+**Triggered automatically** when Paying Agent commits the final ledger entry.
+
+**Platform executes**:
+- **NFT burn transaction** on the C-Chain (or internal ledger chain)
+- **Records burn hash** and timestamp
+- **Marks NFT status** = **Burned / Closed**
+
+**If any residuals remain** (recoveries or adjustments):
+- Posted as **Final Ledger Notes**
+- Documented in final reports
+- Included in redemption certificate
+
+**Outcome**:
+- NFT representing that loan is **permanently retired**
+- **Ownership officially extinguished**
+- Cannot be reactivated or transferred
+- Immutable record of closure on blockchain
+
+**Burn Transaction Details**:
+- Transaction hash on C-Chain
+- Burn timestamp
+- Final owner address (before burn)
+- Deal ID reference
+- Storage in audit trail
+
+### 📄 5. Generate and Publish Final Reports
+
+**Navigation Path**: Deal → **Reports** → Final Reports
+
+**Purpose**: To provide comprehensive closure documentation for all stakeholders.
+
+**Reports Generated**:
+
+<Table>
+
+| Report | Description |
+|--------|-------------|
+| **Final Investor Report** | Summarizes all cashflows, realized yield, and redemption confirmation |
+| **Pool Closure Report** | Consolidates all loans, statuses, and closure reasons |
+| **Audit Ledger Report** | Lists all transaction hashes (NFT mint, transfer, burn) |
+| **Regulatory Report** | Optional — export for auditors or regulators showing full traceability |
+
+</Table>
+
+**Report Content**:
+- **Investor Summary**: Total invested, total received, final yield
+- **Payment History**: All payments over deal lifecycle
+- **Loan Status**: Final status of all loans in pool
+- **Performance Metrics**: Delinquency rates, recovery amounts, etc.
+- **Transaction Hashes**: All on-chain transaction references
+- **Redemption Certificate**: Official proof of closure
+
+**Distribution**:
+- Published under **Documents → Deal Reports → Closure**
+- Shared with **Investor, Issuer, and Servicer**
+- **Immutable reference hashes** stored on blockchain for each document
+
+### 🧾 6. Deal Archival
+
+**Navigation Path**: Paying Agent → **Deals** → Archive
+
+**Purpose**: To finalize the lifecycle of the deal and remove it from active dashboards.
+
+**Steps**:
+
+1. **After investor redemption confirmed**, click **Archive Deal**
+
+2. **Confirm closure metadata**:
+   - Final Report Date
+   - NFT burn hash
+   - Redemption completion date
+   - Final totals
+
+3. **System moves deal from Active → Archived state**
+
+**System Behavior**:
+- All dashboards updated
+- Data remains accessible under **Archived Deals** for audit or regulatory review
+- Deal flagged **"Completed"** with immutable timestamp
+
+**Archival Details**:
+- Deal marked as **Archived / Closed**
+- All records locked
+- Immutable timestamp set
+- Data retained for regulatory compliance
+- Searchable but not editable
+
+### 🔒 7. Integrity & Security Controls
+
+<Table>
+
+| Control | Description |
+|--------|-------------|
+| **Double Verification for Closure** | Both Servicer and PA must confirm before closure triggers |
+| **NFT Burn Validation** | Smart contract confirms burn transaction hash to prevent reactivation |
+| **Immutable Archive** | Once archived, deal cannot be re-opened or modified |
+| **Redemption Certificate Hash** | Embedded on-chain for investor and regulator verification |
+| **End-to-End Audit Trail** | From initial pool creation (Phase 1) to closure (Phase 7) |
+
+</Table>
+
+**Additional Controls**:
+- **Final Reconciliation Required**: All loans must be reconciled before closure
+- **NFT Burn Verification**: Burn transaction must be confirmed on-chain
+- **Investor Confirmation**: Redemption must be acknowledged
+- **Complete Documentation**: All reports must be generated
+- **Data Retention**: Archived data retained per regulatory requirements
+
+### 📊 Outputs of Phase 7
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| Loan Tokens (NFTs) Burned | On-chain proof of payoff or redemption |
+| Final Investor Redemption Certificate | Proof of return and deal closure |
+| Final Ledger Commit | All payments reconciled and logged |
+| Deal Status = Closed / Archived | Final system and blockchain state |
+| Immutable Audit Trail | All seven phases linked and auditable |
+
+</Table>
+
+### 🧠 Why Phase 7 Is Critical
+
+**Legally Closes Out Entire Lifecycle**:
+- Complete whole-loan lifecycle closure
+- Legal finality of transaction
+- Ownership officially extinguished
+
+**Confirms Cashflow and Token Reconciliation**:
+- Every payment reconciled
+- Token transfers verified
+- Complete balance reconciliation
+- Audit-grade accuracy
+
+**Retires Digital Asset Tokens Safely**:
+- Prevents misuse or reactivation
+- Permanent token retirement
+- Secure closure of NFTs
+- Blockchain-level finality
+
+**Provides Complete Proof**:
+- For investors and issuers
+- Complete transaction proof
+- Ownership transfer documented
+- Redemption certificate issued
+
+**Delivers Full Audit Compliance**:
+- End-to-end traceability
+- Regulatory compliance
+- Immutable audit trail
+- Complete documentation
+
+### 🧩 Phase 7 Flow Summary
+
+```
+Servicer uploads final loan tape (paid off / matured)
+        ↓
+Paying Agent validates final reconciliation
+        ↓
+Investor receives final redemption & confirms
+        ↓
+NFT / Loan Token burned (on-chain)
+        ↓
+Final Reports generated & shared
+        ↓
+Deal archived → Status: Closed
+```
+
+✅ **End of Phase 7 — Deal Lifecycle Closed**
+
+---
+
+## Full Whole Loan Flow Summary (Phases 1–7)
+
+<Table>
+
+| Phase | Title | Key Outcome |
+|------|-------|-------------|
+| **1** | Issuer Creates and Readies Loan Pool | Pool created, loans uploaded, mapped, and submitted for verification |
+| **2** | VA Verification & Certification | Loans verified and certified for sale |
+| **3** | Investor Preview & Bidding | Investors review data and submit pricing bids |
+| **4** | Sale Finalization & NFT Transfer | Investor payment verified, NFT ownership transferred |
+| **5** | Servicer Ongoing Loan Reporting | Monthly/periodic servicing updates committed to ledger |
+| **6** | Paying Agent Consolidation & Reporting | Aggregated summaries, yield calculations, and investor reports generated |
+| **7** | Deal Closure & Redemption | Final reconciliation, NFT burn, investor redemption certificate, and deal archival |
+
+</Table>
+
+---
+
+## Key Differences vs Securitization Flow
+
+<Accordion>
+<AccordionItem title="Token Type">
+Whole-loan uses **NFTs** to represent single whole-loan assets (one NFT per loan), whereas securitization uses **FTs** representing tranche classes.
+</AccordionItem>
+
+<AccordionItem title="Commit Semantics">
+For whole loans, investor commit often equates to buying the entire loan principal (or negotiated portion) rather than subscribing to a tranche class.
+</AccordionItem>
+
+<AccordionItem title="Settlement Action">
+The Paying Agent executes **NFT transfer** (not FT mint/transfer) once off-chain funds are verified.
+</AccordionItem>
+
+<AccordionItem title="Deal Structure">
+No tranche structures for whole-loan deals - direct sale of whole loans versus securitization tranching.
+</AccordionItem>
+</Accordion>
+
+## Summary
+
+The Whole-Loan flow in Intain Markets provides a complete workflow for:
+- ✅ Pool creation and loan onboarding
+- ✅ VA verification and certification
+- ✅ Deal structuring and underwriting
+- ✅ NFT approval and issuance
+- ✅ Investor commitment and investment
+- ✅ NFT transfer and settlement
+- ✅ Ongoing servicing and reporting
+- ✅ Deal closure and status management
+
+**This comprehensive guide covers all phases from initial pool creation through investor ownership and ongoing servicing.**
+
