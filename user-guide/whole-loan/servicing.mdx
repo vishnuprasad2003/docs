@@ -1,0 +1,282 @@
+---
+title: "Loan Servicing"
+description: "Complete guide for managing loan servicing operations including payments, reporting, and borrower management"
+---
+
+## Loan Servicing Overview
+
+Loan servicing encompasses all operations required to manage active loans through their lifecycle, including payment processing, borrower management, escrow administration, and regulatory reporting.
+
+## Servicing Dashboard
+
+Access the **Servicing Dashboard** to view:
+
+- Total active loans in portfolio
+- Loans with payments due
+- Delinquent loans requiring attention
+- Upcoming payment deadlines
+- Portfolio performance metrics
+
+## Payment Processing
+
+### Monthly Payment Cycle
+
+**Standard Payment Process**:
+
+1. **Generate Payment Statements**: Automated generation before due date
+2. **Send to Borrowers**: Email notifications with payment details
+3. **Process Payments**: Accept payments through multiple channels
+4. **Update Balances**: Automatic balance updates upon payment
+5. **Generate Reports**: Monthly performance reports
+
+### Payment Channels
+
+Borrowers can make payments through:
+
+- **Online Portal**: Secure online payment processing
+- **Bank Transfer**: Direct bank transfers
+- **Check**: Traditional check processing
+- **Auto-Pay**: Automated recurring payments
+
+### Payment Application
+
+**Principal & Interest**:
+- Payment allocated to interest first
+- Remaining amount to principal
+- Outstanding balance updated
+
+**Escrow Payments**:
+- Property tax escrow
+- Insurance escrow
+- Excess escrow handling
+
+### Delinquency Management
+
+**Tracking Delinquency**:
+- 15 days past due: Warning notification
+- 30 days past due: First late notice
+- 60 days past due: Intensified collection efforts
+- 90 days past due: Default proceedings initiated
+
+**Collection Actions**:
+- Automated reminder emails
+- Phone contact attempts
+- Collection letter mailing
+- Default processing if necessary
+
+## Loan Status Management
+
+### Status Types
+
+- **Active**: Loan in good standing
+- **Current**: Up-to-date on payments
+- **Delinquent**: Past due on payments
+- **Forbearance**: Temporary payment relief
+- **Modification**: Loan terms modified
+- **Default**: In default status
+- **Paid Off**: Loan fully repaid
+- **Closed**: Loan closed
+
+### Updating Loan Status
+
+**Status Changes**:
+1. Navigate to specific loan
+2. Select **Update Status**
+3. Choose new status
+4. Enter reason/notes
+5. Confirm status change
+6. Notification sent to borrower
+
+<Note>
+Status changes are recorded on blockchain for audit purposes. All status changes include timestamp and user information.
+</Note>
+
+## Escrow Management
+
+### Escrow Account Types
+
+**Property Tax Escrow**:
+- Collect monthly property tax payments
+- Disburse annual tax payments
+- Maintain required reserves
+
+**Insurance Escrow**:
+- Collect homeowners insurance premiums
+- Disburse annual insurance payments
+- Handle policy renewals
+
+**PMI Escrow** (if applicable):
+- Private mortgage insurance payments
+- Automatic termination when appropriate
+
+### Escrow Analysis
+
+**Annual Escrow Review**:
+- Review collected vs disbursed amounts
+- Calculate required escrow balance
+- Determine monthly payment adjustments
+- Notify borrower of changes
+
+## Payment Statement Generation
+
+### Statement Components
+
+**Borrower Information**:
+- Borrower name and address
+- Loan account number
+- Statement date and period
+
+**Payment Summary**:
+- Previous balance
+- Payment received
+- Interest charged
+- Principal paid
+- New balance
+
+**Escrow Summary**:
+- Escrow balance
+- Escrow disbursements
+- Taxes paid
+- Insurance paid
+
+**Important Dates**:
+- Due date
+- Late date
+- Next payment amount
+
+### Generating Statements
+
+1. Navigate to **Statements** section
+2. Select statement period
+3. Click **Generate Statements**
+4. Review generated statements
+5. Send to borrowers automatically
+
+## Monthly Reporting
+
+### Servicer Reports
+
+**Report Components**:
+- Portfolio summary
+- Payment statistics
+- Delinquency rates
+- Default rates
+- Payment collection rates
+
+**Report Generation**:
+- Automated monthly generation
+- Customizable report periods
+- Export to Excel/PDF
+- Share with investors/lenders
+
+### Performance Metrics
+
+**Key Metrics Tracked**:
+- Collections ratio
+- Delinquency percentage
+- Loss severity
+- Recovery rates
+- Portfolio aging
+
+## Borrower Management
+
+### Borrower Portal
+
+**Features Available**:
+- View loan details
+- Make online payments
+- Download statements
+- View payment history
+- Upload documents
+- Request modifications
+
+### Document Management
+
+**Uploaded Documents**:
+- Borrower uploads
+- Servicer documents
+- Correspondence
+- Modified documents
+
+**Document Security**:
+- All documents stored in IPFS
+- Version control maintained
+- Access logging
+- Secure retrieval
+
+## Loan Modifications
+
+### Modification Types
+
+**Payment Modifications**:
+- Temporary payment reduction
+- Extended loan term
+- Interest rate adjustment
+
+**Forbearance Agreements**:
+- Temporary payment suspension
+- Balloon payment arrangement
+- Payment plan structuring
+
+### Modification Process
+
+1. **Borrower Request**: Submit modification request
+2. **Review Eligibility**: Assess borrower financials
+3. **Propose Modification**: Generate modification terms
+4. **Borrower Acceptance**: Sign modified documents via DocuSign
+5. **Implementation**: Update loan terms
+6. **Monitoring**: Track modification compliance
+
+## Regulatory Compliance
+
+### Reporting Requirements
+
+**Required Reports**:
+- Monthly servicer reports
+- Delinquency reports
+- Recovery reports
+- Modification reports
+- Investor reports
+
+**Deadlines**:
+- Monthly reports due by 15th
+- Quarterly reports by end of quarter
+- Annual reports by fiscal year end
+
+### Data Retention
+
+**Retention Periods**:
+- Payment records: 7 years
+- Correspondence: 5 years
+- Statements: 3 years
+- All data on blockchain permanently
+
+## Best Practices
+
+<Accordion>
+<AccordionItem title="Payment Processing">
+Process payments promptly and accurately. Update balances immediately to maintain data integrity.
+</AccordionItem>
+
+<AccordionItem title="Delinquency Management">
+Act quickly on delinquent accounts. Early intervention improves recovery rates.
+</AccordionItem>
+
+<AccordionItem title="Communication">
+Maintain clear communication with borrowers. Transparency builds trust and improves collections.
+</AccordionItem>
+
+<AccordionItem title="Documentation">
+Document all loan servicing activities. Complete documentation supports audits and compliance.
+</AccordionItem>
+</Accordion>
+
+## Next Steps
+
+<Card title="Investment Tracking" icon="hand-holding-usd" href="/user-guide/whole-loan/investment">
+  Learn about whole loan investment tracking
+</Card>
+
+<Card title="Monthly Reporting" icon="chart-line" href="/user-guide/whole-loan/reporting">
+  Understand reporting requirements and generation
+</Card>

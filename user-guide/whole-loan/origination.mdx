@@ -1,0 +1,207 @@
+---
+title: "Loan Origination"
+description: "Complete guide for creating and onboarding loan applications"
+---
+
+## Loan Origination Process
+
+Loan origination is the first step in the whole loan lifecycle. This guide covers how to create, upload, and manage loan applications through the platform.
+
+## Creating a Loan Application
+
+### Step 1: Access Loan Origination
+
+Navigate to the **Loans** section in your dashboard and select **Create New Loan**.
+
+<Image src="/images/login.png" title="Loan Creation Interface" alt="Access loan creation from dashboard" />
+
+### Step 2: Enter Loan Details
+
+Provide the following information for your loan:
+
+**Borrower Information**:
+- Borrower name (individual or business)
+- Contact information
+- Income verification
+- Credit score
+
+**Loan Terms**:
+- Loan amount
+- Interest rate
+- Loan term (months/years)
+- Loan type (mortgage, auto, personal, etc.)
+
+**Collateral Information**:
+- Collateral type
+- Collateral value
+- Appraisal documents
+
+### Step 3: Upload Supporting Documents
+
+Upload required documents to support the loan application:
+
+**Required Documents**:
+- Application form
+- Income verification
+- Credit reports
+- Property appraisal (if applicable)
+- Title documents (if applicable)
+
+**Document Requirements**:
+- Files must be PDF, JPG, or PNG format
+- Maximum file size: 10MB
+- All documents stored in IPFS
+- Documents encrypted and secure
+
+### Step 4: Submit for Review
+
+Once all required information and documents are provided:
+
+1. Review all entered information
+2. Verify document uploads are complete
+3. Click **Submit for Review**
+4. Status changes to **Pending Review**
+
+<Tip>
+Auto-save is enabled for loan applications. Your progress is automatically saved as you fill out the form.
+</Tip>
+
+## Loan Tape Management
+
+For bulk loan origination, upload loan tapes (Excel files):
+
+### Preparing Loan Tapes
+
+**File Format**: Excel (.xlsx or .xls)
+
+**Required Columns**:
+- Loan ID
+- Borrower Name
+- Loan Amount
+- Interest Rate
+- Loan Term
+- Origination Date
+- Loan Type
+- Property Address (if applicable)
+
+**Template Available**:
+Download the loan tape template from the platform to ensure proper formatting.
+
+### Uploading Loan Tapes
+
+1. Navigate to **Loan Tapes** section
+2. Click **Upload Loan Tape**
+3. Select your Excel file
+4. System validates file format
+5. Review upload summary
+6. Confirm upload
+
+### Processing Upload
+
+After upload:
+- System validates data format
+- Each loan record processed
+- Loan applications created automatically
+- Status assigned: **Pending Review**
+- Notifications sent to relevant parties
+
+<Warning>
+Ensure all required fields are present in your loan tape. Missing required fields will prevent successful processing.
+</Warning>
+
+## Loan Application Review
+
+### For Lenders
+
+Review submitted loan applications:
+
+**Review Checklist**:
+- Verify borrower information
+- Check credit reports
+- Validate income documentation
+- Review collateral appraisals
+- Assess loan terms
+
+**Actions Available**:
+- **Approve**: Move loan to approved status
+- **Reject**: Decline loan with reason
+- **Request More Info**: Send back for additional documentation
+
+### Status Management
+
+**Status Flow**:
+```
+Pending Review → Under Review → Approved/Rejected
+```
+
+**Approved Loans**:
+- Moved to Active status
+- Borrower notification sent
+- Servicing begins
+
+**Rejected Loans**:
+- Reason recorded
+- Borrower notification sent
+- Application archived
+
+## Loan Approval & Activation
+
+### Final Approval Process
+
+Once approved by lender:
+
+1. **Notification Sent**: Borrower receives approval notification
+2. **Funding Process**: Loan moves to funded status
+3. **Document Generation**: Final loan documents created
+4. **DocuSign Workflow**: Documents sent for electronic signature
+5. **Activation**: Loan becomes active after signature completion
+
+### Post-Activation
+
+**Automatic Processes**:
+- Loan added to servicing portfolio
+- Payment schedule established
+- Initial payment due date set
+- Borrower portal access enabled
+- First payment statement generated
+
+## Best Practices
+
+<Accordion>
+<AccordionItem title="Data Quality">
+Ensure all loan information is accurate and complete before submission. Incomplete applications will delay the approval process.
+</AccordionItem>
+
+<AccordionItem title="Document Management">
+Use clear naming conventions for documents. Include document type and borrower name for easy identification.
+</AccordionItem>
+
+<AccordionItem title="Bulk Uploads">
+For bulk loan uploads, validate your data against the template. Use the platform's validation tools before submission.
+</AccordionItem>
+
+<AccordionItem title="Review Process">
+Establish clear review criteria and approval workflows to ensure consistent decision-making.
+</AccordionItem>
+</Accordion>
+
+## Loan Origination APIs
+
+The platform provides comprehensive APIs for loan origination:
+
+**Endpoints**:
+- `POST /createLoanApplication` - Create new loan application
+- `POST /uploadLoanTape` - Upload bulk loan applications
+- `GET /getLoanStatus` - Retrieve loan status
+- `POST /updateLoanStatus` - Update loan status
+- `GET /getAllLoans` - Retrieve all loans
+
+## Next Steps
+
+<Card title="Loan Servicing" icon="cogs" href="/user-guide/whole-loan/servicing">
+  Learn about loan servicing operations after origination
+</Card>
+
+<Card title="Loan Investment" icon="hand-holding-usd" href="/user-guide/whole-loan/investment">
+  Explore whole loan investment opportunities
+</Card>

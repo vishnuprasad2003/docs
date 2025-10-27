@@ -34,6 +34,36 @@
             ]
           },
           {
+            "group": "Whole Loan Workflow",
+            "pages": [
+              "user-guide/whole-loan/overview",
+              "user-guide/whole-loan/origination",
+              "user-guide/whole-loan/servicing",
+              "user-guide/whole-loan/investment",
+              "user-guide/whole-loan/reporting"
+            ]
+          },
+          {
+            "group": "Securitization Workflow",
+            "pages": [
+              "user-guide/securitization/overview",
+              "user-guide/securitization/pool-creation",
+              "user-guide/securitization/deal-onboarding",
+              "user-guide/securitization/tranche-management",
+              "user-guide/securitization/investment-management"
+            ]
+          },
+          {
+            "group": "Preview & Verification",
+            "pages": [
+              "user-guide/preview/overview",
+              "user-guide/preview/pool-creation",
+              "user-guide/preview/loan-tape-upload",
+              "user-guide/preview/verification-process",
+              "user-guide/preview/nft-minting"
+            ]
+          },
+          {
             "group": "Document Management",
             "pages": [
               "user-guide/documents/docusign-integration",
@@ -50,12 +80,15 @@
             ]
           },
           {
-            "group": "Role-Based Access",
+            "group": "Role-Based Guides",
             "pages": [
+              "user-guide/roles/overview",
               "user-guide/roles/issuer",
               "user-guide/roles/facility-agent",
               "user-guide/roles/lender",
-              "user-guide/roles/servicer"
+              "user-guide/roles/servicer",
+              "user-guide/roles/verification-agent",
+              "user-guide/roles/market-maker"
             ]
           }
         ]
