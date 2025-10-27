@@ -55,10 +55,7 @@
             "group": "Preview & Verification",
             "pages": [
               "user-guide/preview/overview",
-              "user-guide/preview/pool-creation",
-              "user-guide/preview/loan-tape-upload",
-              "user-guide/preview/verification-process",
-              "user-guide/preview/nft-minting"
+              "user-guide/preview/workflow-overview"
             ]
           },
           {

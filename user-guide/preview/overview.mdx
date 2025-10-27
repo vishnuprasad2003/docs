@@ -1,140 +1,157 @@
 ---
 title: "Preview & Verification Flow Overview"
-description: "Complete guide for preview pools, loan tape verification, and NFT minting"
+description: "Complete guide for preview pools, collaborative feedback, and formal verification"
 ---
 
-## Preview & Verification Overview
+## Preview & Verification Flow Overview
 
-The Preview & Verification workflow enables issuers to create preview pools for market evaluation, upload loan tapes for verification agent review, and mint NFTs for verified loans.
+The Preview & Verification workflow ensures that before any pool is accepted, priced, or published for investment, the underlying loan data is accurate, verified, and reviewed by all relevant stakeholders.
+
+<Info>
+**Purpose**: Preview & Verification provides a multi-phase collaborative process for reviewing, validating, and certifying loan pools before they enter securitization or sale workflows.
+</Info>
 
 ## Workflow Overview
 
+The Preview & Verification process encompasses two main phases:
+
 ```mermaid
 graph TD
-    A[Create Preview Pool] --> B[Assign Partners]
-    B --> C[Upload Loan Tapes]
-    C --> D[Verification Agent Review]
-    D --> E[Market Maker Review]
-    E --> F[Pool Rejection/Approval]
-    F --> G[Mint NFTs]
-    G --> H[Transfer to BDB]
+    A[Phase 1: Submit Pool for Preview] --> B[Reviewer Feedback Loop]
+    B --> C[Issuer Revises & Reconsiders]
+    C --> D[Phase 2: Submit for VA Verification]
+    D --> E[VA Reviews & Certifies]
+    E --> F[Pool Certified & Ready]
 ```
+
+## Key Phases
+
+### Phase 1: Issuer Creates Pool and Submits for Preview
+- Create pool with loan data
+- Upload and map loan tapes
+- Submit pool for preview with reviewers
+- Collaborative feedback and reconsideration loop
+- Finalize pool based on feedback
+
+### Phase 2: Formal Verification and Certification
+- Submit finalized pool to Verification Agent
+- VA reviews loans and documents
+- Issuer revises and resubmits if needed
+- VA certifies pool and issues certificate
+- Pool now investor-ready
 
 ## Key Components
 
-### 1. Preview Pool Creation
+### Preview Phase
+**Purpose**: Allow early review and feedback before formal verification
 
-**Purpose**: Create a pool for market preview and evaluation
+**Features**:
+- Collaborative review by multiple parties
+- Loan-level feedback and comments
+- Reconsideration workflow
+- Version tracking and revision history
 
-**Key Features**:
-- Pool configuration
-- Partner assignment
-- Loan tape upload
-- Status tracking
+### Verification Phase
+**Purpose**: Formal validation and certification by Verification Agent
 
-### 2. Loan Tape Management
-
-**Purpose**: Upload and manage loan data files
-
-**Key Features**:
-- Excel file upload
-- Data validation
-- Mapping configuration
-- Standard field mapping
-
-### 3. Verification Process
-
-**Purpose**: Ensure loan data quality and compliance
-
-**Key Features**:
-- Verification agent review
-- Data quality checks
-- Compliance verification
-- Approval/rejection workflow
-
-### 4. NFT Minting
-
-**Purpose**: Create blockchain NFTs for verified loans
-
-**Key Features**:
-- Automatic NFT minting
-- Blockchain recording
-- Secure tokenization
-- Transfer to BDB platform
+**Features**:
+- Field-level data validation
+- Document consistency checks
+- Asset eligibility verification
+- Official VA certificate issuance
 
 ## User Roles
 
-<CardGroup cols={3}>
-  <Card title="Issuer" icon="building">
-    Creates preview pools and submits for review
-  </Card>
-  <Card title="Verification Agent" icon="check-circle">
-    Reviews and verifies loan data quality
-  </Card>
-  <Card title="Market Maker" icon="users">
-    Reviews pools and approves for market
-  </Card>
-</CardGroup>
+### **Issuer**
+- Creates pool and uploads loan data
+- Submits pool for preview and verification
+- Addresses reviewer feedback
+- Revises and resubmits based on feedback
 
-## Status Flow
+### **Underwriter**
+- Reviews pool in preview mode
+- Provides feedback and comments
+- Rejects loans with reasons
+- Approves or requests changes
 
-### Pool Statuses
-- **Created**: Pool created, configuration in progress
-- **Submitted**: Submitted for review
-- **Under Review**: Being reviewed
-- **Approved**: Approved for market
-- **Rejected**: Rejected by reviewer
+### **Rating Agency** (Optional)
+- Reviews pool quality
+- Provides rating perspective
+- Offers quality feedback
 
-### Verification Statuses
-- **Pending**: Awaiting verification
-- **Verified**: Verified by agent
-- **Rejected**: Failed verification
+### **Verification Agent (VA)**
+- Performs formal data verification
+- Validates field-level accuracy
+- Certifies pool quality
+- Issues verification certificate
 
-## Key Features
+## Status Model
+
+<Table>
+
+| Status | Description |
+|--------|-------------|
+| **Created** | Pool created, awaiting loan data |
+| **Under Preview** | Pool submitted for reviewer feedback |
+| **Submitted for Verification** | Pool submitted to VA for formal verification |
+| **Certified / Verified** | Pool verified and certified by VA |
+| **Rejected** | Pool failed verification (with reasons) |
+
+</Table>
+
+## Benefits
 
 ### Data Quality
-- Automatic validation
-- Standard field mapping
-- Error detection
-- Compliance checking
+- Multiple review layers
+- Early error detection
+- Formal validation
+- VA certification
 
 ### Transparency
-- Blockchain record keeping
-- IPFS document storage
 - Complete audit trail
-- Version control
+- Documented feedback cycles
+- Clear certification process
+- Version history maintained
+
+### Collaboration
+- Multiple stakeholders involved
+- Open feedback mechanism
+- Responsive revision process
+- Continuous improvement
+
+### Risk Reduction
+- Early review reduces VA rejections
+- Issues addressed upfront
+- Cleaner data before certification
+- Higher certification success rate
 
 ## Use Cases
 
 <CardGroup cols={2}>
-  <Card title="Market Evaluation" icon="search">
-    Preview loans before full securitization
+  <Card title="Securitization Prep" icon="layer-group">
+    Verify and clean pool before securitization structuring
   </Card>
-  <Card title="Data Verification" icon="check-circle">
-    Ensure loan data quality and compliance
+  <Card title="Whole Loan Sale" icon="hand-holding-usd">
+    Verify and certify pool before investor bidding
   </Card>
-  <Card title="NFT Creation" icon="link">
-    Mint blockchain NFTs for verified loans
+  <Card title="Data Quality" icon="check-circle">
+    Ensure loan data accuracy and completeness
   </Card>
-  <Card title="Platform Transfer" icon="exchange-alt">
-    Transfer verified loans to other platforms
+  <Card title="Regulatory Compliance" icon="shield-alt">
+    Meet regulatory verification requirements
   </Card>
 </CardGroup>
 
 ## Next Steps
 
-<Card title="Pool Creation" icon="layer-group" href="/user-guide/preview/pool-creation">
-  Learn how to create preview pools
+<Card title="Complete Workflow Guide" icon="route" href="/user-guide/preview/workflow-overview">
+  View the complete phase-by-phase Preview & Verification workflow
 </Card>
 
-<Card title="Loan Tape Upload" icon="upload" href="/user-guide/preview/loan-tape-upload">
-  Understand loan tape upload process
+<Card title="Securitization Flow" icon="layer-group" href="/user-guide/securitization/workflow-overview">
+  Continue from verified pool to securitization
 </Card>
 
-<Card title="Verification Process" icon="check-circle" href="/user-guide/preview/verification-process">
-  Learn about verification workflow
-</Card>
-
-<Card title="NFT Minting" icon="link" href="/user-guide/preview/nft-minting">
-  Understand NFT minting process
+<Card title="Whole Loan Flow" icon="hand-holding-usd" href="/user-guide/whole-loan/workflow-overview">
+  Continue from verified pool to whole loan sale
 </Card>
