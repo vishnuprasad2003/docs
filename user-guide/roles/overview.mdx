@@ -1,0 +1,87 @@
+---
+title: "User Roles Overview"
+description: "Complete overview of all user roles and their responsibilities in the Intain Markets platform"
+---
+
+## User Roles Overview
+
+The Intain Markets platform supports multiple user roles, each with specific capabilities, responsibilities, and permissions. Understanding these roles is essential for navigating the platform effectively.
+
+## Role Categories
+
+### 1. Originators & Issuers
+
+**Roles**: Issuer, Market Maker
+
+These users create and manage assets, facilities, and deals on the platform.
+
+### 2. Service Providers
+
+**Roles**: Servicer, Verification Agent, Underwriter, Paying Agent, Rating Agency
+
+These users provide essential services throughout the platform workflows.
+
+### 3. Investors
+
+**Roles**: Lender, Investor
+
+These users provide funding and investment capital.
+
+### 4. Facility Management
+
+**Roles**: Facility Agent
+
+These users manage credit facilities and approve funding.
+
+## Complete Role List
+
+<CardGroup cols={3}>
+  <Card title="Issuer" icon="building" href="/user-guide/roles/issuer">
+    Creates pools, deals, and facilities
+  </Card>
+  <Card title="Facility Agent" icon="user-tie" href="/user-guide/roles/facility-agent">
+    Manages credit facilities
+  </Card>
+  <Card title="Lender" icon="money-bill-wave" href="/user-guide/roles/lender">
+    Funds credit facilities
+  </Card>
+  <Card title="Servicer" icon="cogs" href="/user-guide/roles/servicer">
+    Services loans and generates reports
+  </Card>
+  <Card title="Verification Agent" icon="check-circle" href="/user-guide/roles/verification-agent">
+    Verifies loan data quality
+  </Card>
+  <Card title="Market Maker" icon="users" href="/user-guide/roles/market-maker">
+    Facilitates deal creation
+  </Card>
+  <Card title="Investor" icon="hand-holding-usd" href="/user-guide/roles/investor">
+    Invests in whole loans and securities
+  </Card>
+  <Card title="Underwriter" icon="file-signature" href="/user-guide/roles/underwriter">
+    Reviews and approves deals
+  </Card>
+  <Card title="Paying Agent" icon="file-invoice" href="/user-guide/roles/paying-agent">
+    Manages payment distributions
+  </Card>
+</CardGroup>
+
+## Role Permissions Matrix
+
+| Role | Create Pools | Create Deals | Review Deals | Fund Facilities | Service Loans | Verify Data |
+|------|--------------|--------------|--------------|-----------------|---------------|-------------|
+| Issuer | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Facility Agent | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ |
+| Lender | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ |
+| Servicer | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Verification Agent | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Market Maker | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |
+
+## Getting Started
+
+<Card title="Register Account" icon="user-plus" href="/user-guide/registration">
+  Complete registration for your role
+</Card>
+
+<Card title="Platform Overview" icon="layer-group" href="/user-guide/overview">
+  Learn about platform features
+</Card>
