@@ -44,11 +44,7 @@
             "group": "Securitization Workflow",
             "pages": [
               "user-guide/securitization/overview",
-              "user-guide/securitization/workflow-overview",
-              "user-guide/securitization/ui-navigation",
-              "user-guide/securitization/state-transitions",
-              "user-guide/securitization/blockchain-actions",
-              "user-guide/securitization/operational-notes"
+              "user-guide/securitization/workflow-overview"
             ]
           },
           {
@@ -64,14 +60,6 @@
               "user-guide/documents/docusign-integration",
               "user-guide/documents/ipfs-storage",
               "user-guide/documents/file-uploads"
-            ]
-          },
-          {
-            "group": "Servicer Operations",
-            "pages": [
-              "user-guide/servicer/loan-tape-upload",
-              "user-guide/servicer/monthly-reporting",
-              "user-guide/servicer/loan-management"
             ]
           },
           {
