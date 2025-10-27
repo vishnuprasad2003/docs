@@ -47,10 +47,11 @@
             "group": "Securitization Workflow",
             "pages": [
               "user-guide/securitization/overview",
-              "user-guide/securitization/pool-creation",
-              "user-guide/securitization/deal-onboarding",
-              "user-guide/securitization/tranche-management",
-              "user-guide/securitization/investment-management"
+              "user-guide/securitization/workflow-overview",
+              "user-guide/securitization/ui-navigation",
+              "user-guide/securitization/state-transitions",
+              "user-guide/securitization/blockchain-actions",
+              "user-guide/securitization/operational-notes"
             ]
           },
           {

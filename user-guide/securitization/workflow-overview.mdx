@@ -1,0 +1,2890 @@
+---
+title: "Securitization Complete Workflow"
+description: "Complete end-to-end securitization workflow from pool creation to investor reporting"
+---
+
+## Complete Securitization Workflow
+
+This guide covers the entire securitization transaction lifecycle from prerequisites through investor reporting, including all roles, screens, and state changes.
+
+## Phase 0 — Prerequisites & Roles (Read Me First)
+
+**Who**: Issuer, Underwriter, Investor, Paying Agent (PA), Servicer, Verification Agent (VA)
+
+**Why**: Ensure identities, accounts, and loans are correctly set up before starting securitization so later stages (commit/invest/issue FT/reporting) run without blockers.
+
+### 0.1 User Accounts & Access
+
+**Confirm each participant has an active Intain Markets account with correct Role assigned**:
+- **Issuer**
+- **Underwriter**
+- **Investor**
+- **Paying Agent**
+- **Servicer**
+- **Verification Agent**
+
+**Verification Checklist**:
+- [ ] Organization membership confirmed
+- [ ] Email address verified
+- [ ] Two-factor authentication enabled (if enforced)
+- [ ] Role visibility verified for deal/pool objects
+- [ ] Access to relevant sections confirmed
+
+**Role Visibility Test**:
+- Issuer should see: Pools, Loans, Deals sections
+- Underwriter should see: Pools (for review), Deals sections
+- Investor should see: Opportunities, Portfolio sections
+- Paying Agent should see: Deals, Loans, Reporting sections
+- Servicer should see: Deals, Loan Tapes sections
+- Verification Agent should see: Batch sections
+
+### 0.2 Payment Settings (Profile → Payment Settings)
+
+**Set these BEFORE tranche approvals and investor funding**
+
+**Navigation Path**: User → **User Profile** → **Payment Settings**
+
+**Off-Chain Bank Details** (per role as applicable):
+
+**For Issuer/Investor/Paying Agent**:
+- Account Holder Name
+- Bank Name
+- Branch/Address
+- Account Number/IBAN
+- SWIFT/IFSC
+- Currency
+
+**Best Practice**: Use a clearly labeled **"Securitization – Closing/Receipts"** account for PA to avoid ambiguity.
+
+**On-Chain (C-Chain) Settings**:
+
+**Issuer (Mandatory)**:
+- C-Chain Address displayed in profile
+- Approval Method for Issuer's FT transfers:
+  - **Option 1**: Upload wallet JSON/keystore (encrypted) and enter passphrase at approval time
+  - **Option 2**: Paste private key at approval time (recommended only if policy allows)
+
+**Why Required**: This approval allows the platform's Intain C-Chain account to transfer FTs on the Issuer's behalf per-tranche during issuance.
+
+**Paying Agent (Optional)**:
+- C-Chain setup required if applicable to your configuration
+
+<Warning>
+**Security Tip**: Use a non-trading hot wallet for approvals; keep treasury keys offline. Document the approver's identity and policy in your runbook.
+</Warning>
+
+### 0.3 Loan Onboarding & Verification (Pre-Underwriter)
+
+**Objective**: Make loans eligible for underwriting by completing data preparation and third-party verification.
+
+**Complete Process**:
+
+1. **Issuer Uploads Loan Tape** (Excel)
+   - Navigate to **Loans** → **Add Loans**
+   - Click **Upload Excel**
+   - Select and upload Excel file
+
+2. **Map Fields to Intain Standard Schema**
+   - Map each column to corresponding Intain standard field
+   - Map essentials:
+     - Loan ID
+     - UPB (Unpaid Principal Balance)
+     - Interest Rate
+     - Product Type
+     - Origination Date
+     - Maturity Date
+     - Payment amounts
+     - Arrears status
+     - Collateral/Valuation
+     - Geography
+     - Borrower attributes (as permitted)
+   - Save mapping profile for reuse (one-time mapping reusable across uploads)
+
+3. **(Optional) Filter/Tag Loans**
+   - Apply filters for target pool
+   - Select loans based on criteria
+
+4. **Create Verification Batch**
+   - Select loans for batch
+   - Create batch with selected loans
+
+5. **Submit to VA**
+   - Click **Submit for Verification**
+   - Batch sent to Verification Agent
+
+**VA Workflow** (Verification Agent):
+- **Review**: Compare evidence/LMS vs contract data
+- **Certify**: VA signs off; issues certificate
+- **Verify**: NFT/verified state enabled
+
+**Outcomes**:
+- **Verified**: Loans marked verified and eligible for Underwriter submission
+- **Self-Verified**: If issuer acts as VA (per program rules)
+- **Rejected**: Loans not meeting criteria
+- **Reviewed**: Flagged with comments (Issuer can fix and resubmit)
+
+**Result**: Loans marked **Verified** and eligible for Underwriter submission.
+
+### 0.4 Status Model (Quick Reference)
+
+**Pool Statuses**:
+```
+Created → Submitted → Accepted (→ Deal created) / Rejected → Closed (if abandoned)
+```
+
+**Deal Statuses**:
+```
+Created → Awaiting Approval (Issuer tranche approvals) → Open (published) → Closed
+```
+
+**Loan/Batch Statuses (VA)**:
+```
+Pending → Reviewed → Certified → Verified (eligible)
+```
+
+### 0.5 Document Hygiene
+
+**Upload to Pool/Deal Documents Tab**:
+
+**Required Documents**:
+- Offering documents drafts
+- Data tape
+- Stratifying summaries
+- Legal opinions drafts
+- Servicing agreement
+- Paying agent appointment
+- Fee schedules
+
+**Documentation Standards**:
+- Use consistent naming convention
+- Version control: `<DealName>-<DocType>-vX.Y`
+- Example: `Atlas2025-OfferingMemorandum-v1.0.pdf`
+
+**Available Document Types**:
+- Offering Memoranda
+- Data Tapes
+- Stratification Reports
+- Legal Documents
+- Servicing Agreements
+- Fee Schedules
+- Other Supporting Documents
+
+### 0.6 Environments & Dates
+
+**Important Configuration**:
+
+1. **Timezone**: Confirm timezone settings for your organization
+2. **Payment Dates Convention**: Establish payment date conventions for the deal
+   - Servicer relies on this for monthly tapes
+   - Paying Agent uses this for distributions
+3. **Commit Window**: Define commitment period start/end dates
+4. **Invest Window**: Define investment period start/end dates
+
+**Calendar Alignment**:
+- Coordinate payment dates across all participants
+- Establish reporting periods
+- Define close dates
+
+### 0.7 Success Criteria for Phase 0
+
+**All prerequisites must be complete before proceeding**:
+
+- [ ] All roles are provisioned and can see relevant menus
+- [ ] Issuer's Payment Settings complete (off-chain + on-chain)
+- [ ] At least one loan batch verified by VA
+- [ ] Required documents uploaded to Pool/Deal workspace
+- [ ] Payment settings configured for all participants
+- [ ] Document naming conventions established
+- [ ] Dates and calendars aligned
+
+<Note>
+**Cannot proceed to Phase 1 without completing all Phase 0 prerequisites.**
+</Note>
+
+## Participants & Responsibilities
+
+<CardGroup cols={3}>
+  <Card title="Issuer" icon="building">
+    Creates pools, uploads loan tapes, submits for preview and underwriting, approves tranches, publishes deals
+  </Card>
+  <Card title="Underwriter" icon="file-signature">
+    Reviews preview pools, converts to deals, configures deal structure, collects commitments, publishes for FT approval
+  </Card>
+  <Card title="Verification Agent" icon="check-circle">
+    Verifies and certifies loans pre-underwriting through batch review, certification, and verification
+  </Card>
+  <Card title="Investor" icon="hand-holding-usd">
+    Reviews published deals, commits during Commit stage, wires funds during Invest stage
+  </Card>
+  <Card title="Paying Agent" icon="file-invoice">
+    Verifies off-chain receipts, issues FTs to investors, runs deal recurring and reporting
+  </Card>
+  <Card title="Servicer" icon="cogs">
+    Monthly loan tape ingestion, mapping, summarizes and commits to ledger; supports ongoing reporting
+  </Card>
+</CardGroup>
+
+## Prerequisites
+
+### Payment Settings
+
+**Required Setup**: All participants must configure payment settings before transactions begin.
+
+**Issuer/Investor/PA Setup**:
+1. Navigate to **User Profile → Payment Settings**
+2. Set up Off-chain bank accounts
+3. Configure On-chain where applicable
+4. The Issuer's C-Chain Address is critical for FT transfers
+
+<Warning>
+Issuer must configure C-Chain address in Payment Settings before approving FT issuance.
+</Warning>
+
+### Loan Onboarding & Verification
+
+**Process**:
+1. Issuer uploads loan tape (Excel)
+2. Maps fields to Intain standard
+3. Optionally filters loans
+4. Submits selected loans to VA as batch
+5. VA reviews → certifies → verifies (NFT)
+6. Verified loans eligible for Underwriting submission
+
+## Complete Workflow Phases
+
+<Steps>
+  <Step title="Phase 1: Pool Creation">
+    Issuer creates pool, uploads loan tapes, and submits for Preview/Underwriter
+  </Step>
+  <Step title="Phase 2: Deal Configuration">
+    Underwriter accepts pool, creates deal, configures tranches, fees, and payment rules
+  </Step>
+  <Step title="Phase 3: Issuer Approval">
+    Issuer approves tranches with FT authority, publishes deal to investors
+  </Step>
+  <Step title="Phase 4: Investor Participation">
+    Investors commit during Commit stage, wire funds during Invest stage
+  </Step>
+  <Step title="Phase 5: FT Issuance">
+    Paying Agent verifies receipts and issues FTs to investors
+  </Step>
+  <Step title="Phase 6: Ongoing Servicing">
+    Servicer processes monthly loan tapes and commits to ledger
+  </Step>
+  <Step title="Phase 7: Reporting">
+    Paying Agent generates aggregate summary and investor reports
+  </Step>
+</Steps>
+
+## Status Model Overview
+
+### Pool Status Flow
+```
+Created → Pending → Accepted/Rejected by UW → Closed
+```
+
+- **Created**: Pool setup complete
+- **Pending**: Submitted to Underwriter
+- **Accepted**: Underwriter creates deal
+- **Rejected**: Returned to Issuer
+- **Closed**: Whole-loan transfer (rare in securitization)
+
+### Deal Status Flow
+```
+Created → Active → Awaiting Approval → Open → Closed
+```
+
+- **Created**: Deal created on pool acceptance
+- **Active**: Deal configuration in progress
+- **Awaiting Approval**: Published to Issuer for FT approval
+- **Open**: Published to investors for participation
+- **Closed**: Deal closed and completed
+
+### Loan/Batch Status (VA)
+```
+Upload → Map → Submit for Verification → Pending/Accepted/Rejected/Reviewed → Verified
+```
+
+### Preview Reconsider Flow
+
+During Preview, Underwriter can:
+1. Reject individual loans with reasons
+2. Issuer receives rejection notification
+3. Issuer can:
+   - **Accept Rejection**: Remove loan from pool
+   - **Reject the Rejection**: Keep loan with feedback
+4. Feedback loop continues until resolution
+
+## Phase 1 — Issuer Creates and Readies a Pool
+
+**Pool Creation → Loan Upload → Mapping → Preview → Submission to Underwriter**
+
+### 🎯 Objective
+
+To build a clean, verified, and review-ready loan pool that will later be securitized.
+
+In this stage, the Issuer is responsible for:
+- Creating a new pool with key identifiers
+- Uploading and mapping the raw loan data (loan tape) into Intain's standardized schema
+- Validating and reviewing the data
+- Submitting the pool for preview (feedback loop with Underwriter / Rating Agency / Investors)
+- Submitting for formal Underwriter review once loans are verified
+
+### 🧭 Actors Involved
+
+<Tabs items={['Actors', 'Responsibilities']}>
+<Tab>
+<Table>
+
+| Role | Responsibility in this phase |
+|------|------------------------------|
+| Issuer | Creates pool, uploads loan tape, maps fields, validates data, initiates preview and underwriter submission |
+| Underwriter (UW) | Optionally reviews loans during preview; can reject individual loans with reasons |
+| Rating Agency / Investors | Optionally provide comments during preview stage |
+| Verification Agent (VA) | Not directly active yet, but the Issuer must ensure VA verification of loans before underwriter submission |
+
+</Table>
+</Tab>
+
+<Tab>
+- **Issuer**: Primary actor managing pool creation and submission
+- **Underwriter**: Provides optional feedback during preview stage
+- **Rating Agency**: Reviews pool quality and provides preliminary guidance
+- **Investors**: Offer early market feedback on pool appeal
+- **Verification Agent**: Ensures data quality through verification process
+</Tab>
+</Tabs>
+
+### 1.1 Create Pool (Pools → Set up Pool)
+
+**Navigation Path**: Issuer → **Pools** → **Set up Pool**
+
+**Process**:
+1. Click **Set up Pool** button
+2. Enter required pool information:
+
+   **Pool Name** (unique, human-readable):
+   - Example: "Atlas 2025-1"
+   - Must be unique within your organization
+   - Used to generate Pool ID
+
+   **Asset Class** (e.g., RMBS, Auto, Whole Loan → Securitization path):
+   - Select appropriate asset class from dropdown
+   - Determines pool categorization
+   - Examples: Residential Mortgage, Commercial, Auto Loans
+
+   **Transaction Type**: Must be **Securitization**
+   - Critical for triggering securitization workflow
+   - Determines available features and workflow
+
+   **Description** (short purpose):
+   - Example: "Prime first-lien residential mortgages, WA FICO 745"
+   - Brief description of pool purpose and characteristics
+   - Used for reference and reporting
+
+3. Click **Save** to create Pool Details
+4. Pool created with status: **Created**
+
+**Pool Details Tabs Available**:
+- **LoanTape**: View and manage loan data
+- **Strat**: Stratification analysis and reports
+- **Summary**: Pool summary statistics
+- **Documents**: Upload and manage pool documents
+
+**Validation & UX Notes**:
+
+**Required Fields**: Pool Name, Asset Class, Transaction Type
+
+**Duplicate Names**: System prompts warning if pool name already exists. System appends "-1" if you proceed.
+
+**Role Gating**: Only Issuer sees **Set up Pool** button. Other roles have limited access.
+
+<Note>
+Pool ID is automatically generated by the system based on pool name, issuer org initials, and asset class.
+</Note>
+
+### 1.2 Upload & Map Loans (Loans → Add Loans)
+
+**Navigation Path**: Issuer → **Loans** → **Add Loans** → **Upload Excel**
+
+**Complete Upload Process**:
+
+1. Click **Add Loans** button
+2. Click **Upload Excel** button
+3. Navigate to and select prepared loan tape file (.xlsx or .xls format)
+4. Click **Upload**
+5. System displays uploaded loan data in grid format
+6. Review uploaded data for completeness
+
+**Preview the Raw Sheet**:
+- System displays raw Excel data as uploaded
+- Review column structure
+- Identify needed mappings
+- Check data quality
+
+**Choose or Create Field Mapping to Intain Standard**:
+
+System allows you to map your Excel columns to Intain standard fields:
+
+**Map Essentials Include**:
+- **Loan ID**: Unique loan identifier
+- **UPB**: Unpaid Principal Balance
+- **Rate**: Interest rate
+- **Product Type**: Type of loan product
+- **Origination Date**: Loan origination date
+- **Maturity**: Loan maturity date
+- **Payment**: Monthly payment amount
+- **Arrears**: Current arrears/delinquency status
+- **Collateral/Valuation**: Collateral details and valuation
+- **Geography**: Geographic location/state
+- **Borrower attributes**: Borrower characteristics (as permitted by data privacy)
+
+**Mapping Process**:
+1. System displays your raw Excel column headers
+2. For each column, select corresponding **Intain standard field** from dropdown
+3. System provides auto-suggestions based on column name similarity
+4. Review mapping for accuracy
+5. Use **Preview** feature to verify data mapping
+6. **Save the mapping profile for reuse** (one-time mapping reusable across uploads)
+7. Click **Confirm Mapping** when complete
+
+<Tip>
+**Save Mapping Profiles**: Save frequently used mappings to reuse for future uploads, saving time and ensuring consistency.
+</Tip>
+
+**Optional Data Quality Checks**:
+
+System performs automatic data quality checks:
+
+**Missing Required Fields**:
+- Row-level error highlighting
+- System identifies loans missing required data
+- Fix data or exclude problematic rows
+
+**Type Mismatch**:
+- Date/number type mismatches highlighted
+- System flags incorrect data types
+- Fix inline or re-upload corrected data
+
+**Duplicate Loan IDs**:
+- System flags duplicate Loan IDs
+- Options: **Replace existing** or **Skip duplicates**
+- Choose strategy for handling duplicates
+
+**Attach Loans to Pool**:
+
+From the mapped grid:
+1. **Filter and Select** loans (optional):
+   - Apply filters to select subset of loans
+   - Use **Select All** for entire dataset
+   - Use checkboxes to select individual loans
+
+2. Click **Add to Pool** button
+
+3. Choose target pool from dropdown:
+   - Select the pool you created in Step 1.1
+   - Verify pool selection
+
+4. Confirm adding loans to pool
+
+5. Loans now attached to pool
+
+**Eligibility Tip**: Only **Verified** (or self-verified per rules) loans should be added to the final submission set.
+
+**LoanTape Tab in Pool Details**:
+- Navigate to Pool Details
+- Click **LoanTape** tab
+- View all loans attached to this pool
+- **Download** button available to export loan tape
+- Review loan data before submission
+
+### 1.3 (Optional) Preview Loop (Early Feedback)
+
+**Navigation Path**: Issuer → Pool Details → **Submit for Preview**
+
+**Purpose**: Socialize the pool with Underwriter/Investors/Rating Agency before formal UW submission to reduce later churn.
+
+**Why Use Preview**:
+- Get early feedback on pool composition
+- Reduce rejections during formal underwriting
+- Optimize pool before submission
+- Identify potential issues early
+
+**When to Use Preview**:
+- Complex or non-standard pool compositions
+- New asset classes or products
+- Large loan portfolios needing validation
+- Multiple stakeholder input desired
+
+**Preview Process**:
+
+1. In **Pool Details**, click **Submit for Preview** button
+
+2. **What Happens**:
+   - Pool shared with Underwriter
+   - Pool shared with optionally selected Investors
+   - Pool shared with Rating Agency (if assigned)
+   - Pool status changes to **Pending Preview**
+
+3. **Stakeholder Actions**:
+
+**Underwriter** can:
+- Open Preview view
+- View stratification analysis
+- Review loan-level detail
+- Leave feedback on pool composition
+- **Reject specific loans with reasons**
+
+**Investors** (if granted access) can:
+- Review pool details
+- Provide investment interest feedback
+- Comment on pool appeal
+
+**Rating Agency** (if assigned) can:
+- Review pool characteristics
+- Provide preliminary rating guidance
+- Comment on pool quality
+
+**Feedback Loop - Issuer Sees Reconsider View**:
+
+**Reject Loan with Reasons**:
+- Underwriter rejects individual loans
+- Must provide specific rejection reason
+- Issuer receives notification with rejection details
+
+**Issuer Response Options**:
+
+**Accept the Rejection** (Remove):
+1. Review Underwriter rejection reason
+2. Evaluate if rejection is valid
+3. Click **Accept the Rejection** for that loan
+4. Loan removed from pool
+5. Underwriter notified of acceptance
+
+**Reject the Rejection** (Retain):
+1. Review Underwriter rejection reason
+2. Disagree with rejection decision
+3. Click **Reject the Rejection** for that loan
+4. Provide feedback/justification/evidence
+5. Loan remains in pool
+6. Underwriter receives your feedback
+
+**Iterate Until Stable**:
+- Feedback exchange continues
+- Both parties can provide additional reasoning
+- Pool composition evolves based on feedback
+- Loop continues until preview set stabilizes
+
+**Good Practices**:
+
+<Accordion>
+<AccordionItem title="Preview Comment Log">
+Keep a Preview Comment Log in Documents (CSV/PDF) for auditability. Track all feedback and resolutions.
+</AccordionItem>
+
+<AccordionItem title="Removal Documentation">
+When a loan is removed, record removal reason (credit, compliance, data deficiency) in the comment log.
+</AccordionItem>
+
+<AccordionItem title="Feedback Quality">
+Provide clear, actionable feedback. Specific feedback expedites resolution and reduces iterations.
+</AccordionItem>
+
+<AccordionItem title="Timeline Management">
+Set deadlines for preview feedback to maintain deal timeline. Don't let preview loop drag on indefinitely.
+</AccordionItem>
+</Accordion>
+
+**Skip Preview Option**:
+- Preview is optional - you can skip entirely
+- Submit for Underwriter remains available
+- Once verifications and docs are satisfied
+- Direct submission saves time for simple pools
+
+### 1.4 Submit for Underwriter (Formal Handover)
+
+**Navigation Path**: Issuer → Pool Details → **Submit for Underwriter**
+
+**Prerequisites - Pre-checks Before Enabling Button**:
+
+System validates these requirements before enabling submission:
+
+**Pool Contains Only Verified Loans**:
+- All loans must have **Verified** status (or permitted self-verified)
+- Any unverified loans block submission
+- System lists offending Loan IDs if present
+- Fix verification before resubmitting
+
+**Pool Has Minimum Loan Count/UPB** (if configured):
+- System checks minimum pool size requirements
+- Ensures pool meets deal viability thresholds
+- Prevents submission of too-small pools
+
+**Mandatory Pool Documents Uploaded**:
+- Complete document checklist must pass
+- Required documents verified as uploaded
+- System validates document completeness
+
+**Submission Process**:
+
+1. Navigate to **Pool Details** page
+
+2. Review Key Sections:
+   - **LoanTape** tab: Verify all attached loans
+   - **Strat** tab: Check stratification analysis
+   - **Summary** tab: Review pool summary statistics
+   - **Documents** tab: Confirm all required documents uploaded
+
+3. Verify All Prerequisites Met:
+   - All loans are Verified
+   - Pool size requirements satisfied
+   - Mandatory documents uploaded
+
+4. Click **Submit for Underwriter** button
+
+5. System performs final validation
+
+6. Confirm submission in dialog box
+
+7. Pool status changes to **Submitted**
+
+8. Underwriter receives notification
+
+**What Issuer Should Expect Next**:
+
+**If Accepted by Underwriter**:
+- Pool converts to a Deal
+- Issuer receives acceptance notification
+- Deal becomes accessible to Underwriter
+- Issuer can now proceed to deal configuration (Phase 2)
+
+**If Rejected by Underwriter**:
+- Issuer receives rejection notification
+- Rejection reasons provided
+- Return pool to **Created** status
+- Fix data or composition as needed
+- Re-submit after corrections
+
+### 1.5 Error Handling / Edge Cases
+
+**Unverified Loans Present**:
+- System blocks submission
+- Lists offending Loan IDs
+- Provides "View batch status" link
+- Issuer must complete verification before resubmission
+
+**Field Mapping Changed Mid-way**:
+- System tracks mapping version used at submission time
+- Re-run **Preview Map** if needed
+- System maintains mapping history
+- Previous mappings remain available
+
+**File Size/Format Issues**:
+- System shows max upload size limits
+- Rejects non-Excel formats
+- Provides friendly error messages
+- Provides sample template link for guidance
+
+**Partial Preview Loop**:
+- You can skip Preview entirely
+- Submit for Underwriter remains available
+- Once verifications and docs are satisfied
+- Preview is truly optional
+
+### 1.6 Success Criteria for Phase 1
+
+**All criteria must be met**:
+
+- [ ] Pool exists with Transaction Type = Securitization
+- [ ] Accurate LoanTape attached to pool
+- [ ] All loans Verified (or valid per program) and attached
+- [ ] (Optional) Preview feedback resolved; no open rejections
+- [ ] Submit for Underwriter completed successfully
+- [ ] Underwriter can Accept/Reject the pool
+
+### 1.7 Deliverables/Artifacts (Attach in Documents)
+
+**Required Documentation**:
+
+- [ ] **Loan Tape** (as submitted) and Field Mapping profile (export)
+- [ ] **Preview Feedback Export** (if used) and resolution notes
+- [ ] **Pool Summary/Stratification Snapshots** (PDF/CSV)
+- [ ] **Data Quality Report** (if your org requires)
+
+**Best Practice**: Maintain complete documentation for audit trail and future reference.
+
+### 📋 Key Screens / Tabs / Actions
+
+<Tabs items={['Screens & Tabs', 'Actions', 'Navigation']}>
+<Tab>
+<Table>
+
+| Screen | Description / Use |
+|--------|-------------------|
+| Pool Details | Central dashboard showing Loan Tape, Stratification, Summary, Documents, and Feedback |
+| Feedback / Reconsider | Tabs for Underwriter or RA feedback; Issuer can manage accept/reject loops |
+| Submit for Preview / Submit for Underwriter | Action buttons to trigger workflow transitions |
+| Loan Tape Viewer | Grid showing mapped loans; can export, sort, filter |
+| Documents | For uploading supporting docs (credit memos, agreements, audit certificates) |
+
+</Table>
+</Tab>
+
+<Tab>
+- **Create Pool**: Initial pool setup with metadata
+- **Upload Excel**: Import raw loan data
+- **Map Fields**: Standardize loan data to Intain schema
+- **Map to Pool**: Assign loans to specific pool
+- **Submit for Preview**: Optional early feedback stage
+- **Submit for Underwriter**: Final submission for underwriting
+- **View Feedback**: Manage review feedback and rejections
+- **Export**: Download loan tapes and reports
+</Tab>
+
+<Tab>
+- **Pools** → **Set Up Pool** → Create new pool
+- **Loans** → **Add Loans** → Upload and map loans
+- **Pool Details** → View and manage pool information
+- **Submit for Preview** → Initiate feedback workflow
+- **Submit for Underwriter** → Formal submission
+</Tab>
+</Tabs>
+
+### 🔐 Data / Workflow Integrity Controls
+
+**Mapping Validation**:
+- Ensures all mandatory Intain standard fields are populated
+- Validates data types and formats
+- Checks for duplicate loan IDs
+
+**Status Locks**:
+- Once pool is submitted for UW, Issuer cannot alter data
+- Preserves data integrity during underwriting process
+
+**Audit Log**:
+- Captures all feedback and submission timestamps
+- Complete audit trail for compliance
+
+**Prerequisite Check**:
+- **Hard Stop**: "Loan must be verified via VA before UW submission"
+- System blocks submission if any unverified loans present
+- Lists offending Loan IDs for resolution
+
+### ⚙️ Typical Data Flow Summary
+
+```
+Issuer Excel (raw loans)
+        ↓
+Upload → Map Fields (Intain schema)
+        ↓
+Mapped Loans → Map to Pool
+        ↓
+Submit for Preview (Underwriter/RA feedback)
+        ↓
+Issuer resolves feedback
+        ↓
+Submit for Underwriter (only verified loans)
+```
+
+### 📈 Outputs of Phase 1
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| Created Pool record | Pool metadata + linked verified loans |
+| Mapped, standardized loan data | Ready for analytics and verification certificates |
+| Feedback log | Optional comments and rejections from preview reviewers |
+| Underwriter submission | Triggers creation of the Deal object in Phase 2 |
+
+</Table>
+
+### 🧠 Why Phase 1 Is Critical
+
+**Establishes Data Integrity**:
+- Clean mapping to Intain schema ensures consistency
+- Verified loans guarantee data quality
+- Standardized format across all stakeholders
+
+**Provides Transparency**:
+- Preview feedback surfaces issues early
+- Multi-party review before legal structuring
+- Clear audit trail of review history
+
+**Forms the Base Dataset**:
+- Foundation for tranching analysis
+- Enables rating agency evaluation
+- Supports investor analytics and decision-making
+
+**Reduces Downstream Friction**:
+- No unverifiable loans enter securitization
+- No mis-mapped loans in pool
+- Clean pool composition reduces underwriting rejections
+- Faster deal execution in later phases
+
+## Phase 2 — Underwriter Converts Pool to Deal & Configures Structure
+
+**Pool Acceptance → Deal Creation → Structure Configuration → Publish to Issuer**
+
+### 🎯 Objective
+
+To accept a verified pool, convert it into a Deal, and fully configure the securitization structure:
+- Define tranches (FT structure)
+- Assign fees, expenses, and accounts
+- Set tests, variables, and payment rules
+- Upload and publish the deal for Issuer approval
+
+This phase transforms the raw pool of assets into a financially engineered securitization product.
+
+### 🧭 Actors Involved
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| Underwriter (UW) | Accepts the pool, creates the deal, configures all economic and structural parameters, publishes deal to issuer for FT approval |
+| Issuer | Receives published deal later to approve tranches and authorize FT transfer |
+| Intain Platform | Enforces deal schema, locks structure after approval, and validates input consistency across tabs |
+
+</Table>
+
+### ⚙️ 1. Accept the Pool → Deal Creation
+
+**Navigation Path**: Underwriter → **Pools** → Issuer-submitted securitization pool
+
+**Purpose**: To formally accept a pool submitted by the Issuer and generate a securitization Deal record.
+
+**Steps**:
+1. Underwriter opens **Pools** tab to view all pools submitted by Issuers
+2. Locate the pool in status **Submitted for Underwriter**
+3. Review pool details:
+   - Pool name and ID
+   - Asset class
+   - Number of loans
+   - Summary statistics
+   - Loan tape quality
+   - Documentation completeness
+4. Decision: **Accept** or **Reject**
+
+**Accept Pool**:
+1. Click **Accept** button for selected pool
+2. Provide acceptance comments (optional)
+3. Confirm acceptance
+4. **System automatically converts the pool into a Deal**
+
+**System Behavior**:
+- Pool status changes to **Accepted by Underwriter**
+- **Deal record is created** in Deals module
+- Issuer is notified (via in-platform alert)
+- **Loans in that pool are locked to that deal**
+- Deal status: **Created**
+
+**Reject Pool**:
+1. Click **Reject** button
+2. Provide rejection reason (recommended)
+3. Pool status changes to **Rejected**
+4. Returned to Issuer for corrections
+5. Issuer receives notification with reasons
+
+### 🧾 2. Open the Deal (Securitization Mode)
+
+**Navigation Path**: Underwriter → **Deals** → **View Deal Details** (Securitization)
+
+**Tabs / Sections Visible**:
+- **General**: Deal metadata, name, type, dates, currency
+- **Tranches**: Define structure of issued FTs
+- **Tools**: Central configuration area (comprehensive setup)
+- **Strat / Summary**: Auto-pulled analytics from the pool
+- **Documents**: Attach related files (deal model, offering memo, etc.)
+- **More**: Access submodules like Accounts, Transactions, and Reports
+
+**This Deal object is now the digital equivalent of the term sheet or offering structure.**
+
+### 🧰 3. Configure the Deal Using "Tools"
+
+The **Tools** menu is the Underwriter's core workspace for building the securitization model.
+
+#### a. General
+
+**Input or confirm high-level metadata**:
+
+**Fields Include**:
+- **Deal Name**: Unique deal identifier
+- **Type**: Securitization
+- **Currency**: Base currency for deal
+- **Deal Dates**:
+  - Closing Date
+  - First Payment Date
+  - Maturity Date
+- **Status**: Commit or Invest (stage control)
+- **Servicer Details**: Servicer assignment
+- **Paying Agent Details**: Paying agent assignment
+
+**Purpose**: This tab defines all header-level attributes used across modules.
+
+**Validation**:
+- Date logic validation (maturity > first payment > closing)
+- Currency consistency checks
+- Required field enforcement
+
+#### b. Tranches
+
+**Create and stack tranches (FTs) by priority of payment.**
+
+**Fields Typically Include**:
+- **Tranche Name / Class**: A1, A2, B, etc.
+- **Amount / Face Value**: Principal amount
+- **Coupon / Interest Rate**: Interest rate for tranche
+- **Credit Enhancement %**: Overcollateralization level
+- **Payment Priority**: 1 = Senior (lower number = higher priority)
+- **Type**: Senior/Subordinate/Residual
+- **Maturity**: Tranche-specific maturity if different
+
+**The platform supports multiple tranches and calculates total issuance amount.**
+
+**Purpose**: Defines the economic instruments investors will subscribe to.
+
+**Tranche Structure Example**:
+- **Class A1**: Senior, Priority 1, $50M, 3.5% coupon
+- **Class A2**: Senior, Priority 2, $30M, 4.0% coupon
+- **Class B**: Mezzanine, Priority 3, $10M, 6.5% coupon
+- **Residual**: Equity, Priority 4, $10M, Residual
+
+#### c. Fees
+
+**Define fees payable to transaction parties**:
+
+**Fee Types Include**:
+- **Servicer Fee**: Loan servicing compensation
+- **Trustee Fee**: Trust administration
+- **Administrator Fee**: Deal administration
+- **Rating Agency Fee**: Ongoing rating services
+- **Other Fees**: Transaction-specific fees
+
+**Fields**: Fee Name, Amount or %, Frequency, Payee Role
+
+**Purpose**: These fees are incorporated into payment waterfalls later.
+
+#### d. Expenses
+
+**Define one-time or periodic expenses**:
+- **Legal**: Legal and structuring costs
+- **Rating**: Rating agency fees
+- **Miscellaneous**: Other deal expenses
+
+**Purpose**: Serves to model deal-level costs for net proceeds calculation.
+
+#### e. Accounts
+
+**Set up accounts involved in the securitization**:
+
+**Account Types**:
+- **Collection Account**: Where servicer remits borrower payments
+- **Distribution / Principal & Interest Account**: For investor distributions
+- **Reserve Account**: Liquidity / credit enhancement
+- **Closing Account**: For closing transactions
+
+**Purpose**: Required for paying agent to reconcile and disburse payments later.
+
+**Configuration**:
+- Account name
+- Account number
+- Bank name
+- Purpose (Collection/Distribution/Reserve/etc.)
+
+#### f. Tests
+
+**Define transaction-level tests such as**:
+
+**Test Types**:
+- **Overcollateralization (OC) Test**: OC ratio = (Pool Value / Notes Outstanding)
+- **Interest Coverage (IC) Test**: Interest income coverage
+- **Delinquency Test**: Max allowed delinquency threshold
+- **Default Test**: Maximum default rate
+- **Cash Flow Test**: Minimum cash flow coverage
+
+**Configuration**:
+- Test name
+- Test parameters (e.g., min OC ratio = 105%)
+- Trigger conditions
+- Failure consequences
+
+**Example**: "OC Test must remain above 105% or principal diverted to reserve"
+
+#### g. Variables
+
+**Define reusable constants or parameters**:
+
+**Common Variables**:
+- Interest rate benchmarks
+- Performance thresholds
+- Calculation parameters
+- Market rates
+- Recovery assumptions
+
+**Purpose**: Simplifies rule editing and reuse.
+
+**Benefits**:
+- Change once, update everywhere
+- Easier maintenance
+- Consistent calculations
+
+#### h. Payment Rules
+
+**Define the waterfall logic: how cash flows are allocated each period.**
+
+**Example Logic Sequence**:
+1. Pay Servicer Fee
+2. Pay Trustee Fee
+3. Pay Class A Interest
+4. Pay Class A Principal
+5. Pay Class B Interest
+6. Pay Class B Principal
+7. Pay Residual (if any)
+
+**Configuration Elements**:
+- Rule order/priority
+- Source account (Collection Account)
+- Destination (Tranche/Fee recipient)
+- Amount (% of available or fixed)
+- Conditions (test triggers)
+
+**Purpose**: Rules reference tranches, fees, and accounts to create complete payment structure.
+
+#### i. Files
+
+**Upload Deal Excel model for audit/reference**:
+
+**Actions Available**:
+- **Download Template**: Get deal Excel template
+- **Upload Completed Excel**: Upload completed deal model
+- **View Uploaded File**: Review uploaded deal file
+- **Publish to Issuer**: Final action (see below)
+
+**Purpose**: Maintain deal model for audit trail and calculation reference.
+
+### 🏦 4. Configure Off-Chain Accounts (Wire Instructions)
+
+**Navigation Path**: **More** → **Account & Transaction Details**
+
+**Purpose**: To define off-chain (real-world) bank accounts for settlement and closing.
+
+**Add Accounts**:
+- **Issuer's Collection Account**
+- **Closing Account**
+- **Investor Subscription Account**
+- **Distribution Account**
+
+**These details will later be used by Investors for fund wires and by Paying Agent for reconciliation.**
+
+**Data Typically Includes**:
+- **Account Name**: Holder name
+- **Bank Name**: Financial institution
+- **Account Number / IBAN**: Account identifier
+- **SWIFT / Routing**: Wire routing information
+- **Currency**: Account currency
+- **Purpose**: Collection / Subscription / Fee / Distribution
+
+**Purpose**: These accounts bridge on-chain records (FTs) and off-chain financial flows.
+
+### 📤 5. Publish Deal to Issuer for FT Approval
+
+**Navigation Path**: **Tools** → **Files** → **Publish Deal to Issuer**
+
+**Purpose**: To hand off the finalized securitization structure to the Issuer for FT issuance authorization.
+
+**Steps**:
+1. After completing all **Tools** configurations:
+   - Ensure tranches and waterfall are finalized
+   - Verify all accounts configured
+   - Confirm fees and expenses set
+2. From the **Files** tab, click **Publish Deal to Issuer**
+3. Review deal configuration summary
+4. Confirm publication
+
+**System Behavior**:
+- Sends the Deal to Issuer's dashboard (Phase 3 begins there)
+- **Locks editing for Underwriter** until Issuer responds
+- **Deal status changes to Awaiting Approval**
+- Intain system awaits FT approval via Issuer's C-Chain wallet
+
+**What Issuer Must Do** (in Phase 3):
+- Grant transfer authority for FTs on Issuer's C-Chain
+- Approve each tranche issuance
+- Issuer's C-Chain address must be configured in Payment Settings
+
+### 🔒 Validation & Integrity Checks
+
+**Field Validation**:
+- Each Tools section enforces required fields
+- Example: Tranche total must equal sum of FTs to issue
+- Date logic validation (maturity > first payment > closing)
+- Numeric validations (amounts, rates, percentages)
+
+**State Control**:
+- Once published, UW can't modify deal structure until Issuer returns or approves
+- Preserves deal structure integrity during approval process
+
+**Data Integrity**:
+- Accounts, tranches, and rules must reference consistent IDs before submission
+- Cross-section validation (e.g., tranche amounts match payment rule allocations)
+
+**Security**:
+- All FT issuance authority stays with Issuer
+- UW cannot mint or transfer without Issuer's explicit wallet approval
+- Blockchain-based authorization required
+
+### 📊 Outputs of Phase 2
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| Deal Record | Created from accepted pool; holds all structuring parameters |
+| Tranche Definitions | Hierarchy of FT classes with economics |
+| Payment Rules / Fees / Tests | Codified waterfall and performance tests |
+| Off-chain Accounts | Bank accounts for subscription and settlement |
+| Published Deal to Issuer | Deal now awaits FT approval from Issuer |
+
+</Table>
+
+### 🧠 Why Phase 2 Is Critical
+
+**Converts Static Asset Pool**:
+- Transforms loan pool into structured securitization
+- Defines financial engineering of the deal
+- Creates tradeable securities
+
+**Defines Economic Hierarchy**:
+- Tranches establish risk/return profiles
+- Fees and expenses model economics
+- Tests ensure ongoing credit quality
+
+**Establishes Bridge**:
+- Both off-chain and on-chain transaction flows defined
+- Bank accounts for wire transfers configured
+- Payment waterfall links assets to securities
+
+**Locks Reference Model**:
+- Defines tranching, rating, and investor analytics
+- Sets framework for FT issuance
+- Establishes foundation for ongoing reporting
+
+### 🧩 Phase 2 Flow Summary
+
+```
+Issuer Pool (verified loans)
+        ↓
+Underwriter accepts pool
+        ↓
+Deal automatically created
+        ↓
+UW configures in Tools:
+   - General, Tranches, Fees, Accounts, Tests, Rules
+        ↓
+Add Off-Chain Accounts (More → Accounts & Transactions)
+        ↓
+Publish Deal to Issuer (status: Awaiting Approval)
+```
+
+## Phase 3 — Issuer Approves Tranches & Publishes the Deal
+
+**Approve FT Issuance → Grant Intain transfer authority → Publish Deal to Investors**
+
+### 🎯 Objective
+
+After the Underwriter structures and publishes the deal, the Issuer must:
+- Review the securitization structure and tranches configured by the Underwriter
+- Approve FT (Fungible Token) issuance by granting Intain's C-Chain account authority to transfer tokens on their behalf
+- Publish the deal publicly to the Investors, making it visible under Opportunities
+
+**This phase formally authorizes the deal to go live on the platform and on-chain.**
+
+### 🧭 Actors Involved
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| Issuer | Reviews deal, approves tranches, authorizes C-Chain FT transfer rights, publishes to investors |
+| Underwriter | Awaits Issuer's approval; cannot modify deal during this period |
+| Intain C-Chain Account | Performs token transfers once authorized |
+| Investors | Gain visibility of the deal only after publication |
+
+</Table>
+
+### ⚙️ 1. Receive Published Deal (Awaiting Approval)
+
+**Navigation Path**: Issuer → **Deals** → [Securitization Deal]
+
+**Purpose**: Issuer receives the securitization deal that the Underwriter has published in **Awaiting Approval** state.
+
+**Steps**:
+1. Log in as Issuer
+2. Go to **Deals** section
+3. Locate the published deal (status: **Awaiting Approval**)
+4. Click **View Deal Details** to open the full deal configuration
+
+**Available Tabs**:
+- **General**: Deal overview and metadata
+- **Tranches**: List of all tranches configured by Underwriter
+- **Fees, Accounts, Payment Rules**: For transparency and review
+- **Documents**: Uploaded deal Excel, term sheet, etc.
+- **More**: Additional settings and transactions
+
+**This review ensures Issuer validates all deal terms before approving on-chain issuance.**
+
+### 🧾 2. Approve Issuance (Grant FT Transfer Authority)
+
+**Navigation Path**: Issuer → **Deals** → Securitization Deal → **Approve Issuance/Tranches**
+
+**Purpose**: To authorize Intain's C-Chain account to transfer FTs (fungible tokens) on Issuer's behalf.
+Without this step, the system cannot issue or allocate FTs to investors later.
+
+### 🔐 Key Security Concept
+
+**Each Issuer has a C-Chain wallet address** (configured under Payment Settings in Phase 0).
+
+**Intain requires temporary transfer authority** on this wallet to move FTs/NFTs for settlement.
+
+**The Issuer provides this approval by**:
+- **Option 1**: Entering C-Chain private key directly in the UI
+- **Option 2**: Uploading the wallet JSON file (containing encrypted keypair)
+
+**Once the private key or JSON is validated**, Intain's C-Chain account gains transfer permission (programmatic allowance) only for the specified deal tranches.
+
+<Warning>
+**Security Critical**: This approval allows token transfers only for this specific deal, not access to the entire Issuer wallet. Keys are never stored in plaintext.
+</Warning>
+
+**Steps to Approve**:
+1. Click **Approve Issuance / Approve Tranches** button
+
+2. System prompts with options:
+   - Enter C-Chain Private Key, OR
+   - Upload wallet.json file
+
+3. For each tranche:
+   - Select tranche
+   - Enter private key OR upload wallet.json
+   - Enter passphrase if using JSON
+
+4. Confirm action → the system digitally signs approval for the Intain C-Chain account
+
+5. The platform confirms successful authorization: **"FT transfer authority granted"** message
+
+**Post-condition**:
+- Deal status changes from **Awaiting Approval → Approved by Issuer**
+- Intain can now mint and transfer FTs/NFTs once investor funds are verified
+- Each tranche approval is recorded on blockchain
+
+**Approval Requirements**:
+- Issuer's C-Chain address configured in **User Profile → Payment Settings** (from Phase 0)
+- Private key or wallet JSON for signing
+- Each tranche requires individual approval
+- All tranches must be approved before publishing to investors
+
+### ⚙️ 3. Review & Validate Deal Components (Optional Pre-Publish Check)
+
+Before making the deal public, the Issuer can cross-check:
+
+<Table>
+
+| Tab | Purpose |
+|-----|---------|
+| **Tranches** | Validate tranche names, face values, and rates |
+| **Accounts** | Verify off-chain accounts (collection / closing / reserve) |
+| **Fees & Expenses** | Ensure all party compensation entries are accurate |
+| **Payment Rules** | Confirm payment waterfall logic aligns with offering memorandum |
+| **Documents** | Upload final legal documents (Prospectus, Rating Letter, Term Sheet) |
+
+</Table>
+
+**Purpose**: This serves as a "final QA" before public release — ensuring investors see accurate and approved data.
+
+**Validation Checklist**:
+- [ ] Tranche amounts sum correctly
+- [ ] Interest rates are as expected
+- [ ] Payment waterfall logic is sound
+- [ ] Fees and expenses are acceptable
+- [ ] Accounts are properly configured
+- [ ] All legal documents uploaded
+- [ ] Deal structure matches offering memorandum
+
+### 📢 4. Publish Deal to Investors
+
+**Navigation Path**: Issuer → **Deals** → [Approved Deal] → **Publish to Investors**
+
+**Purpose**: To make the securitization deal visible and open to all relevant investor accounts in the Opportunities section.
+
+**Steps**:
+1. Ensure all tranches are approved
+2. Click **Publish to Investors** button
+3. Review publication summary
+4. Confirm publication
+5. System validates all requirements are met
+
+**System Behavior**:
+- Deal status changes to **Open** (or **Live**)
+- Investors can now view deal details under **Investor → Opportunities**
+- Underwriter and Paying Agent also get read-only visibility
+- The commit phase (Phase 4) becomes available
+- All participants receive publication notification
+
+**What Investors See**:
+- Deal details and structure
+- Tranche offerings with economics
+- Investment opportunities
+- Deal documentation
+- Payment terms and waterfall
+- Expected returns and risks
+
+### 🧩 5. Post-Publish State
+
+<Table>
+
+| Deal State | Description |
+|-----------|-------------|
+| **Awaiting Approval** | Published by UW, waiting for Issuer's authorization |
+| **Approved by Issuer** | Issuer approved tranches; FT authority granted |
+| **Open / Live** | Published to investors; visible under Opportunities; ready for commits |
+
+</Table>
+
+**State Transitions**:
+- Underwriter publishes → **Awaiting Approval**
+- Issuer approves all tranches → **Approved by Issuer**
+- Issuer publishes → **Open** (investors can see)
+- Deal ready for commit phase
+
+### 🔒 Security and Integrity Controls
+
+**FT Authority Limited Scope**:
+- The Intain account can transfer only FTs tied to the specific approved deal
+- NOT the entire Issuer wallet
+- Scope limited to this deal's tranches only
+
+**Private Key Handling**:
+- System prompts for key input or JSON upload securely
+- Key is never stored in plaintext
+- Session-based authorization
+- No permanent key storage on platform
+
+**Immutable Lock**:
+- Once published to investors, deal structure is locked
+- Tranches, waterfall, fees cannot be modified post-publication
+- Prevents post-approval tampering
+- Ensures investor protection
+
+**Audit Trail**:
+- Approval actions are timestamped
+- Actions tied to Issuer identity
+- Blockchain records authorization
+- Complete audit trail for compliance
+
+### 📊 Outputs of Phase 3
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| FT Transfer Authorization | Intain account approved for token movement on behalf of Issuer |
+| Issuer-Approved Deal Record | All tranches and structure finalized and frozen |
+| Published Deal (Visible to Investors) | Investors can now view and commit |
+| Transition Trigger | Enables Underwriter and Investors to begin commit/invest phases |
+
+</Table>
+
+### 🧠 Why Phase 3 Is Critical
+
+**Formalizes Issuer Authorization**:
+- On-chain actions cannot proceed without this step
+- FTs cannot be legally or technically issued
+- Ensures proper authorization before token issuance
+
+**Transitions Deal to Public**:
+- Moves from private structuring to public offering
+- Makes deal available to market participants
+- Opens investment phase
+
+**Protects Investors**:
+- Ensures only Issuer-approved structures are visible
+- Provides investor confidence in deal legitimacy
+- Validates deal structure before investors commit
+
+**Provides Compliance Linkage**:
+- Links off-chain deal docs to on-chain asset representation
+- Establishes legal basis for token issuance
+- Creates audit trail for regulatory compliance
+
+### 🧩 Phase 3 Flow Summary
+
+```
+Underwriter publishes Deal → Status: Awaiting Approval
+        ↓
+Issuer receives notification
+        ↓
+Issuer reviews Deal details (General, Tranches, Rules)
+        ↓
+Issuer Approves Issuance (enter private key / upload wallet.json)
+        ↓
+FT Transfer authority granted to Intain
+        ↓
+Issuer publishes Deal to Investors → Status: Open
+        ↓
+Investors see Deal in Opportunities (ready for Commit phase)
+```
+
+## Phase 4 — Investor Commit & Invest; Underwriter Toggles Stage
+
+**Investor Engagement → Commit Stage → Invest Stage (Off-Chain Fund Transfers)**
+
+### 🎯 Objective
+
+To allow Investors to review the published deal, commit desired investment amounts, and then, after Underwriter confirmation, invest actual funds.
+
+This phase manages:
+- Investor engagement (Commit stage)
+- Deal activation (Underwriter toggles Commit → Invest)
+- Off-chain investor fund transfers (Invest stage)
+
+<Warning>
+**Critical Note**: FTs are NOT yet transferred here. FT issuance happens only after verification by the Paying Agent in Phase 5.
+</Warning>
+
+### 🧭 Actors & Responsibilities
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| **Investor** | Reviews deal → commits an amount → transfers funds off-chain once deal moves to Invest stage → marks transaction as completed |
+| **Underwriter (UW)** | Monitors commitments → toggles deal stage from Commit to Invest → oversees investor activity |
+| **Issuer** | Passive observer; no action during this phase |
+| **Paying Agent (PA)** | Will verify the incoming payments in next phase |
+
+</Table>
+
+### ⚙️ 1. Investor Views the Deal
+
+**Navigation Path**: Investor → **Opportunities** → Securitization Deal → View Details
+
+**Purpose**: To display deal information (structured in earlier phases) for investor due diligence.
+
+**Available Sections**:
+
+**Overview / General**:
+- Deal name, asset class
+- Issue size
+- Key dates (closing, maturity, first payment)
+- Current status
+
+**Tranches**:
+- List of FT classes (A, B, C, etc.)
+- Coupon rates
+- Maturity dates
+- Available amounts per tranche
+- Remaining capacity
+- Seniority levels
+
+**Documents**:
+- Term sheet
+- Offering memorandum
+- Rating information
+- Legal documents
+- Servicing agreements
+
+**Payment Rules / Accounts**:
+- How payments flow through waterfall
+- Where wires go (bank account details)
+- Payment frequency
+- Distribution logic
+
+**Investors analyze these details before making a commitment.**
+
+### 💰 2. Commit Stage
+
+**Navigation Path**: Investor → **Opportunities** → Deal → **Commit**
+
+**Purpose**: To allow investors to reserve participation before actual fund transfer.
+
+**Steps**:
+1. On the Deal page, review all details
+2. Click **Commit** button
+3. Enter commitment details:
+   - **Amount to commit** (cannot exceed tranche availability)
+   - **Tranche selection** (which tranche class)
+   - Optional note or preferences
+4. Review commitment summary
+5. Confirm commitment
+6. System records commitment
+
+**System Behavior**:
+- **Commitment recorded** in platform under **Investor Commitments** table
+- Investor can **Edit Commitment** (increase/decrease) until deal advances to Invest stage
+- **Total committed vs. required amount** shown to Underwriter
+- Commitment binding (terms apply)
+
+**Commitment Status Examples**:
+
+<Table>
+
+| Stage | Description |
+|-------|-------------|
+| **Draft** | Commitment created but not finalized |
+| **Committed** | Confirmed commitment |
+| **Withdrawn** | Investor retracts before Invest stage |
+
+</Table>
+
+**Commitment Features**:
+- **Editability**: Can modify amount until Invest stage
+- **Visibility**: Total commitments visible to Underwriter
+- **Binding**: Terms apply once committed
+- **Trackability**: Full commitment history maintained
+
+### ⚙️ 3. Underwriter Monitors & Toggles Stage
+
+**Navigation Path**: Underwriter → **Deals** → **General Settings**
+
+**Purpose**: To manage the transition from soft commitments to hard investments.
+
+**Steps**:
+
+1. **Monitor Commitments**:
+   - Underwriter reviews total commitments in the **Deal dashboard**
+   - View commitment summary:
+     - Total commitments by tranche
+     - Remaining capacity
+     - Commitment timeline
+     - Individual investor commitments
+
+2. **Assess Readiness**:
+   - Determine if sufficient commitments received
+   - Check if deal fully subscribed
+   - Evaluate investor quality
+   - Consider timing and market conditions
+
+3. **When Ready to Proceed**:
+   - Ensure sufficient commitments are reached
+   - (e.g., deal fully subscribed or target met)
+   - Navigate to **General Settings** → **Deal Status**
+
+4. **Toggle Stage**:
+   - Find **Stage Control** section
+   - Toggle from **Commit** to **Invest**
+   - Review toggle summary:
+     - Commitment totals will be locked
+     - Investors will be notified
+     - Wire instructions will be provided
+
+5. **Confirm Toggle**:
+   - Platform confirmation appears: **"Switching to Invest locks commitments"**
+   - Review impact summary
+   - Click **Confirm** to proceed
+
+**System Behavior**:
+- **Locks further edits** to commitments
+- **Enables Invest actions** for investors
+- **Sends notifications** to all committed investors: "Deal moved to Invest stage"
+- **Displays wire instructions** to investors
+- Deal status updates to **Invest**
+
+**Underwriter Control**:
+- Full control over timing
+- Can wait for more commitments before toggling
+- Strategic decision point
+- Cannot reverse once toggled (permanent lock)
+
+### 💸 4. Investor Invest Stage (Off-chain Fund Transfer)
+
+**Navigation Path**: Investor → **Opportunities** → Deal → **Invest**
+
+**Purpose**: To convert committed amounts into actual investments through off-chain (bank wire) payment.
+
+**Steps**:
+
+1. **Investor Receives Notification**:
+   - Deal moved to Invest stage
+   - Email/notification sent
+   - Wire instructions available
+
+2. **Access Invest Action**:
+   - Navigate to **Opportunities** section
+   - Open Securitization Deal
+   - Click **Invest** button for committed amount
+
+3. **View Wire Instructions**:
+   - System displays detailed wire instructions:
+     - **Beneficiary Bank**: Bank name
+     - **Account Number / IBAN**: Account identifier
+     - **SWIFT / Routing Number**: Wire routing info
+     - **Currency**: Account currency
+     - **Reference Code**: Unique to investor (critical for reconciliation)
+     - **Payment Amount**: Total to wire
+     - **Deadline**: Wire deadline
+
+4. **Complete Off-chain Transfer**:
+   - Investor initiates wire transfer from their bank
+   - Uses provided beneficiary details
+   - Includes unique reference code
+   - Completes wire transfer externally (off-platform)
+   - Retains wire confirmation/receipt
+
+5. **Mark Transaction as Completed**:
+   - After payment is made, investor returns to platform
+   - Click **Mark as Completed** or **Confirm Wire Transfer**
+   - Optionally upload wire confirmation
+   - Status updates: **Investment marked complete**
+
+**System Behavior**:
+- **Transaction record created**:
+  - Amount
+  - Payment Reference
+  - Status = **Pending Verification**
+- Investor commitment locked
+- Transaction details recorded
+- Awaiting Paying Agent verification (Phase 5)
+
+**Important**: **FTs are NOT yet transferred at this point**. FT issuance awaits verification in Phase 5.
+
+**Transaction States**:
+- **Pending**: Awaiting investor wire transfer
+- **Marked Complete**: Investor indicates wire sent
+- **Pending Verification**: Awaiting Paying Agent confirmation
+- **Verified**: PA confirms receipt (Phase 5)
+- **FTs Issued**: Tokens transferred (Phase 5)
+
+### 🔒 5. System / Data Integrity Controls
+
+<Table>
+
+| Control | Description |
+|--------|-------------|
+| **Commit Lock** | Once UW toggles to Invest, commitments cannot be edited or withdrawn |
+| **Payment Reference ID** | Each investor's transfer includes unique code for reconciliation |
+| **Off-chain Validation Link** | Payment status remains Pending until PA updates to Completed in Phase 5 |
+| **Deal Stage Gating** | Platform actions restricted by stage (Commit → Invest → Issued) |
+| **Audit Trail** | Each investor's actions logged with timestamps |
+
+</Table>
+
+**Additional Controls**:
+- **Amount Validation**: Cannot commit more than tranche availability
+- **Duplicate Prevention**: Each investor can commit once per tranche
+- **Stage Enforcement**: Cannot invest without prior commitment
+- **Reference Uniqueness**: Each investor gets unique wire reference
+- **Immutable Logging**: All actions permanently recorded on blockchain
+
+### 📊 6. Outputs of Phase 4
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| Investor Commit Records | All investor commitments stored and locked |
+| Deal Stage = Invest | Underwriter changed status; investors notified |
+| Investor Payment Records | Pending off-chain transfers awaiting verification |
+| Trigger for Phase 5 | Paying Agent begins verification process |
+
+</Table>
+
+### 🧠 Why Phase 4 Is Critical
+
+**Establishes Capital Commitments**:
+- Firm investor commitments to the securitization
+- Demonstrates investor appetite
+- Builds investor pipeline for deal execution
+
+**Introduces Real-World Cash Flow**:
+- Off-chain money movement begins
+- Actual funds flow to designated accounts
+- Bridges traditional banking with blockchain
+
+**Maintains Strict Separation**:
+- Between fund receipt and token issuance
+- Protects against premature transfers
+- Ensures only verified investors receive FTs
+- Reconciled payments advance to settlement
+
+**Ensures Data Integrity**:
+- Only verified investors advance to settlement
+- Payment reconciliation before token issuance
+- Complete audit trail from commitment to payment
+- Investor protection through staged process
+
+### 🧩 Phase 4 Flow Summary
+
+```
+Issuer publishes deal → Visible to investors
+        ↓
+Investor reviews deal details & tranches
+        ↓
+Investor commits amount (Commit Stage)
+        ↓
+Underwriter monitors commitments
+        ↓
+UW toggles Commit → Invest (when sufficient)
+        ↓
+Investors notified of stage change
+        ↓
+Investor wires funds off-chain
+        ↓
+Investor marks transaction "Completed"
+        ↓
+Status: Pending Verification (for Paying Agent)
+        ↓
+Phase 5: PA verifies and issues FTs
+```
+
+## Phase 5 — Paying Agent Verifies Receipts & Issues FTs
+
+**Verify Off-chain Receipts → Confirm Transactions → Issue Fungible Tokens → Trigger IA Module Integration**
+
+### 🎯 Objective
+
+To ensure that:
+- All investor funds committed in Phase 4 have been received and verified
+- Upon successful verification, FT tokens representing investor tranches are issued and distributed to investors' on-chain wallets
+- Once issuance is complete, the deal data is shared with the Standard IA module for ongoing reporting and lifecycle management
+
+**This phase closes the primary issuance and transitions the deal into its servicing lifecycle.**
+
+### 🧭 Actors Involved
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| **Paying Agent (PA)** | Verifies investor receipts, marks transactions as completed, issues FTs |
+| **Investor** | Sends funds off-chain, waits for confirmation and FT allocation |
+| **Underwriter / Issuer** | View-only; monitor status updates |
+| **Intain Platform** | Executes FT issuance on-chain (via authorized C-Chain wallet) |
+
+</Table>
+
+### ⚙️ 1. Verify Off-chain Investor Receipts
+
+**Navigation Path**: Paying Agent → **Deals** → [Securitization Deal] → **More** → **Account & Transaction Details**
+
+**Purpose**: To confirm each investor's payment has been received in the designated off-chain subscription account.
+
+**Steps**:
+
+1. **Open the Securitization Deal**:
+   - Navigate to **Deals** section
+   - Select the active Securitization Deal
+   - Click **More** dropdown menu
+
+2. **Access Account & Transaction Details**:
+   - Click **Account & Transaction Details**
+   - View the list of transactions created during Phase 4 (status: **Pending Verification**)
+   - Each investor record shows:
+     - Investor name/ID
+     - Committed amount
+     - Tranche information
+     - Wire reference code
+     - Transaction status
+     - Date submitted
+
+3. **For Each Investor Record**:
+   
+   **Cross-check against bank statements**:
+   - Verify wire reference code matches
+   - Confirm amount matches committed amount
+   - Check account details (routing number, beneficiary)
+   - Verify currency matches
+   - Confirm receipt date within expected timeframe
+
+4. **Update Transaction Status**:
+   
+   **If matched (funds received)**:
+   - Update Status → **Completed**
+   - Enter verification details:
+     - Receipt amount (may differ slightly due to bank fees)
+     - Receipt date
+     - Reference number from bank statement
+     - Comments if needed
+   - Click **Save** or **Mark as Completed**
+
+   **If unmatched or incorrect**:
+   - Mark Status → **Pending** or **Flagged**
+   - Document discrepancy
+   - Record reason (amount mismatch, missing reference, etc.)
+   - Contact investor if needed
+   - Wait for correction before completing
+
+5. **Review and Validate All Transactions**:
+   - Continue until all investor transactions reviewed
+   - Check that no transactions left pending
+   - Verify total receipts align with commitments
+
+**System Behavior**:
+- **Payment status automatically updates** across modules
+- **Completed transactions** are now eligible for FT issuance
+- **Underwriter and Issuer** can view verification status
+- **Investors** receive confirmation of receipt
+
+**Purpose**: This step ensures a **1:1 verification between off-chain money movement and on-chain token allocation** — the cornerstone of trust and auditability in securitization.
+
+**Verification Checklist**:
+- [ ] All investor wires received
+- [ ] Amounts match commitments (accounting for fees)
+- [ ] Reference codes confirmed
+- [ ] All transactions marked as Completed
+- [ ] Bank statements reconciled
+- [ ] No outstanding discrepancies
+
+### 🧾 2. Review Deal Balances and Investor Summary
+
+**Navigation Path**: Paying Agent → Deal Overview / Accounts Summary
+
+**Purpose**: Before issuing FTs, the PA validates that deal balances are correct and all investor payments are verified.
+
+**Steps**:
+
+1. **Access Deal Summary**:
+   - Navigate to Deal Overview
+   - Or **Accounts Summary** section
+   - Review aggregated information
+
+2. **Perform Balance Checks**:
+
+<Table>
+
+| Validation | Description |
+|-----------|-------------|
+| **Commit = Paid = Issue** | The sum of committed and verified funds matches the FT issuance amount |
+| **Tranche Balance** | Each tranche is fully subscribed and verified |
+| **Account Reconciliation** | Subscription and closing accounts reflect correct totals |
+
+</Table>
+
+3. **Review Per-Tranche Summary**:
+   - Tranche A: Committed vs. Verified vs. Issuance amount
+   - Tranche B: Committed vs. Verified vs. Issuance amount
+   - Subordinate tranches: Full verification status
+   - Residual tranche: If applicable
+
+4. **Verify Totals**:
+   - Total investor commitments
+   - Total verified receipts
+   - Total FT issuance required
+   - All must align
+
+5. **Check for Exceptions**:
+   - Any unverified payments
+   - Amount discrepancies
+   - Missing investor confirmations
+
+**Only after all validations pass can FTs be issued.**
+
+**Validation Rules**:
+- ✅ Total verified receipts = Total committed amounts
+- ✅ All investor payments marked as Completed
+- ✅ No outstanding pending verifications
+- ✅ Account balances reconciled
+- ✅ Tranche-by-tranche verification complete
+
+### 💠 3. Issue FT Tokens (On-Chain Issuance)
+
+**Navigation Path**: Paying Agent → Deal → **Issue FT**
+
+**Purpose**: To mint and distribute Fungible Tokens (FTs) representing tranche-level securities to investors' on-chain wallets.
+
+### 🔧 Mechanics of Issuance
+
+**Steps**:
+
+1. **Initiate FT Issuance**:
+   - After all receipts verified and balances checked
+   - Click **Issue FT** button in Deal interface
+   - System validates prerequisites:
+     - All receipts verified
+     - Balances reconciled
+     - Deal not yet issued
+
+2. **System Initiates On-chain Minting**:
+   
+   **Uses Issuer's wallet** (previously authorized in Phase 3):
+   - FT issuance via authorized C-Chain account
+   - Each FT corresponds to a specific:
+     - Tranche class (A1, A2, B, etc.)
+     - Investor allocation
+     - Face value per token
+     - Token contract address
+
+3. **Token Distribution**:
+   - System mints FTs on C-Chain network
+   - Each investor gets FT allocation:
+     - **Investor Wallet**: FTs transferred to registered address
+     - **Token Amount**: Based on committed amount
+     - **Tranche Class**: A, B, or other tranche
+     - **Transaction Hash**: On-chain confirmation
+
+4. **Record Transaction Details**:
+   - Transaction hash/signature recorded for audit trail
+   - Blockchain confirmation received
+   - Token issuance timestamp recorded
+   - Investor address confirmation
+
+5. **System Updates**:
+   - **Deal status updates** to **FTs Issued** or **Settled**
+   - **Investors' dashboards** show received FTs
+   - **Underwriter and Issuer** can view issued token details
+   - **FT balances** visible in investor accounts
+
+**What Each Investor Receives**:
+- FT tokens in their registered wallet
+- Token amount matching their committed investment
+- Access to on-chain token details
+- Transaction confirmation with hash
+
+**On-Chain Mechanics**:
+- Tokens minted via smart contract
+- Transfer executed on C-Chain
+- Irreversible and immutable
+- Publicly verifiable on blockchain
+- Complete audit trail maintained
+
+<Info>
+FT issuance is **irreversible** once confirmed on blockchain. Ensure all verifications are complete before clicking Issue FT.
+</Info>
+
+### 🔗 4. Trigger Integration with Standard IA Module
+
+**Purpose**: Once FTs are issued, the deal data must be shared with the Standard IA (Investor Administration) Module for recurring servicing, reporting, and cashflow management.
+
+**What IA Module Receives**:
+- Deal metadata (name, dates, type)
+- Tranche structures and economics
+- Investor allocations and balances
+- Payment waterfall rules
+- Fee and expense schedules
+- Test parameters
+- Account details
+
+**System Behavior**:
+
+**Upon FT Issuance Completion**:
+
+1. **Data Sync Triggered**:
+   - Deal metadata synced with IA module
+   - Tranche details shared
+   - Token balances synchronized
+   - Investor list transferred
+
+2. **IA Module Configuration**:
+   - IA uses this data for:
+     - **Interest calculations** (monthly payments)
+     - **Payment schedules** (when distributions occur)
+     - **Periodic reports** (investor statements)
+     - **Cashflow management** (waterfall execution)
+     - **Test monitoring** (overcollateralization, etc.)
+
+3. **Lifecycle Transition**:
+   - Deal enters active servicing phase
+   - Monthly processing workflows enabled
+   - Reporting capabilities activated
+   - Investor dashboard integration complete
+
+**This integration serves as the bridge between issuance and servicing.**
+
+**What This Enables**:
+- ✅ Automated payment calculations
+- ✅ Investor reporting (monthly statements)
+- ✅ Performance monitoring
+- ✅ Regulatory compliance
+- ✅ Audit trail maintenance
+
+### 🔒 5. Security & Integrity Controls
+
+<Table>
+
+| Control | Purpose |
+|--------|---------|
+| **On-chain Authorization** | Paying Agent can issue FTs only using Issuer-approved C-Chain permissions |
+| **Payment Verification Gate** | FT issuance button is disabled until all investor receipts marked Completed |
+| **Immutable Audit Trail** | Each FT issuance recorded with on-chain transaction hash and timestamp |
+| **No Double Issuance** | The platform prevents reissuing tokens for already verified tranches |
+| **Data Lock Post-Issuance** | Once FTs issued, deal structure (tranches, waterfall) becomes immutable |
+
+</Table>
+
+**Additional Controls**:
+- **Verification Requirements**: All receipts must be verified before FT button enabled
+- **Balance Reconciliation**: Automated checks before issuance
+- **Authorization Check**: Issuer's FT approval (Phase 3) must exist
+- **Transaction Finality**: On-chain issuance is permanent
+- **Audit Logging**: Complete record of all actions
+
+### 📊 Outputs of Phase 5
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| Verified Investor Payments | All off-chain receipts reconciled and marked complete |
+| FT Token Issuance | On-chain tokens minted and distributed to investors |
+| Deal Status = FTs Issued / Settled | Indicates successful closing |
+| IA Module Integration | Deal data synchronized for recurring calculations and reporting |
+| Blockchain Audit Record | Transaction hashes confirm transparency and finality |
+
+</Table>
+
+### 🧠 Why Phase 5 Is Critical
+
+**Ensures True Settlement**:
+- Funds verified before token issuance
+- Prevents false issuance
+- Maintains platform integrity
+- Protects all parties
+
+**Establishes Legal and Digital Ownership**:
+- FTs on-chain represent legal ownership
+- Blockchain provides proof of ownership
+- Transparent and immutable
+- Legally binding instrument
+
+**Provides Audit Transparency**:
+- Transaction hashes create permanent record
+- Non-repudiation through blockchain
+- Complete audit trail
+- Regulatory compliance support
+
+**Connects Primary Issuance to Servicing**:
+- IA module integration enables ongoing management
+- Automated servicing workflows
+- Investor reporting capabilities
+- Lifecycle management support
+
+### 🧩 Phase 5 Flow Summary
+
+```
+Investor wires funds (off-chain)
+        ↓
+Paying Agent reviews Account & Transaction Details
+        ↓
+Verify and mark receipts as Completed
+        ↓
+Review deal balances and investor summary
+        ↓
+Issue FTs (on-chain mint + transfer to investor wallets)
+        ↓
+Update Deal Status = FTs Issued / Settled
+        ↓
+Sync deal data to Standard IA Module for recurring management
+        ↓
+Deal enters active servicing phase
+```
+
+## Phase 6 — Servicer Monthly Processing
+
+**Upload Monthly Loan Tape → Map Fields → Preview → Summarize → Commit to Digital Ledger**
+
+### 🎯 Objective
+
+To ensure timely and accurate loan performance reporting after deal issuance.
+
+Each month (or on each payment date), the Servicer uploads and processes an updated loan tape, maps it to Intain's standard schema, validates and summarizes data, and commits it to the Digital Ledger.
+
+**This step feeds verified asset-level performance into the securitization ecosystem, enabling accurate waterfall and investor payout computations.**
+
+### 🧭 Actors & Responsibilities
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| **Servicer** | Uploads periodic loan tapes, performs data mapping and validation, generates servicer summary, commits results to Digital Ledger |
+| **Paying Agent (PA)** | Later uses committed summary data for aggregation and investor reporting |
+| **Issuer / Underwriter** | Read-only; monitor portfolio health and delinquency trends |
+| **Platform (Intain)** | Standardizes field mapping, automates stratification, and records ledger commits |
+
+</Table>
+
+### ⚙️ 1. Process Loan Tape
+
+**Navigation Path**: Servicer → **Deals** → [Securitization Deal] → **Process Loan Tape**
+
+**Purpose**: To upload a new loan tape (Excel file) for a specific payment period.
+
+**Steps**:
+
+1. **Access the Deal**:
+   - Navigate to **Deals** section
+   - Select the securitization deal you service
+   - Locate **Process Loan Tape** option
+
+2. **Initiate Upload**:
+   - Click **Process Loan Tape** button
+   - System displays upload interface
+   - Select specific **Payment Date** from dropdown (e.g., 2024-03-01)
+
+3. **Upload Excel File**:
+   - Click **Upload Excel** or **Browse** button
+   - Select prepared loan tape Excel file (.xlsx)
+   - File typically includes fields like:
+     - Loan ID
+     - Principal Outstanding
+     - Interest Received
+     - Payment Date
+     - Status (Current/Delinquent/Defaulted)
+     - Delinquency (30/60/90+ days)
+     - Additional performance fields
+
+4. **Confirm Upload**:
+   - Click **Upload** to submit file
+   - System validates file format
+   - System checks for basic structure
+
+**System Behavior**:
+- Parses and validates file format
+- Flags missing mandatory fields before proceeding to mapping
+- Stores raw tape in temporary holding for further actions
+- Provides upload confirmation
+
+<Note>
+The loan tape must follow a consistent format across all monthly uploads to ensure mapping accuracy. Use the template provided during initial pool creation.
+</Note>
+
+### 🗺️ 2. Map Fields to Intain Standard
+
+**Navigation Path**: Continue from Upload → **Map Fields**
+
+**Purpose**: To align Servicer's loan tape headers with Intain's standardized schema (same as in Phase 1, but for ongoing servicing data).
+
+**Steps**:
+
+1. **View Raw Columns**:
+   - System displays uploaded column headers
+   - Each column shows in its raw format
+   - Example raw headers: "Loan #", "Prin_Bal", "Int_Recv", etc.
+
+2. **Map Each Column**:
+   - In **Map Fields** interface, map each loan tape column to its corresponding standard Intain field:
+   
+   <Table>
+
+   | Servicer Column | Map To Intain Field |
+   |----------------|---------------------|
+   | Loan Number | Loan_ID |
+   | Principal Outstanding | Principal_Outstanding |
+   | Interest Collected | Interest_Collected |
+   | Next Payment Date | Next_Payment_Date |
+   | Delinquency Days | Delinquency_Days |
+   | Payment Status | Payment_Status |
+
+   </Table>
+
+3. **Use Mapping Tools**:
+   - Use dropdown for each field
+   - Auto-suggestions provided by system
+   - Browse available Intain standard fields
+   - Saved mapping profiles can be reused across cycles
+
+4. **Click Preview Map Fields** to verify the mapping accuracy and data types
+
+5. **If successful, click Save Mapping**
+
+**Validation Checks**:
+- ✅ Mandatory fields present (Loan ID, Balance, Payment Date, etc.)
+- ✅ No duplicate loan IDs
+- ✅ Data type matches (numeric/date/text)
+- ✅ Totals reconcile with previous period
+
+**If Validation Fails**:
+- System highlights problematic fields
+- Servicer must correct and re-upload
+- Can fix issues inline or adjust original Excel
+
+### 📊 3. Preview Mapped Data
+
+**Navigation Path**: Continue from Map Fields → **Preview**
+
+**Purpose**: To allow Servicer to review the mapped data before committing it for calculations.
+
+**Steps**:
+
+1. **Click Preview Loan Tape** after mapping is complete
+
+2. **Platform displays structured data grid** with:
+   
+   **Aggregate Metrics**:
+   - Loan count
+   - Aggregate balance
+   - Weighted average coupon (WAC)
+   - Delinquency %
+   - Average loan size
+   
+   **Stratification**:
+   - By region (geography)
+   - By term (remaining maturity)
+   - By performance status (current/delinquent/defaulted)
+   - By credit enhancement level
+   
+   **Trend Analysis**:
+   - Comparison to prior period
+   - Change in total outstanding
+   - Payment activity summary
+
+3. **Review Data for Reasonableness**:
+   - Check that metrics align with expectations
+   - Verify no outliers or anomalies
+   - Confirm totals are logical
+
+4. **Make Corrections if Necessary**:
+   - If data looks incorrect, return to mapping step
+   - If data is wrong at source, re-upload corrected Excel
+   - Adjust mappings if needed
+
+**Outcome**: Ensures that only validated, accurate data progresses to summarization.
+
+**Good Practices**:
+- Compare current metrics to previous period
+- Check for data entry errors
+- Verify loan counts haven't changed unexpectedly
+- Review delinquency trends for issues
+
+### 📈 4. Generate Servicer Summary
+
+**Navigation Path**: Servicer → Process Loan Tape → **Summarize**
+
+**Purpose**: To calculate aggregate servicing statistics for the uploaded loan tape.
+
+**System Auto-Calculates**:
+
+<Table>
+
+| Metric | Description |
+|--------|-------------|
+| **Total Loans Serviced** | Count of active loans in pool |
+| **Total Outstanding Principal** | Aggregate UPB across all loans |
+| **Principal/Interest Received** | Payments collected in period |
+| **Delinquency Counts** | Number of loans 30/60/90+ days past due |
+| **Default Counts** | Number of loans in default |
+| **Pool-Level Weighted Averages** | WAC (Weighted Average Coupon), WAM (Weighted Average Maturity) |
+| **Recoveries** | Defaulted loan recoveries if applicable |
+| **Prepayments** | Principal prepaid ahead of schedule |
+
+</Table>
+
+**Steps**:
+
+1. **Click Summarize** after reviewing the mapped preview
+
+2. **Platform Generates Servicer Summary Table**:
+   - Comprehensive summary report
+   - All calculated metrics displayed
+   - Period-over-period comparisons
+   - Trend indicators
+
+3. **Review and Confirm**:
+   - Verify calculation accuracy
+   - Check totals reconcile
+   - Ensure metrics align with expectations
+   - Review for any red flags
+
+**Outcome**: A summarized data snapshot used by the Paying Agent to compute tranche-level distributions.
+
+**Summary Components**:
+- **Balance Summary**: Total outstanding principal
+- **Payment Summary**: Interest and principal received
+- **Performance Summary**: Delinquency and default rates
+- **Profile Summary**: WAC, WAM, average loan size
+- **Comparison**: Changes from prior period
+
+### 🧾 5. Commit to Digital Ledger
+
+**Navigation Path**: Servicer → Summarize → **Commit to Digital Ledger**
+
+**Purpose**: To finalize and record the validated and summarized loan performance data on the Digital Ledger for the specified payment date.
+
+**Steps**:
+
+1. **Final Review**:
+   - After reviewing the summary
+   - Ensure all data looks correct
+   - Confirm payment date is accurate
+
+2. **Click Commit to Digital Ledger**
+
+3. **System Validates One Last Time**:
+   - Deal status = Active / FTs Issued
+   - No duplicate commit for same payment date
+   - Mandatory fields (Loan ID, Amounts, Payment Date) present
+   - Data integrity checks pass
+
+4. **Confirm Commit**:
+   - System may prompt for confirmation
+   - Review commit summary
+   - Click **Confirm** to proceed
+
+**System Behavior**:
+- **Stores finalized performance snapshot** to the immutable ledger
+- **Flags the reporting period** as "Processed = YES"
+- **Notifies the Paying Agent** that new data is available for aggregation and investor reporting (Phase 7)
+- **Creates immutable record** on blockchain
+- **Timestamp and identity** recorded
+
+**Outcome**: The ledger now holds official servicing data for that payment cycle — used in all downstream calculations and reports.
+
+**Data Immutability**:
+- Once committed, data cannot be edited
+- Only subsequent periods can be appended
+- Complete audit trail maintained
+- Blockchain-level security
+
+### 🔒 6. Integrity & Quality Controls
+
+<Table>
+
+| Control | Description |
+|--------|-------------|
+| **Schema Validation** | Ensures mapping adheres to standardized Intain field structure |
+| **Data Reconciliation** | Compares current and prior-period aggregates to detect anomalies |
+| **Commit Lock** | Once committed, data cannot be edited — only appended next cycle |
+| **Ledger Timestamping** | Each commit gets timestamp and Servicer identity |
+| **Audit Trail** | Each uploaded tape and commit action logged for transparency |
+
+</Table>
+
+**Additional Controls**:
+- **Format Validation**: Excel file must meet template requirements
+- **Required Fields**: All mandatory fields must be present
+- **Data Type Checks**: Numeric, date, text types validated
+- **Duplicate Prevention**: Cannot commit same payment date twice
+- **Identity Recording**: Servicer identity tied to each commit
+
+### 📊 Outputs of Phase 6
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| Servicer Loan Tape Record | Uploaded and mapped source file for the reporting period |
+| Servicer Summary | Aggregated performance metrics |
+| Digital Ledger Commit | Immutable on-chain record of loan performance data |
+| Processed Flag = YES | Confirms completion of servicing for that period |
+| Notification to PA | Triggers Paying Agent to aggregate and calculate payments |
+
+</Table>
+
+### 🧠 Why Phase 6 Is Critical
+
+**Keeps Securitization Transparent**:
+- Ongoing asset-level updates
+- Real-time performance visibility
+- Early detection of issues
+- Investor confidence through transparency
+
+**Provides Data Foundation**:
+- For waterfall payment calculations
+- For investor yield computations
+- For performance reporting
+- For regulatory compliance
+
+**Ensures Auditability**:
+- Digital ledger commits create permanent record
+- Regulatory compliance support
+- Complete audit trail
+- Non-repudiation
+
+**Detects Portfolio Deterioration Early**:
+- Delinquencies identified quickly
+- Defaults tracked and measured
+- Prepayments monitored
+- Performance trends visible
+
+**Creates Tamper-Proof Records**:
+- Monthly record of servicing activity
+- Immutable blockchain storage
+- Complete historical record
+- Audit support
+
+### 🧩 Phase 6 Flow Summary
+
+```
+Servicer retrieves current loan data
+        ↓
+Upload Loan Tape (Excel)
+        ↓
+Map Fields → Preview Loan Tape
+        ↓
+Generate Summary (system computes aggregates)
+        ↓
+Commit to Digital Ledger
+        ↓
+Flag payment date as Processed = YES
+        ↓
+Notify Paying Agent for aggregation and investor reporting
+```
+
+✅ **End of Phase 6**
+
+<Info>
+**At this point, the loan-level performance data is up-to-date on the Digital Ledger.**
+The Paying Agent can now use this committed data to generate aggregate summaries, payment waterfalls, and investor reports — which brings us to Phase 7: Paying Agent Consolidation & Reporting.
+</Info>
+
+## Phase 7 — Paying Agent Consolidation & Reporting
+
+**Aggregate Servicer Data → Commit Summary to Ledger → Run Recurring Deal Calculations → Generate Investor Reports**
+
+### 🎯 Objective
+
+To ensure that after each reporting cycle:
+- Servicer-submitted and committed data is consolidated at the deal level
+- The Paying Agent performs verification, calculation, and reporting of investor-level outcomes
+- Results are committed to the Digital Ledger, marking that payment period as processed
+
+**This phase operationalizes the cash flow waterfall and provides official investor statements — completing the monthly servicing loop.**
+
+### 🧭 Actors & Responsibilities
+
+<Table>
+
+| Role | Responsibility |
+|------|---------------|
+| **Paying Agent (PA)** | Consolidates Servicer data, commits summary to ledger, runs waterfall calculations, generates investor reports |
+| **Servicer** | Has already submitted and committed loan-level data (Phase 6) |
+| **Issuer / Underwriter / Investors** | Consume reports and dashboards; view payment performance and distributions |
+| **Intain Platform** | Automates data aggregation, performs calculations per payment rules, and maintains immutable record of each reporting cycle |
+
+</Table>
+
+### ⚙️ 1. Access Aggregate Summary
+
+**Navigation Path**: Paying Agent → **Loans** → **View Aggregate Summary**
+
+**Purpose**: To consolidate all loan-level data that has been committed by the Servicer into a deal-level summary.
+
+**Steps**:
+
+1. **Navigate to Loans Section**:
+   - Log in as Paying Agent
+   - Select the relevant securitization deal
+   - Open the **Loans** tab
+
+2. **Click View Aggregate Summary**
+
+3. **Select Payment Date**:
+   - Choose the reporting period from dropdown
+   - System displays date-specific aggregation
+
+4. **Review System Auto-Aggregated Metrics**:
+   
+   **Portfolio Metrics**:
+   - Total principal and interest collected
+   - Total delinquencies / defaults
+   - Weighted Average Coupon (WAC)
+   - Pool factor and cumulative prepayments
+   - Loan count and balance reconciliation
+   
+   **Performance Indicators**:
+   - Current period activity
+   - Historical comparisons
+   - Trend analysis
+   - Geographic distribution
+   - Performance stratification
+
+5. **Validate Data Accuracy**:
+   - Check totals reconcile with Servicer submissions
+   - Verify period-over-period consistency
+   - Review for data anomalies
+   - Confirm loan count integrity
+
+**Outcome**: The PA gets a portfolio-wide snapshot of performance for the given period.
+
+**What Aggregate Summary Shows**:
+- Total loans in pool
+- Total outstanding balance
+- Payments collected (principal + interest)
+- Delinquency/Default counts
+- Prepayment activity
+- Pool performance metrics
+- Period-over-period comparisons
+
+### 💾 2. Commit Aggregate Summary to Digital Ledger
+
+**Navigation Path**: Paying Agent → **Loans** → **View Aggregate Summary** → **Commit to Digital Ledger**
+
+**Purpose**: To lock in the verified, consolidated summary metrics for the given payment date.
+
+**Steps**:
+
+1. **Review Calculated Aggregates**:
+   - Total principal outstanding
+   - Total interest collected
+   - Payment activity summary
+   - Performance metrics
+   - Loans serviced count
+
+2. **Validate Reconciliation**:
+   - **Servicer vs. PA totals** should reconcile to zero difference
+   - All loan-level data accounted for
+   - No missing or duplicate records
+   - Balance checks pass
+
+3. **Click Commit to Digital Ledger**
+
+4. **Confirm Action**:
+   - System displays commit summary
+   - Review data snapshot
+   - Confirm commit
+
+**System Behavior**:
+- **The Processed Flag** for that payment date flips to **YES**
+- **Ledger records** the committed dataset with:
+  - Deal ID
+  - Payment Date
+  - Summary metrics
+  - Timestamp
+  - Paying Agent's user ID
+- **Data becomes immutable** (no edits allowed post-commit)
+
+**Purpose**: This establishes a tamper-proof record of the official servicer summary for that payment cycle.
+
+**Validation Before Commit**:
+- [ ] All Servicer data committed
+- [ ] Totals reconcile (Servicer = PA aggregate)
+- [ ] Payment date is correct
+- [ ] No duplicate commits for same date
+- [ ] All required metrics present
+
+<Warning>
+Once committed, data cannot be edited. Ensure all validations pass before clicking Commit.
+</Warning>
+
+### 🧮 3. Perform Deal Recurring Calculations
+
+**Navigation Path**: Paying Agent → **Deal Recurring** → **Edit** → **Deal**
+
+**Purpose**: To apply the securitization's waterfall logic (defined in Phase 2) on the newly committed Servicer data — calculating tranche-level distributions and generating reports.
+
+**Steps**:
+
+1. **Open Deal Recurring Tab**:
+   - Navigate to **Deal Recurring** section
+   - Locate the target securitization deal
+   
+2. **Click Edit → Deal**:
+   - This loads the original securitization structure
+   - Opens **Deal Creation tabs** (same as Underwriter configuration in Phase 2)
+   - Access to: **Tranches, Fees, Expenses, Accounts, Tests, Variables, Payment Rules**
+
+3. **Verify Servicer Data Status**:
+   - Confirm that Servicer's loan data status = **YES** (processed) for the payment date
+   - Ensure aggregate summary is committed
+   - Check payment date is correct
+
+4. **Review Deal Structure** (Optional):
+   - **Tranches**: Verify tranche stack is correct
+   - **Payment Rules**: Review waterfall logic
+   - **Tests**: Confirm test parameters
+   - **Fees & Expenses**: Verify fee structures
+
+5. **Click Calculate**:
+
+**System Behavior**:
+
+**Executes Waterfall Computations** based on:
+- **Payment Rules** (e.g., Fee → Class A Interest → Class A Principal → Subordinated, etc.)
+- **Tests & Variables** (coverage ratios, OC/IC thresholds)
+- **Fee Schedules** (servicer fees, trustee fees, etc.)
+- **Expense Provisions** (legal, rating, miscellaneous)
+
+**Allocates Cash Flows Among**:
+- **Fees / Expenses** (paid first)
+- **Tranches** (by class priority):
+  - Senior tranches receive payments first
+  - Subordinate tranches receive after seniors
+  - Residual/equity receives last
+- **Residual / Equity positions**
+
+**Calculation Outputs**:
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| **Cash Distribution Summary** | Who gets paid what (by entity) |
+| **Interest & Principal Distribution** | By tranche (Class A, B, C, etc.) |
+| **Coverage Tests Results** | Pass/fail for OC/IC and other tests |
+| **Unpaid Amounts or Shortfalls** | Any shortages in payment |
+| **Next Payment Date** | Scheduled next cycle |
+| **Balances Carried Forward** | Ending balances for each tranche |
+
+</Table>
+
+**Detailed Results Include**:
+- Per-tranche interest payments
+- Per-tranche principal payments
+- Fee distributions (servicer, trustee, etc.)
+- Expense payments
+- Coverage test results
+- Pool performance metrics
+- Carry-forward balances
+
+### 📊 4. Generate and Distribute Reports
+
+**Navigation Path**: Reports section in Deal
+
+**Purpose**: To provide investors, Issuer, and Underwriter with updated payment information and deal performance.
+
+**Reports Generated**:
+
+<Table>
+
+| Report Type | Description |
+|------------|-------------|
+| **Investor Distribution Report** | Details per tranche interest and principal payments |
+| **Deal Summary Report** | Portfolio performance overview (pool factor, delinquencies, recoveries) |
+| **Coverage Test Report** | Pass/fail results for OC/IC and other covenant tests |
+| **Servicer Summary Report** | Servicer-submitted data validated and consolidated |
+
+</Table>
+
+**Additional Reports**:
+- **Payment Waterfall Report**: Detailed cash flow allocation
+- **Performance Dashboard**: Visual metrics and trends
+- **Investor Statement**: Individual investor account details
+- **Regulatory Report**: Compliance and audit information
+
+**System Behavior**:
+- **Reports stored** under **Deal Documents** or **Reports** tab
+- **Notifications sent** to all relevant stakeholders (Issuer, Underwriter, Investors)
+- **Investors can download or view** reports directly from their dashboard
+- **Version control** maintained for all reports
+
+**Report Features**:
+- **PDF format** for presentation and archival
+- **Excel format** for analysis and manipulation
+- **Access control** by role (Investor sees only their tranche)
+- **Historical versions** maintained for audit
+- **Automated distribution** via email/platform
+
+**Report Content**:
+- **Payment period** (date range)
+- **Investor allocations** (by tranche)
+- **Principal distributions**
+- **Interest payments**
+- **Current balances**
+- **Performance metrics**
+- **Coverage test results**
+- **Next payment date**
+
+### 🔒 5. Data & Integrity Controls
+
+<Table>
+
+| Control | Description |
+|--------|-------------|
+| **Servicer Status Gating** | Recurring calculations only run if Servicer data is committed (flag = YES) |
+| **Ledger Immutability** | Once PA commits summary, no edits can be made — enforces reporting integrity |
+| **Cross-Module Reconciliation** | System validates that Servicer totals = PA aggregates = reported payments |
+| **Waterfall Auditability** | Each step of the cash flow allocation logged with timestamp and user ID |
+| **Report Versioning** | Any re-run or updated calculation generates a new report version with audit trail |
+
+</Table>
+
+**Additional Controls**:
+- **Payment Date Validation**: Cannot process future or duplicate dates
+- **Calculation Integrity**: Rules must match original deal structure
+- **Balance Reconciliation**: Total inputs must equal total outputs
+- **Test Enforcement**: Coverage tests must pass per deal terms
+- **Identity Recording**: All actions attributed to Paying Agent user
+
+### 🧾 6. Reporting Completion and System Update
+
+**Once the Paying Agent has completed and committed all reports:**
+
+**System Updates**:
+- **Deal's reporting cycle** is marked as **Completed** for that period
+- **System schedules** the next cycle (next payment date)
+- **Ledger reflects** "Payment Date Processed = YES"
+- **Investors now see** updated portfolio performance and token yield metrics on their dashboards
+
+**Investor Dashboard Updates**:
+- Current token balance
+- Period yield (interest + principal)
+- Cumulative returns
+- Performance metrics
+- Historical payment record
+- Downloadable statements
+
+**Next Cycle Trigger**:
+- Next payment date automatically scheduled
+- Servicer notified for next tape upload
+- Paying Agent receives reminder for next cycle
+- System ready for Phase 6-7 loop repeat
+
+### 📊 Outputs of Phase 7
+
+<Table>
+
+| Output | Description |
+|--------|-------------|
+| Committed Aggregate Summary | Consolidated deal performance data on the ledger |
+| Recurring Waterfall Calculations | Cash flow distribution results per tranche |
+| Investor & Deal Reports | Generated and available for all stakeholders |
+| Processed Flag = YES | Marks the payment date as closed and reconciled |
+| Immutable Ledger Record | Complete audit trail of data, calculations, and results |
+
+</Table>
+
+### 🧠 Why Phase 7 Is Critical
+
+**Converts Loan-Level to Financial Outcomes**:
+- Transforms individual loan performance into investor payouts
+- Applies waterfall logic to determine distributions
+- Calculates tranche-level returns
+- Provides financial transparency
+
+**Ensures Accuracy and Transparency**:
+- Periodic payments accurately calculated
+- Full transparency of cash flow distribution
+- Investor confidence through verified reporting
+- Regulator-friendly auditability
+
+**Creates Permanent Record**:
+- Immutable record of each distribution cycle
+- Blockchain-level security for historical data
+- Complete audit trail for compliance
+- Non-repudiation for all stakeholders
+
+**Provides Regulatory and Investor Assurance**:
+- Auditable reporting for compliance
+- Investor confidence through transparency
+- Regulator-friendly documentation
+- Risk management through continuous monitoring
+
+**Enables End-to-End Traceability**:
+- Individual loans → aggregated pool → tranche → investor return
+- Complete data lineage
+- Full audit trail from loan to payout
+- Transparent securitization lifecycle
+
+### 🧩 Phase 7 Flow Summary
+
+```
+Servicer commits monthly data to Digital Ledger
+        ↓
+Paying Agent accesses Aggregate Summary
+        ↓
+Review → Validate → Commit to Ledger
+        ↓
+Deal Recurring → Edit → Calculate
+        ↓
+System executes waterfall distribution logic
+        ↓
+Generate Investor & Deal Reports
+        ↓
+Reports published → Payment Date flagged as Processed = YES
+        ↓
+Next cycle scheduled
+```
+
+✅ **End of Phase 7**
+
+<Info>
+**At this point, the securitization deal has fully transitioned into its recurring servicing and reporting loop.**
+
+The Servicer will continue uploading new loan tapes each month (Phase 6).
+
+The Paying Agent will keep consolidating and reporting (Phase 7).
+
+Investors receive ongoing reports and track returns through issued FTs.
+
+The Digital Ledger maintains a transparent, immutable audit trail of every transaction and payment cycle.
+</Info>
+
+## Key Operational Notes
+
+<Accordion>
+<AccordionItem title="Tranche Approvals">
+All tranche approvals are mandatory before publishing to investors. Each tranche must be individually approved by Issuer.
+</AccordionItem>
+
+<AccordionItem title="FT Transfers">
+FTs are transferred only after Paying Agent verifies all investor off-chain transactions and issues FTs.
+</AccordionItem>
+
+<AccordionItem title="Preview Loop">
+During Preview, loan-level rejections loop through Reconsider and Feedback until resolved by Issuer.
+</AccordionItem>
+
+<AccordionItem title="Stage Control">
+Commit → Invest stage transition is controlled by Underwriter in General Settings when sufficient commitments are reached.
+</AccordionItem>
+
+<AccordionItem title="Monthly Processing">
+Servicer must process loan tapes monthly for each payment date, following Map → Preview → Summarize → Commit flow.
+</AccordionItem>
+</Accordion>
+
+## Quick Checklists
+
+### Issuer Checklist
+- [ ] Pool created (Transaction Type: Securitization)
+- [ ] Loans uploaded and mapped to pool
+- [ ] Loans submitted for VA verification
+- [ ] Optional: Submit for Preview
+- [ ] Submit for Underwriter
+- [ ] Approve all tranches (FT authority via C-Chain)
+- [ ] Publish to Investors
+
+### Underwriter Checklist
+- [ ] Review and Accept Pool (creates Deal)
+- [ ] Configure Deal (General, Tranches, Fees, Expenses, Accounts, Tests, Variables, Payment Rules)
+- [ ] Upload deal Excel template
+- [ ] Publish Deal to Issuer for FT approval
+- [ ] Toggle Commit → Invest when ready
+
+### Investor Checklist
+- [ ] Commit desired amount during Commit stage
+- [ ] Wire funds using provided instructions during Invest stage
+- [ ] Mark investment as Completed
+- [ ] Receive FTs from Paying Agent
+- [ ] Monitor investment through monthly reports
+
+### Paying Agent Checklist
+- [ ] Verify all off-chain investor receipts
+- [ ] Update transaction statuses
+- [ ] Issue FTs to verified investors
+- [ ] Generate Aggregate Summary
+- [ ] Commit aggregate summary to ledger
+- [ ] Run Deal Recurring calculations
+- [ ] Generate and distribute investor reports
+
+### Servicer Checklist
+- [ ] Process loan tape for each payment date
+- [ ] Map fields to Intain standard
+- [ ] Preview and validate mappings
+- [ ] Summarize loan tape data
+- [ ] Commit to Digital Ledger monthly
+
+### Verification Agent Checklist
+- [ ] Accept/Reject loan batch
+- [ ] Review loans (LMS vs Contract)
+- [ ] Edit mismatches as needed
+- [ ] Certify batch with signature
+- [ ] Verify batch (enables NFT verification)
+
+## Next Steps
+
+<Card title="UI Navigation" icon="map" href="/user-guide/securitization/ui-navigation">
+  Learn role-based navigation for securitization
+</Card>
+
+<Card title="State Transitions" icon="exchange-alt" href="/user-guide/securitization/state-transitions">
+  Understand state management
+</Card>
+
+<Card title="Blockchain Actions" icon="link" href="/user-guide/securitization/blockchain-actions">
+  Learn on-chain vs off-chain operations
+</Card>
+
+<Card title="Operational Notes" icon="sticky-note" href="/user-guide/securitization/operational-notes">
+  View operational rules and file templates
+</Card>

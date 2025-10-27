@@ -1,0 +1,229 @@
+---
+title: "UI Navigation by Role"
+description: "Complete UI navigation guide for each role in the securitization workflow"
+---
+
+## UI Navigation Map by Role
+
+This guide provides exact navigation paths for each user role throughout the securitization process.
+
+## Issuer UI Navigation
+
+### Pools Section
+
+**Navigation Path**: Issuer → **Pools**
+
+**Pool Management Flow**:
+1. **Set up Pool** → Create new pool
+2. **View Details** → Access pool details with tabs:
+   - **LoanTape**: View all mapped loans
+   - **Strat**: Stratification analysis
+   - **Summary**: Pool statistics and metrics
+   - **Documents**: Pool-related documents
+3. **Submit for Preview** → Optional feedback stage
+4. **Submit for Underwriter** → Final submission
+
+**Feedback/Reconsider Workflow**:
+- Access **Feedback** section from pool details
+- Review UW rejections with comments
+- **Accept Rejection**: Remove loan from pool
+- **Reject the Rejection**: Keep loan with feedback
+- Exchange feedback back-and-forth until resolution
+
+### Loans Section
+
+**Navigation Path**: Issuer → **Loans**
+
+**Loan Upload Flow**:
+1. **Add Loans** → Access loan upload interface
+2. **Upload Excel** → Select and upload loan tape file
+3. **Map Fields** → Map columns to Intain standard fields
+4. **Filter** → Apply filters to select desired loans
+5. **Map to Pool** → Associate loans with pool
+6. **Submit for Verification** → Send to VA for verification
+
+### Deals Section
+
+**Navigation Path**: Issuer → **Deals**
+
+**Securitization Deal Actions**:
+1. Open **Securitization Deal**
+2. **Approve Issuance** → Approve each tranche:
+   - Enter C-Chain private key OR
+   - Upload wallet JSON file
+3. **Publish** → Publish approved deal to investors
+
+### User Profile
+
+**Navigation Path**: Issuer → **User Profile** → **Payment Settings**
+
+**Payment Configuration**:
+- **Off-chain**: Configure bank account details
+- **On-chain**: Configure C-Chain address for FT/NFT transfers
+- Maintain C-Chain address required for issuance approval
+
+## Underwriter UI Navigation
+
+### Preview Pools
+
+**Navigation Path**: Underwriter → **Preview Pools**
+
+**Preview Actions**:
+1. **View** → Review pool details and loan data
+2. **Reject specific loans** → Reject individual loans with comments
+3. **Submit to Investors** → Submit approved preview pool
+
+### Pools Section
+
+**Navigation Path**: Underwriter → **Pools**
+
+**Pool Review Actions**:
+1. View Issuer-submitted securitization pools
+2. **Accept** → Convert pool to Deal (creates Deal)
+3. **Reject** → Return pool to Issuer with reason
+
+### Deals Section
+
+**Navigation Path**: Underwriter → **Deals** → **View Deal Details** (Securitization)
+
+**Deal Configuration Access Points**:
+- **Tranches**: Define tranche stack
+- **Tools**: Comprehensive configuration tabs
+- **Strat/Summary**: Deal statistics
+- **Documents**: Deal documents
+- **More**: Additional settings
+
+**Tools Section Configuration**:
+1. **General**: Deal metadata
+2. **Tranches**: Define tranche stack
+3. **Fees**: Fee structures
+4. **Expenses**: Deal expenses
+5. **Accounts**: Account setup
+6. **Tests**: Performance tests
+7. **Variables**: Deal variables
+8. **Payment Rules**: Payment waterfall
+9. **Files**: Upload deal Excel
+
+**Publish to Issuer**:
+- **Tools → Files** → Upload completed Excel
+- Click **Publish Deal to Issuer** for FT approval
+
+**Additional Actions via More**:
+- **Account & Transaction Details**: Configure off-chain accounts
+- **General Settings**: Toggle Commit/Invest stage
+
+## Investor UI Navigation
+
+### Opportunities Section
+
+**Navigation Path**: Investor → **Opportunities**
+
+**Securitization Deal Actions**:
+1. View **Securitization Deal** details
+2. **Commit** → Commit desired amount during Commit stage
+3. **Invest** → In Invest stage:
+   - View wire instructions
+   - Wire funds off-line
+   - Mark **Completed** after wire transfer
+
+### Portfolio & Deal Analytics
+
+**Navigation Path**: Investor → **Portfolio** & **Deal Analytics**
+
+**Available Views**:
+- Analytics and reporting views
+- Access via IA module connections
+- Standard reports (periodic)
+- On-demand reports available
+
+## Paying Agent UI Navigation
+
+### Securitization Deal Details
+
+**Navigation Path**: Paying Agent → **Deals** → Securitization Deal
+
+**Primary Actions**:
+1. **Issue FTs** → Issue FTs to investors after verification
+2. Access **More** dropdown:
+   - **Pool Details**: View pool information
+   - **Account Details**: View account configurations
+   - **General Settings**: Manage deal settings
+3. **Download Documents**: Access deal documentation
+
+### Loans Section
+
+**Navigation Path**: Paying Agent → **Loans**
+
+**Aggregate Summary**:
+1. Click **View Aggregate Summary**
+2. Select payment date
+3. Review consolidated summary
+4. **Commit to Digital Ledger**
+
+### Deal Recurring / Deal Creation
+
+**Navigation Path**: Paying Agent → **Deal Recurring** → **Edit** → **Deal**
+
+**Run Periodic Calculations**:
+1. Navigate to **Deal Recurring** section
+2. Click **Edit**
+3. Select Deal
+4. Opens Deal Creation tabs (similar to UW)
+5. Used post-issuance for reporting flows
+6. Run calculations when loan status is YES
+
+## Verification Agent UI Navigation
+
+### Batch Section
+
+**Navigation Path**: Verification Agent → **Batch**
+
+**Verification Process**:
+1. **Accept/Reject** batch
+2. **View Loans** → Access standard VA module
+3. **Review** → Compare LMS vs Contract data
+4. **Edit mismatches** if found
+5. **Certify** → Sign with signature
+6. **Verify** → Enable NFT verification state
+
+**Batch Actions**:
+- **Accept** → Accept batch for processing
+- **Reject** → Reject batch with reason
+- Review each loan in detail
+- Edit mismatches and discrepancies
+- Certify with electronic signature
+- Verify to enable NFT state
+
+## Navigation Best Practices
+
+<Accordion>
+<AccordionItem title="Role-Specific Navigation">
+Each role has distinct navigation paths. Follow the role-specific guides for your responsibilities.
+</AccordionItem>
+
+<AccordionItem title="Stage Awareness">
+Always check current stage/deal status to determine available actions.
+</AccordionItem>
+
+<AccordionItem title="Status Checking">
+Review deal/pool status before attempting actions to ensure prerequisites met.
+</AccordionItem>
+
+<AccordionItem title="Documentation Access">
+Download relevant documents at each stage for your records and compliance.
+</AccordionItem>
+</Accordion>
+
+## Next Steps
+
+<Card title="State Transitions" icon="exchange-alt" href="/user-guide/securitization/state-transitions">
+  Learn about state management in securitization
+</Card>
+
+<Card title="On-Chain & Off-Chain Actions" icon="link" href="/user-guide/securitization/blockchain-actions">
+  Understand blockchain vs off-chain operations
+</Card>
+
+<Card title="Workflow Overview" icon="diagram-project" href="/user-guide/securitization/workflow-overview">
+  Return to complete securitization workflow
+</Card>
