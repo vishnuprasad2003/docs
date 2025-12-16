@@ -1,0 +1,274 @@
+---
+title: "IPFS Storage"
+description: "Complete guide to IPFS document storage and retrieval system"
+---
+
+# IPFS Storage
+
+The Intain Markets platform uses IPFS (InterPlanetary File System) for decentralized, secure document storage. This guide covers IPFS integration and document management.
+
+## Overview
+
+IPFS provides:
+
+- **Decentralized Storage** - Distributed file storage network
+- **Content Addressing** - Unique hash-based addressing
+- **Immutable Storage** - Tamper-proof document storage
+- **Global Access** - Worldwide document accessibility
+- **Cost Efficiency** - Reduced storage costs
+
+## How IPFS Works
+
+### Content Addressing
+
+**Hash-Based Addressing:**
+- Each document gets unique hash (CID)
+- Hash represents document content
+- Changes to document create new hash
+- Immutable document versioning
+
+### Distributed Network
+
+**Peer-to-Peer Storage:**
+- Documents stored across multiple nodes
+- Redundant storage for reliability
+- No single point of failure
+- Global accessibility
+
+## Document Upload Process
+
+### Step 1: Upload Document
+
+**Upload Methods:**
+- **Direct Upload** - Upload from local device
+- **Drag and Drop** - Drag files to upload area
+- **Bulk Upload** - Upload multiple files
+- **API Upload** - Programmatic upload
+
+### Step 2: IPFS Processing
+
+**Automatic Processing:**
+1. Document uploaded to platform
+2. System generates IPFS hash
+3. Document stored in IPFS network
+4. Hash returned to user
+5. Document linked to record
+
+### Step 3: Hash Storage
+
+**Hash Management:**
+- IPFS hash stored in database
+- Document metadata recorded
+- Access permissions set
+- Audit trail created
+
+## Document Types
+
+### Credit Facility Documents
+
+**Term Sheet Documents:**
+- Signed term sheet PDFs
+- Supporting documentation
+- Financial statements
+- KYC documents
+
+**Master Commitment Documents:**
+- Signed master commitment PDFs
+- Lender approval documents
+- Legal documentation
+- Compliance certificates
+
+**Funding Request Documents:**
+- Collateral addendum
+- Financial statements
+- KYC documents
+- Supporting materials
+
+**Funding Notice Documents:**
+- Signed funding notice PDFs
+- Token distribution records
+- Transaction confirmations
+- Audit documentation
+
+### Servicer Documents
+
+**Loan Tape Files:**
+- Monthly loan tape uploads
+- Performance reports
+- Delinquency reports
+- Servicing documentation
+
+## Document Retrieval
+
+### Accessing Documents
+
+**Retrieval Methods:**
+- **Platform Interface** - Access through platform
+- **Direct Hash Access** - Use IPFS hash directly
+- **API Access** - Programmatic retrieval
+- **Bulk Download** - Download multiple documents
+
+### Hash-Based Access
+
+**Using IPFS Hash:**
+- Copy IPFS hash (CID)
+- Use IPFS gateway to access
+- Direct content addressing
+- Immutable document access
+
+## Security Features
+
+### Access Control
+
+**Permission Management:**
+- Role-based access control
+- Document-level permissions
+- Time-based access
+- Audit logging
+
+### Encryption
+
+**Data Protection:**
+- End-to-end encryption
+- Secure transmission
+- Encrypted storage
+- Key management
+
+## Best Practices
+
+### Document Preparation
+
+**Before Upload:**
+- Ensure document is complete
+- Verify document format (PDF preferred)
+- Check file size limits
+- Remove sensitive metadata
+
+**File Management:**
+- Use descriptive filenames
+- Organize documents logically
+- Maintain version control
+- Regular backup procedures
+
+### Upload Process
+
+**Upload Guidelines:**
+- Use stable internet connection
+- Verify upload completion
+- Save IPFS hash for reference
+- Test document retrieval
+
+## Troubleshooting
+
+### Common Issues
+
+**Upload Failed:**
+- Check file format and size
+- Verify internet connection
+- Try different browser
+- Contact support if persistent
+
+**Cannot Access Document:**
+- Verify IPFS hash is correct
+- Check access permissions
+- Ensure document exists
+- Contact technical support
+
+**Slow Retrieval:**
+- IPFS network may be slow
+- Try different IPFS gateway
+- Check network connectivity
+- Wait and retry
+
+### IPFS Gateway Issues
+
+**Gateway Problems:**
+- Try different IPFS gateway
+- Check gateway status
+- Use local IPFS node
+- Contact IPFS support
+
+## Integration Details
+
+### API Integration
+
+**IPFS API:**
+- RESTful API for uploads
+- Hash-based retrieval
+- Metadata management
+- Status monitoring
+
+### Platform Integration
+
+**Seamless Integration:**
+- Automatic IPFS processing
+- Hash storage in database
+- Document linking
+- Status synchronization
+
+## Performance Optimization
+
+### Upload Optimization
+
+**Best Practices:**
+- Compress large files
+- Use appropriate formats
+- Batch uploads when possible
+- Monitor upload progress
+
+### Retrieval Optimization
+
+**Access Optimization:**
+- Cache frequently accessed documents
+- Use CDN for popular content
+- Optimize document formats
+- Monitor retrieval performance
+
+## Compliance and Audit
+
+### Audit Trail
+
+**Document Tracking:**
+- Complete upload history
+- Access log records
+- Modification tracking
+- Compliance reporting
+
+### Data Retention
+
+**Retention Policies:**
+- Configurable retention periods
+- Automatic archival
+- Compliance requirements
+- Legal hold capabilities
+
+## Cost Management
+
+### Storage Costs
+
+**Cost Factors:**
+- Document size
+- Storage duration
+- Access frequency
+- Network usage
+
+### Optimization Strategies
+
+**Cost Reduction:**
+- Compress documents
+- Archive old documents
+- Optimize access patterns
+- Monitor usage metrics
+
+## Next Steps
+
+After document upload:
+
+1. **Verify Upload** - Confirm document stored correctly
+2. **Save Hash** - Record IPFS hash for reference
+3. **Test Access** - Verify document retrieval
+4. **Monitor Status** - Track document status
+
+<Card title="File Upload Management" icon="upload" href="/user-guide/documents/file-uploads">
+  Learn about file upload management and best practices.
+</Card>

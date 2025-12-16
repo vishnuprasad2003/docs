@@ -1,103 +1,102 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Intain Markets",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#1E40AF",
+    "light": "#3B82F6",
+    "dark": "#1E3A8A"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "User Guide",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "user-guide/overview",
+              "user-guide/registration",
+              "user-guide/authentication"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Credit Facility Workflow",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "user-guide/credit-facility/overview",
+              "user-guide/credit-facility/term-sheet",
+              "user-guide/credit-facility/master-commitment",
+              "user-guide/credit-facility/funding-request",
+              "user-guide/credit-facility/funding-notice",
+              "user-guide/credit-facility/loan-mapping"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Document Management",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "user-guide/documents/docusign-integration",
+              "user-guide/documents/ipfs-storage",
+              "user-guide/documents/file-uploads"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Servicer Operations",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
+              "user-guide/servicer/loan-tape-upload",
+              "user-guide/servicer/monthly-reporting",
+              "user-guide/servicer/loan-management"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Role-Based Access",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "user-guide/roles/issuer",
+              "user-guide/roles/facility-agent",
+              "user-guide/roles/lender",
+              "user-guide/roles/servicer"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
+  },
+  "global": {
+    "anchors": [
+      {
+        "anchor": "Intain Markets",
+        "href": "https://intain.com",
+        "icon": "building"
+      },
+      {
+        "anchor": "Platform",
+        "href": "https://platform.intain.com",
+        "icon": "rocket"
+      }
+    ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/intainLogo.jpeg",
+    "dark": "/logo/intainLogo.jpeg",
+    "width": 180,
+    "height": 40
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@intainft.com"
+      },
+      {
+        "label": "Test Network",
+        "href": "https://imuat.intainmarkets.us/"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Platform Access",
+      "href": "https://intainmarkets.us/"
     }
   },
   "contextual": {
@@ -112,11 +111,10 @@
      "vscode"
    ]
   },
+  "hidePoweredBy": true,
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "linkedin": "https://linkedin.com/company/intain"
     }
   }
 }

@@ -1,0 +1,276 @@
+---
+title: "Term Sheet Management"
+description: "Complete guide to creating, managing, and submitting term sheets"
+---
+
+## Term Sheet Overview
+
+The term sheet is the foundation document of the credit facility process. It defines the initial terms and conditions between the borrower (issuer) and the facility agent, serving as the basis for the master commitment agreement.
+
+## Term Sheet Creation Process
+
+### **Step 1: Access Term Sheet Creation**
+
+1. **Login** to your account as an Issuer
+2. **Navigate** to the Credit Facility section
+3. **Click** "Create New Term Sheet"
+4. **Fill** in the required information
+
+<img 
+  src="/images/termSheetCreation.png" 
+  alt="Term Sheet Creation Interface"
+  height="400"
+  className="rounded-lg"
+/>
+
+### **Step 2: Complete Term Sheet Form**
+
+#### **Basic Information**
+```json
+{
+  "termSheetName": "ABC Credit Facility Term Sheet",
+  "issuerOrgName": "ABC Corporation",
+  "requestedCommitmentAmount": 50000000,
+  "advanceRate": 85.0,
+  "pricingIndex": "SOFR",
+  "margin": 2.5,
+  "maturityDate": "12/31/2025",
+  "fixedRate": 5.5,
+  "covenantTemplate": "Standard Commercial",
+  "drawFrequency": "Monthly"
+}
+```
+
+#### **Required Fields**
+- **Term Sheet Name**: Descriptive name for the facility
+- **Issuer Organization Name**: Legal name of borrowing entity
+- **Requested Commitment Amount**: Total facility amount requested
+- **Advance Rate**: Percentage of collateral value that can be borrowed
+- **Pricing Index**: Base rate (SOFR, LIBOR, etc.)
+- **Margin**: Spread over the pricing index
+- **Maturity Date**: Facility expiration date
+- **Draw Frequency**: How often funds can be drawn (Monthly, Quarterly, etc.)
+
+#### **Optional Fields**
+- **Fixed Rate**: Alternative to floating rate pricing
+- **Covenant Template**: Standard covenant package
+- **Additional Terms**: Custom terms and conditions
+- **Supporting Documents**: Upload relevant documentation
+
+### **Step 3: Auto-Save Functionality**
+
+The platform automatically saves your progress:
+- **Real-Time Saving**: Changes saved as you type
+- **Draft Status**: Term sheet remains in "Draft" status
+- **No Data Loss**: Prevents accidental data loss
+- **Resume Anytime**: Continue editing from where you left off
+
+### **Step 4: Document Upload**
+
+Upload supporting documents:
+- **Financial Statements**: Recent financial reports
+- **Business Plan**: Company overview and strategy
+- **Collateral Documentation**: Asset descriptions and valuations
+- **Legal Documents**: Corporate documents and authorizations
+
+## Term Sheet Status Management
+
+### **Status Flow**
+```
+Draft → BorrowerSigned → FAReview → Accepted/Rejected/CHANGES_REQUESTED
+```
+
+### **Status Descriptions**
+
+#### **Draft**
+- **Editable**: Full editing capabilities
+- **Auto-Save**: Automatic saving enabled
+- **Private**: Only visible to issuer
+- **Actions**: Can edit, upload documents, submit for signing
+
+#### **BorrowerSigned**
+- **Read-Only**: Cannot be edited
+- **DocuSign Complete**: Electronic signature completed
+- **Preview Available**: Can preview signed document
+- **Actions**: Can submit for facility agent review
+
+#### **FAReview**
+- **Under Review**: Facility agent is reviewing
+- **Read-Only**: Cannot be edited by issuer
+- **Pending Decision**: Waiting for facility agent action
+- **Actions**: Facility agent can approve, reject, or request changes
+
+#### **Accepted**
+- **Approved**: Facility agent has approved
+- **Auto-Trigger**: Master commitment auto-created
+- **Final Status**: No further changes allowed
+- **Next Step**: Master commitment configuration begins
+
+#### **Rejected**
+- **Declined**: Facility agent has rejected
+- **Final Status**: No further actions available
+- **Reason Provided**: Rejection reason documented
+- **Next Step**: Can create new term sheet
+
+#### **CHANGES_REQUESTED**
+- **Revision Required**: Changes requested by facility agent
+- **Editable**: Can be edited again
+- **Comments Provided**: Specific changes requested
+- **Actions**: Make requested changes and resubmit
+
+## DocuSign Integration
+
+### **Electronic Signature Process**
+
+1. **Initiate Signing**
+   - Click "Sign Term Sheet" button
+   - DocuSign envelope is created
+   - Signing URL is generated
+
+2. **Complete Signing**
+   - Access DocuSign signing interface
+   - Review document terms
+   - Apply electronic signature
+   - Complete signing process
+
+3. **Status Update**
+   - Status automatically changes to "BorrowerSigned"
+   - Signed PDF is stored in IPFS
+   - Notification sent to facility agent
+
+### **DocuSign Features**
+- **Legally Binding**: Electronic signatures are legally valid
+- **Audit Trail**: Complete signing history
+- **Secure Storage**: Signed documents stored securely
+- **Multi-Party**: Support for multiple signers if needed
+
+## Submission Process
+
+### **Pre-Submission Checklist**
+
+Before submitting for facility agent review:
+- [ ] All required fields completed
+- [ ] DocuSign signature completed
+- [ ] Supporting documents uploaded
+- [ ] Terms reviewed and approved
+- [ ] Contact information verified
+
+### **Submission Steps**
+
+1. **Review Term Sheet**
+   - Verify all information is correct
+   - Check supporting documents
+   - Confirm terms and conditions
+
+2. **Submit for Review**
+   - Click "Submit for Facility Agent Review"
+   - Status changes to "FAReview"
+   - Notification sent to facility agent
+
+3. **Await Decision**
+   - Monitor status updates
+   - Respond to any requests for changes
+   - Prepare for next steps if approved
+
+## Facility Agent Review Process
+
+### **Review Criteria**
+- **Creditworthiness**: Borrower's financial strength
+- **Collateral Quality**: Value and liquidity of collateral
+- **Terms Appropriateness**: Reasonableness of requested terms
+- **Documentation Completeness**: Adequacy of supporting documents
+- **Risk Assessment**: Overall risk profile evaluation
+
+### **Possible Outcomes**
+
+#### **Approval**
+- Term sheet is accepted
+- Master commitment is auto-created
+- Facility agent begins configuration process
+- Issuer receives approval notification
+
+#### **Rejection**
+- Term sheet is declined
+- Reason for rejection provided
+- No further actions available
+- Can create new term sheet
+
+#### **Changes Requested**
+- Specific changes identified
+- Comments provided for guidance
+- Status changes to "CHANGES_REQUESTED"
+- Can edit and resubmit
+
+## Best Practices
+
+### **Term Sheet Preparation**
+- **Be Thorough**: Complete all required fields accurately
+- **Provide Documentation**: Upload all relevant supporting documents
+- **Review Terms**: Ensure terms are realistic and achievable
+- **Seek Advice**: Consult with financial advisors if needed
+
+### **Documentation**
+- **Financial Statements**: Provide recent, audited financial statements
+- **Business Plan**: Include comprehensive business overview
+- **Collateral Details**: Provide detailed collateral descriptions
+- **Legal Documents**: Include all required corporate documents
+
+### **Communication**
+- **Respond Promptly**: Address facility agent requests quickly
+- **Be Professional**: Maintain professional communication
+- **Provide Clarifications**: Offer additional information when requested
+- **Follow Up**: Monitor progress and follow up as needed
+
+## Troubleshooting
+
+### **Common Issues**
+
+#### **Cannot Edit Term Sheet**
+- **Check Status**: Ensure status is "Draft" or "CHANGES_REQUESTED"
+- **Refresh Page**: Try refreshing the browser
+- **Clear Cache**: Clear browser cache and cookies
+- **Contact Support**: If issues persist, contact support
+
+#### **DocuSign Issues**
+- **Check Email**: Verify DocuSign email was received
+- **Try Different Browser**: Use a different web browser
+- **Check Internet Connection**: Ensure stable internet connection
+- **Contact DocuSign Support**: For DocuSign-specific issues
+
+#### **Document Upload Problems**
+- **Check File Format**: Ensure files are in supported formats
+- **Check File Size**: Verify files are within size limits
+- **Try Different File**: Test with a different file
+- **Contact Support**: For persistent upload issues
+
+## Support and Resources
+
+### **Getting Help**
+
+If you encounter issues or need assistance:
+
+1. **Review Documentation** - Check this guide for detailed steps
+2. **Contact Support** - Reach out to support@intainft.com
+3. **Facility Agent** - Contact your assigned facility agent
+4. **Community** - Access the user community for tips and best practices
+
+### **Additional Resources**
+
+- **Training Materials** - Access comprehensive training resources
+- **Video Tutorials** - Watch step-by-step video guides
+- **FAQ Section** - Find answers to common questions
+- **Best Practices** - Learn from industry best practices
+
+## Next Steps
+
+<Card title="Master Commitment Setup" icon="handshake" href="/user-guide/credit-facility/master-commitment">
+  Learn about master commitment configuration after term sheet approval
+</Card>
+
+<Card title="DocuSign Integration" icon="signature" href="/user-guide/documents/docusign-integration">
+  Understand DocuSign electronic signature workflows
+</Card>
+
+<Card title="Document Management" icon="file" href="/user-guide/documents/file-uploads">
+  Learn about document upload and management
+</Card>
