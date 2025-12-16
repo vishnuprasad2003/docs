@@ -3,29 +3,63 @@
   "theme": "mint",
   "name": "Intain Markets",
   "colors": {
-    "primary": "#1E40AF",
+    "primary": "#0F4C81",
     "light": "#3B82F6",
-    "dark": "#1E3A8A"
+    "dark": "#0A2E4D"
   },
   "favicon": "/favicon.png",
+  "logo": {
+    "light": "/logo/intainLogo.jpeg",
+    "dark": "/logo/intainLogo.jpeg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:support@intainft.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Platform Access",
+      "href": "https://intainmarkets.us/"
+    }
+  },
+  "anchors": [
+    {
+      "name": "Platform Access",
+      "url": "https://intainmarkets.us/",
+      "icon": "rocket"
+    },
+    {
+      "name": "Support",
+      "url": "mailto:support@intainft.com",
+      "icon": "headset"
+    }
+  ],
+  "footer": {
+    "socials": {
+      "website": "https://www.intainft.com/",
+      "linkedin": "https://www.linkedin.com/company/intain",
+      "x": "https://x.com/intainft"
+    }
+  },
   "navigation": {
     "tabs": [
       {
-        "tab": "User Guide",
+        "tab": "Credit Facility",
         "groups": [
           {
             "group": "Getting Started",
             "pages": [
               "index",
-              "user-guide/overview",
-              "user-guide/registration",
-              "user-guide/authentication"
+              "user-guide/credit-facility/overview",
+              "user-guide/credit-facility/roles-permissions"
             ]
           },
           {
-            "group": "Credit Facility Workflow",
+            "group": "Workflow Stages",
             "pages": [
-              "user-guide/credit-facility/overview",
               "user-guide/credit-facility/term-sheet",
               "user-guide/credit-facility/master-commitment",
               "user-guide/credit-facility/funding-request",
@@ -36,7 +70,7 @@
           {
             "group": "Document Management",
             "pages": [
-              "user-guide/documents/docusign-integration",
+              "user-guide/documents/zoho-sign-integration",
               "user-guide/documents/ipfs-storage",
               "user-guide/documents/file-uploads"
             ]
@@ -50,7 +84,7 @@
             ]
           },
           {
-            "group": "Role-Based Access",
+            "group": "Role-Based Guides",
             "pages": [
               "user-guide/roles/issuer",
               "user-guide/roles/facility-agent",
@@ -62,59 +96,8 @@
       }
     ]
   },
-  "global": {
-    "anchors": [
-      {
-        "anchor": "Intain Markets",
-        "href": "https://intain.com",
-        "icon": "building"
-      },
-      {
-        "anchor": "Platform",
-        "href": "https://platform.intain.com",
-        "icon": "rocket"
-      }
-    ]
-  },
-  "logo": {
-    "light": "/logo/intainLogo.jpeg",
-    "dark": "/logo/intainLogo.jpeg",
-    "width": 180,
-    "height": 40
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:support@intainft.com"
-      },
-      {
-        "label": "Test Network",
-        "href": "https://imuat.intainmarkets.us/"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Platform Access",
-      "href": "https://intainmarkets.us/"
-    }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
-  },
-  "hidePoweredBy": true,
-  "footer": {
-    "socials": {
-      "linkedin": "https://linkedin.com/company/intain"
-    }
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": true
   }
 }

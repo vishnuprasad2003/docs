@@ -1,290 +1,306 @@
 ---
-title: "Funding Notice & Token Management"
-description: "Complete guide to funding notices, FT token creation, and lender distribution process"
+title: "Funding Notice & Tokens"
+description: "Understanding how funding notices work and how you receive funds through token distribution"
+sidebarTitle: "Funding Notice"
 ---
 
-# Funding Notice & Token Management
+## What is a Funding Notice?
 
-Funding notices are automatically generated when funding requests are approved. This guide covers the complete process from generation to fund distribution.
+A **Funding Notice** is the document that manages the actual fund transfer. It's automatically created when your funding request is approved. The funding notice handles token creation, electronic signatures, and tracks when lenders transfer funds to you.
 
-## Overview
+<Warning>
+**Important:** You cannot create a Funding Notice manually. It's automatically generated when your Funding Request is approved.
+</Warning>
 
-The funding notice process includes:
+---
 
-1. **Auto-Generation** - Created automatically when funding request is approved
-2. **DocuSign Process** - Borrower signs funding notice electronically
-3. **FT Token Creation** - Tokens created for borrower after DocuSign
-4. **Token Transfer Approval** - Borrower approves token transfers to lenders
-5. **Lender Distribution** - Individual lenders confirm fund transfers
+## Funding Notice Journey
 
-## Auto-Generation Process
-
-### Trigger Conditions
-
-Funding notices are automatically created when:
-
-- Funding request status changes to **APPROVED**
-- Master commitment status is **ACTIVE**
-- All required validations pass
-
-### Generation Details
-
-**Automatic Process:**
-1. System generates unique funding notice ID
-2. Copies data from approved funding request
-3. Calculates token distribution for each lender
-4. Sets initial status to **PENDING_ESIGN**
-5. Prepares DocuSign envelope
-
-**Pre-populated Data:**
-- Request amount from funding request
-- Master commitment details
-- Lender group information
-- Token distribution calculations
-
-## DocuSign Process
-
-### Signing Workflow
-
-1. **Envelope Creation** - DocuSign envelope automatically created
-2. **Borrower Notification** - Email sent to borrower for signing
-3. **Electronic Signature** - Borrower completes DocuSign process
-4. **Status Update** - Funding notice status: **ESIGN_COMPLETED**
-5. **FT Token Creation** - Tokens automatically created
-
-### Signing Requirements
-
-**Borrower Must:**
-- Complete DocuSign authentication
-- Review funding notice details
-- Provide electronic signature
-- Confirm understanding of terms
-
-## FT Token Management
-
-### Token Creation
-
-After DocuSign completion:
-
-1. **Contract Deployment** - FT contract deployed to blockchain
-2. **Token Minting** - Tokens minted for borrower
-3. **Distribution Setup** - Lender token allocation prepared
-4. **Status Tracking** - Individual lender status initialized
-
-### Token Distribution
-
-**Per-Lender Tracking:**
-Each lender has individual status tracking:
-
-- **tokensAllocated** - Amount of tokens allocated
-- **mintingStatus** - Token transfer status (pending/completed)
-- **lenderApprovalStatus** - Lender approval (PENDING/APPROVED/REJECTED)
-- **amountTransferred** - Fund transfer confirmation (pending/transferred)
-
-## Borrower Actions
-
-### Approve Token Transfer
-
-**Purpose:** Make funding notice visible to lenders
-
-**Process:**
-1. Navigate to funding notice details
-2. Review token distribution
-3. Click **"Approve Token Transfer"**
-4. Confirm transaction
-
-**Result:**
-- Status changes to **ISSUED**
-- Funding notice becomes visible to lenders
-- Lenders can confirm fund transfers
-
-### Token Transfer Approval
-
-**Requirements:**
-- Funding notice status: **ESIGN_COMPLETED**
-- FT tokens created successfully
-- Borrower wallet connected
-
-**Steps:**
-1. Connect wallet to platform
-2. Review token distribution details
-3. Approve token transfer privilege
-4. Confirm blockchain transaction
-
-## Lender Actions
-
-### Fund Transfer Confirmation
-
-**Process:**
-1. Lender receives notification of funding notice
-2. Reviews funding notice details
-3. Confirms fund transfer completion
-4. Updates individual status
-
-**Status Updates:**
-- **amountTransferred**: pending → transferred
-- **lenderApprovalStatus**: PENDING → APPROVED
-
-### Individual Lender Tracking
-
-Each lender's participation is tracked separately:
-
-```json
-{
-  "lenderOrgId": "LENDER-123",
-  "lenderName": "ABC Bank",
-  "tokensAllocated": 5000000,
-  "mintingStatus": "completed",
-  "lenderApprovalStatus": "APPROVED",
-  "amountTransferred": "transferred"
-}
+```mermaid
+flowchart LR
+    A[Request Approved] -->|Auto-Created| B[Preparing Tokens]
+    B -->|Tokens Ready| C[Ready for Your Approval]
+    C -->|You Approve| D[Lenders Can See]
+    D -->|Lenders Transfer| E[Funds Received ✅]
 ```
 
-## Status Workflow
+---
 
-### Complete Status Flow
+## How the Funding Process Works
 
+### Stage 1: Funding Notice Created
+
+When your funding request is approved, the system automatically:
+
+<Steps>
+  <Step title="Creates Funding Notice">
+    A new Funding Notice is generated linked to your approved request.
+  </Step>
+  <Step title="Calculates Token Distribution">
+    The system calculates how much each lender will fund based on their share.
+  </Step>
+  <Step title="Prepares for Token Creation">
+    Status is set to **"Preparing Tokens"** while the system sets up.
+  </Step>
+</Steps>
+
+---
+
+### Stage 2: Token Distribution Setup
+
+The Facility Agent reviews and finalizes the token distribution:
+
+<AccordionGroup>
+  <Accordion title="What is Token Distribution?" icon="chart-pie" defaultOpen>
+    Token distribution determines how much each lender will fund. It's calculated based on each lender's voting percentage:
+    
+    **Example:**
+    - You requested: $10,000,000
+    - Lender A (60% share): $6,000,000
+    - Lender B (40% share): $4,000,000
+    
+    Each lender funds their proportional share.
+  </Accordion>
+  
+  <Accordion title="What Happens During This Stage" icon="gears">
+    The Facility Agent:
+    1. Reviews the token distribution
+    2. Confirms the amounts for each lender
+    3. Triggers token creation on the blockchain
+    4. Status changes to **"Tokens Ready"**
+  </Accordion>
+</AccordionGroup>
+
+<Info>
+**Blockchain Tokens:** The platform creates blockchain tokens representing the funding. This provides a secure, transparent record of the transaction.
+</Info>
+
+---
+
+### Stage 3: Electronic Signatures
+
+The Facility Agent signs for each lender via Zoho Sign:
+
+```mermaid
+flowchart TD
+    A[Tokens Created] -->|Sign for Lender 1| B[Lender 1 Signed ✓]
+    A -->|Sign for Lender 2| C[Lender 2 Signed ✓]
+    B & C -->|All Signed| D[Ready for Your Approval]
 ```
-Funding Request APPROVED → Auto-Generate Funding Notice → PENDING_ESIGN
-                                    ↓
-                            DocuSign for Funding Notice
-                                    ↓
-                            ESIGN_COMPLETED (FT tokens created)
-                                    ↓
-                            Borrower Approves Token Transfer
-                                    ↓
-                            ISSUED (visible to lenders)
-                                    ↓
-                            Individual Lenders Confirm Fund Transfer
-                                    ↓
-                            Each lender's status updated in tokenDistribution
+
+<Note>
+**Individual Tracking:** Each lender's signature is tracked separately. You can see which lenders have been signed and which are pending.
+</Note>
+
+---
+
+### Stage 4: Your Approval (Borrower)
+
+Now it's your turn! You need to approve the token transfer:
+
+<Steps>
+  <Step title="Review Token Distribution">
+    Log in and review how much each lender will fund.
+  </Step>
+  <Step title="Verify Details">
+    Confirm the total amount and distribution is correct.
+  </Step>
+  <Step title="Approve Transfer">
+    Click **"Approve Token Transfer"** to authorize the transaction.
+  </Step>
+  <Step title="Status Updates">
+    Status changes to **"Approved"** and lenders can now see the funding notice.
+  </Step>
+</Steps>
+
+<Warning>
+**Before You Approve:** Make sure you've reviewed everything carefully. Once approved, lenders will be able to see the funding notice and begin transferring funds.
+</Warning>
+
+---
+
+### Stage 5: Lenders Transfer Funds
+
+After your approval, lenders complete the final step:
+
+<AccordionGroup>
+  <Accordion title="What Lenders See" icon="eye" defaultOpen>
+    After you approve, lenders can:
+    - View the funding notice in their dashboard
+    - See their allocated amount
+    - Access your payment details
+    - Initiate their fund transfer
+  </Accordion>
+  
+  <Accordion title="How Lenders Transfer Funds" icon="money-bill-transfer">
+    Each lender:
+    1. Reviews the funding notice
+    2. Transfers funds through their banking system
+    3. Confirms the transfer in the platform
+    4. Their status updates to **"Funds Transferred"**
+  </Accordion>
+  
+  <Accordion title="Tracking Progress" icon="chart-simple">
+    You can track each lender's status:
+    - **Pending** - Lender hasn't transferred yet
+    - **Transferred** - Lender has confirmed payment
+    
+    All parties can see the progress in real-time.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Understanding Your Status
+
+| Status | What It Means | What's Happening? |
+|--------|--------------|-------------------|
+| **Preparing Tokens** | Setting up | Token distribution being configured |
+| **Tokens Ready** | Waiting for you | Review and approve the transfer |
+| **Approved** | Visible to lenders | Lenders can now see and transfer |
+| **Funds Transferred** | Complete! | Lenders have confirmed payment |
+
+---
+
+## What You See in a Funding Notice
+
+| Information | Description |
+|------------|-------------|
+| **Funding Notice ID** | Unique identifier |
+| **Request Amount** | Total amount being funded |
+| **Funding Date** | When funds are expected |
+| **Lender Distribution** | How much each lender is funding |
+| **Token Status** | Whether tokens have been created |
+| **Signature Status** | Which lenders have been signed |
+| **Transfer Status** | Which lenders have transferred funds |
+
+---
+
+## Complete Process Flow
+
+```mermaid
+sequenceDiagram
+    participant You as You (Borrower)
+    participant FA as Facility Agent
+    participant L as Lenders
+    participant Sys as System
+
+    Sys->>Sys: Funding Request Approved
+    Sys->>Sys: Create Funding Notice
+    Sys->>FA: Notify: Configure Token Distribution
+    
+    FA->>Sys: Review Distribution
+    Sys->>Sys: Create Blockchain Tokens
+    FA->>Sys: Sign for Each Lender (Zoho Sign)
+    
+    Sys->>You: Notify: Ready for Approval
+    You->>Sys: Approve Token Transfer
+    
+    Sys->>L: Notify: Funding Notice Ready
+    L->>You: Transfer Funds
+    L->>Sys: Confirm Transfer
+    
+    Note over You,Sys: Process Complete!
 ```
 
-### Status Descriptions
+---
 
-- **PENDING_ESIGN** - Auto-generated, ready for DocuSign
-- **ESIGN_COMPLETED** - DocuSign completed, FT tokens created
-- **ISSUED** - Borrower approved token transfer, visible to lenders
+## Borrowing Base Updates
 
-## Token Distribution Details
+Throughout this process, your borrowing base is recalculated:
 
-### Calculation Method
+| When | What Happens |
+|------|-------------|
+| **Token Distribution** | Available capacity updated |
+| **All Funds Transferred** | Final calculation performed |
 
-Token allocation calculated based on:
+<Info>
+**Automatic Updates:** You don't need to manually update anything. The system automatically recalculates your borrowing base and available capacity.
+</Info>
 
-- **Lender Voting Percentage** - From master commitment
-- **Request Amount** - From funding request
-- **Proportional Distribution** - Each lender gets their percentage
+---
 
-**Formula:**
-```
-Lender Tokens = (Lender Voting % / 100) × Request Amount
-```
+## Tracking Individual Lenders
 
-### Distribution Tracking
+Each lender in your funding notice has separate tracking:
 
-**Per-Lender Information:**
-- **lenderGroupId** - Unique identifier
-- **lenderOrgId** - Organization identifier
-- **lenderName** - Lender organization name
-- **votingPercentage** - Voting percentage from master commitment
-- **commitmentAmount** - Lender's commitment amount
-- **tokensAllocated** - Calculated token allocation
-- **tokenContractAddress** - FT contract address
-- **mintedAt** - Token minting timestamp
-- **transactionHash** - Blockchain transaction hash
+| Status | Meaning |
+|--------|---------|
+| **Signature: Pending** | FA hasn't signed for this lender yet |
+| **Signature: Complete** | FA has signed for this lender |
+| **Transfer: Pending** | Lender hasn't confirmed payment |
+| **Transfer: Complete** | Lender has confirmed fund transfer |
 
-## Best Practices
+---
 
-### For Borrowers
+## Common Questions
 
-**Before DocuSign:**
-- Review all funding notice details carefully
-- Verify token distribution calculations
-- Ensure wallet is properly connected
-- Confirm understanding of terms
+<AccordionGroup>
+  <Accordion title="Why can't I see the funding notice yet?" icon="eye-slash">
+    The funding notice goes through several stages before you need to act. If you don't see it:
+    - Your funding request may still be pending approval
+    - The Facility Agent may still be configuring distribution
+    - Tokens may still be being created
+    
+    You'll receive a notification when it's ready for your approval.
+  </Accordion>
+  
+  <Accordion title="Why can't the lender see the funding notice?" icon="user-slash">
+    Lenders can only see funding notices **after** you approve the token transfer. If a lender can't see it:
+    - Check if you've approved the transfer
+    - Verify the lender is in the distribution
+    - Confirm the Facility Agent has signed for that lender
+  </Accordion>
+  
+  <Accordion title="What are the blockchain tokens for?" icon="coins">
+    The blockchain tokens provide:
+    - **Transparency** - Clear record of who funded what
+    - **Security** - Immutable transaction record
+    - **Tracking** - Easy verification of fund movements
+    
+    You don't need to manage the tokens directly—the platform handles everything.
+  </Accordion>
+  
+  <Accordion title="How long until I receive funds?" icon="clock">
+    Timeline depends on:
+    - How quickly you approve the transfer
+    - How quickly each lender processes their payment
+    
+    You can track progress in real-time on your dashboard.
+  </Accordion>
+  
+  <Accordion title="What if a lender doesn't transfer?" icon="triangle-exclamation">
+    If a lender hasn't transferred:
+    - Their status will show as "Pending"
+    - The Facility Agent can follow up with them
+    - Other lenders' transfers proceed independently
+    
+    Contact your Facility Agent if you have concerns about a delayed transfer.
+  </Accordion>
+</AccordionGroup>
 
-**After Token Creation:**
-- Monitor token transfer status
-- Respond promptly to lender confirmations
-- Keep records of all transactions
-- Maintain communication with facility agent
+---
 
-### For Lenders
+## What Happens After All Funds Transfer?
 
-**Fund Transfer Process:**
-- Review funding notice details thoroughly
-- Confirm fund transfer completion promptly
-- Update status accurately
-- Maintain transaction records
+When all lenders confirm their transfers:
 
-**Communication:**
-- Respond to notifications quickly
-- Provide clear confirmation details
-- Report any issues immediately
-- Coordinate with other lenders if needed
+1. **Final Calculations** - Borrowing base is finalized
+2. **Records Updated** - All balances are updated
+3. **Notifications Sent** - Confirmation to all parties
+4. **Ready for More** - You can create new funding requests
 
-## Troubleshooting
-
-### Common Issues
-
-**DocuSign Not Working:**
-- Check email for DocuSign invitation
-- Verify DocuSign account access
-- Contact support if invitation missing
-- Ensure stable internet connection
-
-**Token Creation Failed:**
-- Verify wallet connection
-- Check blockchain network status
-- Ensure sufficient gas fees
-- Contact technical support
-
-**Token Transfer Issues:**
-- Verify wallet permissions
-- Check token contract status
-- Ensure sufficient balance for gas
-- Review transaction logs
-
-### Getting Help
-
-**Technical Issues:**
-1. Check platform status page
-2. Verify network connectivity
-3. Review transaction logs
-4. Contact support@intainft.com
-
-**Process Questions:**
-1. Review this documentation
-2. Check with facility agent
-3. Consult with legal team
-4. Contact support team
-
-## Integration Points
-
-### Blockchain Integration
-
-- **FT Contract Deployment** - Automated contract creation
-- **Token Minting** - Automatic token generation
-- **Transaction Tracking** - Blockchain transaction monitoring
-- **Status Synchronization** - Real-time status updates
-
-### Document Management
-
-- **IPFS Storage** - Decentralized document storage
-- **DocuSign Integration** - Electronic signature workflow
-- **Document Versioning** - Version control and history
-- **Secure Access** - Role-based document access
+---
 
 ## Next Steps
 
-After funding notice completion:
+After receiving your funds:
 
-1. **Monitor Status** - Track individual lender confirmations
-2. **Fund Management** - Manage received funds according to plan
-3. **Reporting** - Provide required reporting to facility agent
-4. **Ongoing Management** - Continue with loan servicing
-
-<Card title="Loan Mapping" icon="link" href="/user-guide/credit-facility/loan-mapping">
-  Learn how to map loans to your credit facility.
-</Card>
+<CardGroup cols={2}>
+  <Card title="Map More Loans" icon="link" href="/user-guide/credit-facility/loan-mapping">
+    Add more collateral to increase your borrowing capacity.
+  </Card>
+  <Card title="Create Another Request" icon="money-bill-wave" href="/user-guide/credit-facility/funding-request">
+    Submit a new funding request when you need more capital.
+  </Card>
+</CardGroup>

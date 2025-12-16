@@ -1,279 +1,281 @@
 ---
-title: "Master Commitment Configuration"
-description: "Complete guide to master commitment setup, lender management, and activation"
+title: "Master Commitment"
+description: "Understanding how master commitments are configured and approved by lenders"
+sidebarTitle: "Master Commitment"
 ---
 
-## Master Commitment Overview
+## What is a Master Commitment?
 
-The Master Commitment is the formal credit facility agreement that is automatically created when a term sheet is approved. It contains detailed terms, lender groups, collateral rules, and commitment amounts that govern the entire credit facility relationship.
+The **Master Commitment** is the formal credit facility agreement that's automatically created when your term sheet is approved. It contains all the details about your facility, including which lenders will participate and the rules for your collateral.
 
-## Auto-Creation Process
+<Warning>
+**Important:** You cannot create a Master Commitment manually. It's automatically generated when your Term Sheet is accepted by the Facility Agent.
+</Warning>
 
-### **Trigger Event**
-When a term sheet reaches "Accepted" status, the system automatically:
-1. **Creates Master Commitment** with "Draft" status
-2. **Pre-populates Data** from the approved term sheet
-3. **Sets Read-Only Fields** from term sheet information
-4. **Provides Editable Fields** for facility agent configuration
+---
 
-### **Pre-Populated Data (Read-Only)**
-- Term sheet information and terms
-- Issuer organization details
-- Basic facility parameters
-- Original requested amounts
+## Master Commitment Journey
 
-### **Editable Fields (Facility Agent)**
-- Lender groups and commitments
-- Collateral eligibility rules
-- Detailed facility terms
-- Servicer organization assignment
-
-## Master Commitment Configuration
-
-### **Step 1: Access Master Commitment**
-
-1. **Login** as Facility Agent (Underwriter)
-2. **Navigate** to Credit Facility section
-3. **Find** the auto-created master commitment
-4. **Click** to open for configuration
-
-![Master Commitment Creation Interface](/images/createFacility.png)
-
-### **Step 2: Configure Lender Groups**
-
-#### **Lender Group Structure**
-```json
-{
-  "lenderGroups": [
-    {
-      "lenderGroupId": "uuid-generated",
-      "lenderName": "ABC Bank",
-      "lenderOrgId": "LENDER-ORG-12345",
-      "commitmentAmount": 25000000,
-      "votingPercentage": 50,
-      "lenderEmail": "contact@abcbank.com",
-      "lenderContactPerson": "John Doe",
-      "lenderPhone": "+1-555-0123",
-      "notes": "Primary lender",
-      "status": "Active"
-    }
-  ]
-}
+```mermaid
+flowchart LR
+    A[Term Sheet Approved] -->|Auto-Created| B[Draft]
+    B -->|FA Configures| C[Awaiting Lender Approval]
+    C -->|Lender Signs| D[ACTIVE ✅]
 ```
 
-#### **Lender Group Fields**
-- **Lender Name**: Legal name of the lender
-- **Lender Organization ID**: Unique identifier for lender
-- **Commitment Amount**: Amount this lender is committing
-- **Voting Percentage**: Percentage of voting rights
-- **Contact Information**: Primary contact details
-- **Status**: Active/Inactive status
+---
 
-### **Step 3: Configure Collateral Rules**
+## What Happens When Your Term Sheet is Approved?
 
-#### **Collateral Rule Structure**
-```json
-{
-  "collateralRules": [
-    {
-      "ruleGroupNumber": 1,
-      "ruleGroupName": "Loan Eligibility Rules",
-      "rules": [
-        {
-          "ruleId": "uuid-generated",
-          "ruleType": "loanTypeEligibility",
-          "loanType": "Residential Mortgage",
-          "minFICO": 680,
-          "maxLTV": 80,
-          "minLoanAmount": 100000,
-          "isActive": true
-        }
-      ]
-    }
-  ]
-}
-```
+When the Facility Agent accepts your term sheet, the system automatically:
 
-#### **Rule Types**
-- **Loan Type Eligibility**: Eligible loan types
-- **Credit Score Requirements**: Minimum FICO scores
-- **Loan-to-Value Limits**: Maximum LTV ratios
-- **Loan Amount Limits**: Minimum/maximum loan amounts
-- **Geographic Restrictions**: Eligible geographic areas
-- **Property Type Limits**: Eligible property types
+<Steps>
+  <Step title="Creates Master Commitment">
+    A new Master Commitment is generated with your term sheet details.
+  </Step>
+  <Step title="Copies Your Information">
+    All the key terms from your term sheet are transferred over (amounts, rates, dates, etc.).
+  </Step>
+  <Step title="Notifies Facility Agent">
+    The Facility Agent is alerted to configure the lender groups and rules.
+  </Step>
+</Steps>
 
-### **Step 4: Set Facility Parameters**
+### What Carries Over from Your Term Sheet
 
-#### **Commitment Details**
-- **Total Commitment Amount**: Sum of all lender commitments
-- **Advance Rate**: Percentage of collateral value
-- **Pricing Terms**: Interest rate structure
-- **Maturity Date**: Facility expiration
-- **Draw Frequency**: How often funds can be drawn
+These details from your term sheet are automatically included and cannot be changed:
 
-#### **Servicer Assignment**
-- **Servicer Organization ID**: Assigned loan servicer
-- **Servicer Contact**: Primary servicer contact
-- **Servicing Terms**: Servicing fee structure
-- **Reporting Requirements**: Monthly reporting obligations
+| Information | Description |
+|------------|-------------|
+| **Facility Amount** | The total credit amount you requested |
+| **Advance Rate** | Your loan-to-value ratio |
+| **Margin** | Interest rate spread |
+| **Pricing Index** | Benchmark rate (SOFR, Prime, Fixed) |
+| **Maturity Date** | When the facility ends |
+| **Draw Frequency** | How often you can request funds |
 
-## Status Management
+---
 
-### **Status Flow**
-```
-Draft → PendingLenderApproval → ACTIVE
-```
+## The Facility Agent's Role
 
-### **Status Descriptions**
+While you wait, the Facility Agent configures your Master Commitment:
 
-#### **Draft**
-- **Editable**: Facility agent can modify all fields
-- **Auto-Save**: Changes automatically saved
-- **Private**: Only visible to facility agent
-- **Actions**: Can edit, save, submit for lender approval
+<img src="/images/facilityAgentCreditFacilityDashboard2.png" alt="Facility Agent Configuration Screen" className="rounded-lg shadow-lg" />
 
-#### **PendingLenderApproval**
-- **Read-Only**: Cannot be edited
-- **Lender Review**: Available to selected lenders
-- **DocuSign Ready**: Lenders can sign electronically
-- **Actions**: Any selected lender can approve
+### What the Facility Agent Sets Up
 
-#### **ACTIVE**
-- **Operational**: Available for funding requests
-- **Read-Only**: Cannot be modified
-- **Funding Ready**: Can accept funding requests
-- **Actions**: Can create funding requests against it
+<AccordionGroup>
+  <Accordion title="Lender Groups" icon="users" defaultOpen>
+    The Facility Agent selects which lenders will participate in your facility:
+    
+    - **Which lenders** will provide funding
+    - **How much** each lender commits
+    - **Voting percentage** for each lender
+    
+    <Note>
+    The total of all lender commitments equals your facility amount. All voting percentages add up to 100%.
+    </Note>
+  </Accordion>
+  
+  <Accordion title="Collateral Rules" icon="check-double">
+    Rules that define what loans can be used as collateral:
+    
+    - Eligible loan types (residential, commercial, etc.)
+    - Minimum credit score requirements
+    - Maximum loan-to-value ratios
+    - Geographic restrictions
+    - Property type limits
+  </Accordion>
+  
+  <Accordion title="Servicer Assignment" icon="gears">
+    The Facility Agent assigns a servicer who will:
+    
+    - Upload monthly loan performance data
+    - Track payments and delinquencies
+    - Support borrowing base calculations
+  </Accordion>
+</AccordionGroup>
+
+<img src="/images/createFacility.png" alt="Create Facility - Lender Configuration" className="rounded-lg shadow-lg" />
+
+---
 
 ## Lender Approval Process
 
-### **Approval Workflow**
+Once configured, the Master Commitment is sent to lenders for approval:
 
-1. **Facility Agent Finalization**
-   - Complete all required fields
-   - Click "Submit for Lender Approval"
-   - Status changes to "PendingLenderApproval"
+### How Lenders See Your Facility
 
-2. **Lender Notification**
-   - Selected lenders receive notification
-   - Master commitment becomes visible to lenders
-   - DocuSign envelope is prepared
+Lenders view your Master Commitment in their **"Opportunities"** section:
 
-3. **Lender Review**
-   - Lenders review terms and conditions
-   - Can access all facility details
-   - Can communicate with facility agent
+<img src="/images/lenderOppurtunitiesSection.png" alt="Lender Opportunities View" className="rounded-lg shadow-lg" />
 
-4. **Lender Approval**
-   - Any selected lender can approve
-   - DocuSign completion required
-   - Status changes to "ACTIVE"
+### The Lender Review Process
 
-### **Approval Requirements**
-- **Any Lender**: Any selected lender can approve
-- **DocuSign Required**: Electronic signature mandatory
-- **No Threshold**: Simple approval (not majority-based)
-- **Immediate Activation**: Status changes immediately upon approval
+<Steps>
+  <Step title="Lender Receives Notification">
+    Selected lenders are notified that a new opportunity is available.
+  </Step>
+  <Step title="Lender Reviews Details">
+    They review the facility terms, commitment amounts, and collateral rules.
+  </Step>
+  <Step title="Electronic Signature">
+    To approve, the lender signs electronically via Zoho Sign.
+  </Step>
+  <Step title="Facility Activates">
+    Once **any** lender signs, your Master Commitment becomes **ACTIVE**.
+  </Step>
+</Steps>
 
-## Auto-Save Functionality
+<img src="/images/lenderSigning.png" alt="Lender Electronic Signature" className="rounded-lg shadow-lg" />
 
-### **Real-Time Saving**
-- **Automatic Saving**: Changes saved as you type
-- **Draft Status**: Remains in "Draft" status during editing
-- **No Data Loss**: Prevents accidental data loss
-- **Resume Anytime**: Continue editing from where you left off
+<Info>
+**Quick Activation:** Your facility becomes ACTIVE as soon as **one** lender approves. You don't need to wait for all lenders—any single approval activates the commitment.
+</Info>
 
-### **Auto-Save Fields**
-- Lender group information
-- Collateral rule configurations
-- Facility parameters
-- Servicer assignments
-- Notes and comments
+---
 
-## Validation Rules
+## When Your Master Commitment is ACTIVE
 
-### **Required Fields**
-- At least one lender group
-- Total commitment amount
-- Collateral eligibility rules
-- Servicer organization assignment
-- Contact information for all parties
+Once active, you can start using your credit facility!
 
-### **Business Rules**
-- **Commitment Sum**: Total lender commitments must equal facility amount
-- **Voting Percentages**: Must sum to 100%
-- **Lender Uniqueness**: No duplicate lender organizations
-- **Rule Completeness**: All rule groups must have at least one rule
+<img src="/images/lenderCreditFacilitySection.png" alt="Lender Credit Facility View" className="rounded-lg shadow-lg" />
 
-## Best Practices
+### What You Can Do Now
 
-### **Lender Group Management**
-- **Diversify Lenders**: Include multiple lenders for risk distribution
-- **Clear Communication**: Maintain open communication with lenders
-- **Realistic Commitments**: Ensure lenders can fulfill commitments
-- **Contact Information**: Keep all contact details current
+<CardGroup cols={2}>
+  <Card title="Create Funding Requests" icon="money-bill-wave">
+    Request funds against your available capacity anytime you need capital.
+  </Card>
+  <Card title="Map Loans" icon="link">
+    Associate your loans with the facility to use them as collateral.
+  </Card>
+  <Card title="Track Capacity" icon="chart-line">
+    Monitor your borrowing base and available funding capacity.
+  </Card>
+  <Card title="View Lender Status" icon="users">
+    See which lenders have approved and their commitment amounts.
+  </Card>
+</CardGroup>
 
-### **Collateral Rules**
-- **Comprehensive Coverage**: Cover all relevant loan types
-- **Realistic Criteria**: Set achievable eligibility criteria
-- **Regular Review**: Periodically review and update rules
-- **Documentation**: Clearly document all rule logic
+---
 
-### **Facility Configuration**
-- **Thorough Review**: Review all terms before submission
-- **Stakeholder Input**: Get input from all relevant parties
-- **Documentation**: Maintain complete documentation
-- **Testing**: Test all configurations before activation
+## Understanding Your Status
 
-## Troubleshooting
+| Status | What It Means | What's Happening? |
+|--------|--------------|-------------------|
+| **Draft** | Being configured | Facility Agent is setting up lenders and rules |
+| **Awaiting Lender Approval** | Ready for lenders | Lenders are reviewing and signing |
+| **ACTIVE** | Ready to use! | You can create funding requests |
 
-### **Common Issues**
+---
 
-#### **Cannot Edit Master Commitment**
-- **Check Status**: Ensure status is "Draft"
-- **Verify Permissions**: Confirm you have facility agent role
-- **Refresh Page**: Try refreshing the browser
-- **Contact Support**: If issues persist, contact support
+## Contract Types Explained
 
-#### **Lender Approval Issues**
-- **Check Lender Status**: Verify lender is active and selected
-- **DocuSign Problems**: Ensure DocuSign integration is working
-- **Communication**: Contact lender directly if needed
-- **Support**: Contact support for technical issues
+Your Master Commitment can be set up in two ways:
 
-#### **Validation Errors**
-- **Review Required Fields**: Ensure all required fields are completed
-- **Check Business Rules**: Verify all business rules are met
-- **Data Integrity**: Check for data inconsistencies
-- **Save and Retry**: Try saving and submitting again
+<Tabs>
+  <Tab title="Single Contract">
+    **Standard Setup** (Most Common)
+    
+    All lenders share one master commitment agreement.
+    
+    **How it works:**
+    - One agreement covers all participating lenders
+    - Each lender's share is tracked within the same contract
+    - Token distribution calculated by voting percentage
+    - Simpler to manage
+    
+    **Best for:** Standard credit facilities with straightforward lender arrangements.
+  </Tab>
+  
+  <Tab title="Multiple Contracts">
+    **Advanced Setup**
+    
+    Each lender has their own separate sub-commitment.
+    
+    **How it works:**
+    - Main "parent" master commitment
+    - Individual sub-commitments for each lender
+    - Each sub-commitment can have unique terms
+    - More complex structure
+    
+    **Best for:** Large syndicated facilities with complex lender arrangements or different terms per lender.
+  </Tab>
+</Tabs>
 
-## Support and Resources
+---
 
-### **Getting Help**
+## Sub Master Commitments (Multiple Contract Type)
 
-If you encounter issues or need assistance:
+If your facility uses multiple contracts, the Facility Agent creates sub-commitments:
 
-1. **Review Documentation** - Check this guide for detailed steps
-2. **Contact Support** - Reach out to support@intainft.com
-3. **Training Materials** - Access comprehensive training resources
-4. **Community** - Access the user community for tips and best practices
+```mermaid
+flowchart LR
+    A[Parent MC - Multiple Type] -->|Create Sub| B[Sub MC Draft]
+    B -->|Configure Lenders| C[Sub MC Ready]
+    C -->|Submit with Parent| D[Awaiting Approval]
+    D -->|Lender Signs| E[Sub MC ACTIVE]
+```
 
-### **Additional Resources**
+<Note>
+Sub master commitments inherit configuration from the parent but can have their own specific lender arrangements.
+</Note>
 
-- **Video Tutorials** - Watch step-by-step video guides
-- **FAQ Section** - Find answers to common questions
-- **Best Practices** - Learn from industry best practices
-- **Technical Support** - Get technical assistance when needed
+---
+
+## Viewing Your Master Commitment
+
+As a Borrower, you can view your Master Commitment details:
+
+| Information | What You'll See |
+|------------|-----------------|
+| **Status** | Current status (Draft, Awaiting Approval, ACTIVE) |
+| **Facility Amount** | Total commitment amount |
+| **Terms** | Interest rate, maturity, draw frequency |
+| **Lender Summary** | Which lenders are participating |
+| **Collateral Rules** | What loans are eligible as collateral |
+| **Available Capacity** | How much you can currently borrow |
+
+---
+
+## Common Questions
+
+<AccordionGroup>
+  <Accordion title="Why can't I create a Master Commitment myself?" icon="question">
+    Master Commitments are complex agreements that require proper configuration by the Facility Agent. They're automatically created when your term sheet is approved to ensure all the proper details carry over correctly.
+  </Accordion>
+  
+  <Accordion title="How long does lender approval take?" icon="clock">
+    It varies by lender. The facility activates as soon as any one lender approves, so you don't need to wait for all lenders. The Facility Agent can follow up with lenders if needed.
+  </Accordion>
+  
+  <Accordion title="What if a lender doesn't approve?" icon="user-xmark">
+    The facility can still activate with other lenders. If a lender doesn't participate, their commitment amount won't be available, but you can still use the facility with the remaining lenders.
+  </Accordion>
+  
+  <Accordion title="Can terms be changed after approval?" icon="pen">
+    Once a Master Commitment is ACTIVE, its core terms cannot be changed. For significant changes, a new term sheet and master commitment would need to be created.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## What Happens After Activation?
+
+Once your Master Commitment is **ACTIVE**, several things happen:
+
+1. **Data sent to Analytics** - Your facility details are sent to Intain Analytics for borrowing base calculations
+2. **Blockchain record created** - An immutable record is created on the blockchain
+3. **You're notified** - You receive a notification that your facility is ready
+4. **Funding enabled** - You can now create funding requests
+
+---
 
 ## Next Steps
 
-<Card title="Funding Request Process" icon="money-bill-wave" href="/user-guide/credit-facility/funding-request">
-  Learn how to create funding requests against active master commitments
-</Card>
+With an ACTIVE Master Commitment, you're ready to request funds:
 
-<Card title="DocuSign Integration" icon="signature" href="/user-guide/documents/docusign-integration">
-  Understand DocuSign electronic signature workflows
-</Card>
-
-<Card title="Document Management" icon="file" href="/user-guide/documents/file-uploads">
-  Learn about document upload and management
+<Card title="Create a Funding Request" icon="money-bill-wave" href="/user-guide/credit-facility/funding-request">
+  Learn how to submit funding requests against your active Master Commitment.
 </Card>

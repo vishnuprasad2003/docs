@@ -1,276 +1,282 @@
 ---
 title: "Term Sheet Management"
-description: "Complete guide to creating, managing, and submitting term sheets"
+description: "Step-by-step guide to creating, signing, and submitting term sheets for credit facility requests"
+sidebarTitle: "Term Sheet"
 ---
 
-## Term Sheet Overview
+## What is a Term Sheet?
 
-The term sheet is the foundation document of the credit facility process. It defines the initial terms and conditions between the borrower (issuer) and the facility agent, serving as the basis for the master commitment agreement.
+The **Term Sheet** is your starting point for obtaining a credit facility. It's the document where you outline what you need—how much funding, the interest rate terms, and when the facility should mature. Think of it as your application for the credit facility.
 
-## Term Sheet Creation Process
+<Info>
+**Good to Know:** When your term sheet is approved by the Facility Agent, a Master Commitment is automatically created for you. This moves your request to the next stage.
+</Info>
 
-### **Step 1: Access Term Sheet Creation**
+---
 
-1. **Login** to your account as an Issuer
-2. **Navigate** to the Credit Facility section
-3. **Click** "Create New Term Sheet"
-4. **Fill** in the required information
+## Term Sheet Journey
 
-<img 
-  src="/images/termSheetCreation.png" 
-  alt="Term Sheet Creation Interface"
-  height="400"
-  className="rounded-lg"
-/>
+Here's how your term sheet progresses through the system:
 
-### **Step 2: Complete Term Sheet Form**
-
-#### **Basic Information**
-```json
-{
-  "termSheetName": "ABC Credit Facility Term Sheet",
-  "issuerOrgName": "ABC Corporation",
-  "requestedCommitmentAmount": 50000000,
-  "advanceRate": 85.0,
-  "pricingIndex": "SOFR",
-  "margin": 2.5,
-  "maturityDate": "12/31/2025",
-  "fixedRate": 5.5,
-  "covenantTemplate": "Standard Commercial",
-  "drawFrequency": "Monthly"
-}
+```mermaid
+flowchart LR
+    A[Create Draft] -->|Sign| B[Signed]
+    B -->|Submit| C[Under Review]
+    C -->|Approved| D[Accepted ✅]
+    C -->|Declined| E[Rejected ❌]
+    C -->|Needs Work| F[Changes Requested]
+    F -->|Edit & Re-sign| B
 ```
 
-#### **Required Fields**
-- **Term Sheet Name**: Descriptive name for the facility
-- **Issuer Organization Name**: Legal name of borrowing entity
-- **Requested Commitment Amount**: Total facility amount requested
-- **Advance Rate**: Percentage of collateral value that can be borrowed
-- **Pricing Index**: Base rate (SOFR, LIBOR, etc.)
-- **Margin**: Spread over the pricing index
-- **Maturity Date**: Facility expiration date
-- **Draw Frequency**: How often funds can be drawn (Monthly, Quarterly, etc.)
+---
 
-#### **Optional Fields**
-- **Fixed Rate**: Alternative to floating rate pricing
-- **Covenant Template**: Standard covenant package
-- **Additional Terms**: Custom terms and conditions
-- **Supporting Documents**: Upload relevant documentation
+## Step-by-Step Guide
 
-### **Step 3: Auto-Save Functionality**
+### Step 1: Access the Platform
 
-The platform automatically saves your progress:
-- **Real-Time Saving**: Changes saved as you type
-- **Draft Status**: Term sheet remains in "Draft" status
-- **No Data Loss**: Prevents accidental data loss
-- **Resume Anytime**: Continue editing from where you left off
+<Steps>
+  <Step title="Login to Intain Markets">
+    Go to [Intain Markets](https://intainmarkets.us/) and sign in with your credentials.
+  </Step>
+  <Step title="Navigate to Credit Facility">
+    From your dashboard, find and click on the **Credit Facility** section.
+  </Step>
+  <Step title="Start a New Term Sheet">
+    Click **"Create New Term Sheet"** to begin.
+  </Step>
+</Steps>
 
-### **Step 4: Document Upload**
+<img src="/images/termSheetCreation.png" alt="Term Sheet Creation Interface" className="rounded-lg shadow-lg" />
 
-Upload supporting documents:
-- **Financial Statements**: Recent financial reports
-- **Business Plan**: Company overview and strategy
-- **Collateral Documentation**: Asset descriptions and valuations
-- **Legal Documents**: Corporate documents and authorizations
+### Step 2: Fill in Your Details
 
-## Term Sheet Status Management
+Complete the form with your credit facility requirements:
 
-### **Status Flow**
+<AccordionGroup>
+  <Accordion title="Required Information" icon="asterisk" defaultOpen>
+    | Field | What to Enter |
+    |-------|--------------|
+    | **Requested Amount** | How much funding you need (e.g., $50,000,000) |
+    | **Advance Rate** | The loan-to-value percentage (e.g., 85%) |
+    | **Margin** | Interest rate spread above the index (e.g., 2.5%) |
+    | **Pricing Index** | The benchmark rate (SOFR, Prime Rate, or Fixed) |
+    | **Maturity Date** | When the facility ends |
+    | **Draw Frequency** | How often you can request funds (Monthly, Quarterly, On Demand) |
+  </Accordion>
+  
+  <Accordion title="Optional Information" icon="circle-plus">
+    | Field | What to Enter |
+    |-------|--------------|
+    | **Fixed Rate** | If using fixed pricing instead of floating rate |
+    | **Covenant Template** | Standard terms template (e.g., Commercial, Real Estate) |
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+**Auto-Save:** Your changes are automatically saved as you work. You can leave and come back anytime while in Draft status.
+</Tip>
+
+### Step 3: Upload Supporting Documents
+
+Upload documents to support your term sheet request:
+
+| Document Type | Purpose |
+|--------------|---------|
+| **Collateral Profile** | Overview of your collateral portfolio |
+| **Financial Statements** | Your recent financial reports |
+| **KYC Documents** | Know Your Customer compliance documents |
+| **Collateral Data** | Detailed information about your collateral |
+| **Funding Sheet** | Your funding requirements breakdown |
+
+<Steps>
+  <Step title="Select Document Type">
+    Choose the type of document from the dropdown menu.
+  </Step>
+  <Step title="Choose Your File">
+    Click to select the file from your computer. Supported formats: PDF, DOC, DOCX, XLS, XLSX.
+  </Step>
+  <Step title="Upload">
+    The file is securely uploaded and linked to your term sheet.
+  </Step>
+</Steps>
+
+### Step 4: Sign Your Term Sheet
+
+Before you can submit, you need to sign your term sheet electronically:
+
+<Steps>
+  <Step title="Click Sign Term Sheet">
+    When your term sheet is complete, click the **"Sign Term Sheet"** button.
+  </Step>
+  <Step title="Complete Zoho Sign">
+    You'll be redirected to Zoho Sign's secure interface. Review the document and apply your electronic signature.
+  </Step>
+  <Step title="Return to Platform">
+    After signing, you'll be automatically redirected back to the platform.
+  </Step>
+</Steps>
+
+<img src="/images/issuerZohoSign.png" alt="Electronic Signature Process" className="rounded-lg shadow-lg" />
+
+<Note>
+Your term sheet status changes to **"Signed"** after you complete the electronic signature. The signed document is securely stored.
+</Note>
+
+### Step 5: Submit for Review
+
+Once signed, you can submit your term sheet to the Facility Agent:
+
+<Steps>
+  <Step title="Review Your Term Sheet">
+    Click **"Preview"** to review all your information one last time.
+  </Step>
+  <Step title="Submit">
+    Click **"Submit for Review"** to send it to the Facility Agent.
+  </Step>
+  <Step title="Confirmation">
+    Your status changes to **"Under Review"** and the Facility Agent is notified.
+  </Step>
+</Steps>
+
+<Warning>
+**Before You Submit:** Make sure everything is correct! Once submitted, you cannot make changes until the Facility Agent either approves, rejects, or requests changes.
+</Warning>
+
+---
+
+## What Happens After Submission?
+
+### The Facility Agent's Decision
+
+The Facility Agent will review your term sheet and take one of three actions:
+
+<Tabs>
+  <Tab title="Approved ✅">
+    **Great News!**
+    
+    Your term sheet is approved and:
+    - Status changes to **"Accepted"**
+    - A **Master Commitment** is automatically created
+    - You'll receive a notification
+    - You can now track your Master Commitment status
+    
+    <Card title="Next Step" icon="arrow-right" href="/user-guide/credit-facility/master-commitment">
+      Learn about Master Commitment configuration
+    </Card>
+  </Tab>
+  
+  <Tab title="Rejected ❌">
+    **Request Declined**
+    
+    If rejected:
+    - Status changes to **"Rejected"**
+    - The rejection reason is documented
+    - This is a final state—no further changes allowed
+    
+    **What to Do:** Review the rejection reason and, if appropriate, create a new term sheet addressing the concerns.
+  </Tab>
+  
+  <Tab title="Changes Requested 🔄">
+    **Revisions Needed**
+    
+    If changes are requested:
+    - Status changes to **"Changes Requested"**
+    - You'll see comments explaining what needs to change
+    - You can now edit your term sheet again
+    - Auto-save is re-enabled
+    
+    **What to Do:** Make the requested changes, re-sign via Zoho Sign, and resubmit.
+  </Tab>
+</Tabs>
+
+---
+
+## Handling Change Requests
+
+If the Facility Agent requests changes, follow this process:
+
+```mermaid
+flowchart LR
+    A[Changes Requested] -->|Review Comments| B[Edit Term Sheet]
+    B -->|Make Changes| C[Re-sign]
+    C -->|Submit Again| D[Under Review]
 ```
-Draft → BorrowerSigned → FAReview → Accepted/Rejected/CHANGES_REQUESTED
-```
 
-### **Status Descriptions**
+<Steps>
+  <Step title="Review the Feedback">
+    Check the Facility Agent's comments to understand what changes are needed.
+  </Step>
+  <Step title="Edit Your Term Sheet">
+    Make the requested modifications. Your changes save automatically.
+  </Step>
+  <Step title="Re-sign">
+    After editing, you must sign again via Zoho Sign.
+  </Step>
+  <Step title="Resubmit">
+    Submit the revised term sheet for another review.
+  </Step>
+</Steps>
 
-#### **Draft**
-- **Editable**: Full editing capabilities
-- **Auto-Save**: Automatic saving enabled
-- **Private**: Only visible to issuer
-- **Actions**: Can edit, upload documents, submit for signing
+<Info>
+**Version History:** Don't worry about losing your previous work. Each revision is saved automatically, maintaining a complete history of changes.
+</Info>
 
-#### **BorrowerSigned**
-- **Read-Only**: Cannot be edited
-- **DocuSign Complete**: Electronic signature completed
-- **Preview Available**: Can preview signed document
-- **Actions**: Can submit for facility agent review
+---
 
-#### **FAReview**
-- **Under Review**: Facility agent is reviewing
-- **Read-Only**: Cannot be edited by issuer
-- **Pending Decision**: Waiting for facility agent action
-- **Actions**: Facility agent can approve, reject, or request changes
+## Understanding Your Status
 
-#### **Accepted**
-- **Approved**: Facility agent has approved
-- **Auto-Trigger**: Master commitment auto-created
-- **Final Status**: No further changes allowed
-- **Next Step**: Master commitment configuration begins
+| Status | What It Means | Can You Edit? | What's Next? |
+|--------|--------------|---------------|--------------|
+| **Draft** | You're working on it | ✅ Yes | Sign when ready |
+| **Signed** | You've signed, ready to submit | ❌ No | Submit for review |
+| **Under Review** | Facility Agent is reviewing | ❌ No | Wait for decision |
+| **Accepted** | Approved! | ❌ No | Master Commitment created |
+| **Rejected** | Declined | ❌ No | Create new term sheet |
+| **Changes Requested** | Revisions needed | ✅ Yes | Edit and resubmit |
 
-#### **Rejected**
-- **Declined**: Facility agent has rejected
-- **Final Status**: No further actions available
-- **Reason Provided**: Rejection reason documented
-- **Next Step**: Can create new term sheet
+---
 
-#### **CHANGES_REQUESTED**
-- **Revision Required**: Changes requested by facility agent
-- **Editable**: Can be edited again
-- **Comments Provided**: Specific changes requested
-- **Actions**: Make requested changes and resubmit
+## Common Questions
 
-## DocuSign Integration
+<AccordionGroup>
+  <Accordion title="Why can't I edit my term sheet?" icon="lock">
+    You can only edit when status is **Draft** or **Changes Requested**. If your term sheet is under review or has been decided, you cannot make changes.
+    
+    **Solution:** 
+    - If rejected, create a new term sheet
+    - If awaiting review, wait for the Facility Agent's decision
+  </Accordion>
+  
+  <Accordion title="I'm having trouble with the electronic signature" icon="signature">
+    If you're having issues with Zoho Sign:
+    - Check your email for any Zoho Sign notifications
+    - Try using a different browser
+    - Ensure you have a stable internet connection
+    - Contact support if the issue persists
+  </Accordion>
+  
+  <Accordion title="My document upload failed" icon="upload">
+    If documents won't upload:
+    - Check the file format (PDF, DOC, DOCX, XLS, XLSX)
+    - Verify the file isn't too large
+    - Try a different file
+    - Ensure stable internet connection
+  </Accordion>
+  
+  <Accordion title="I submitted but want to make changes" icon="pen">
+    Once submitted, you cannot make changes until the Facility Agent reviews your request. They may:
+    - Approve it (no changes needed)
+    - Request changes (you can then edit)
+    - Reject it (you'd need to start a new one)
+  </Accordion>
+</AccordionGroup>
 
-### **Electronic Signature Process**
-
-1. **Initiate Signing**
-   - Click "Sign Term Sheet" button
-   - DocuSign envelope is created
-   - Signing URL is generated
-
-2. **Complete Signing**
-   - Access DocuSign signing interface
-   - Review document terms
-   - Apply electronic signature
-   - Complete signing process
-
-3. **Status Update**
-   - Status automatically changes to "BorrowerSigned"
-   - Signed PDF is stored in IPFS
-   - Notification sent to facility agent
-
-### **DocuSign Features**
-- **Legally Binding**: Electronic signatures are legally valid
-- **Audit Trail**: Complete signing history
-- **Secure Storage**: Signed documents stored securely
-- **Multi-Party**: Support for multiple signers if needed
-
-## Submission Process
-
-### **Pre-Submission Checklist**
-
-Before submitting for facility agent review:
-- [ ] All required fields completed
-- [ ] DocuSign signature completed
-- [ ] Supporting documents uploaded
-- [ ] Terms reviewed and approved
-- [ ] Contact information verified
-
-### **Submission Steps**
-
-1. **Review Term Sheet**
-   - Verify all information is correct
-   - Check supporting documents
-   - Confirm terms and conditions
-
-2. **Submit for Review**
-   - Click "Submit for Facility Agent Review"
-   - Status changes to "FAReview"
-   - Notification sent to facility agent
-
-3. **Await Decision**
-   - Monitor status updates
-   - Respond to any requests for changes
-   - Prepare for next steps if approved
-
-## Facility Agent Review Process
-
-### **Review Criteria**
-- **Creditworthiness**: Borrower's financial strength
-- **Collateral Quality**: Value and liquidity of collateral
-- **Terms Appropriateness**: Reasonableness of requested terms
-- **Documentation Completeness**: Adequacy of supporting documents
-- **Risk Assessment**: Overall risk profile evaluation
-
-### **Possible Outcomes**
-
-#### **Approval**
-- Term sheet is accepted
-- Master commitment is auto-created
-- Facility agent begins configuration process
-- Issuer receives approval notification
-
-#### **Rejection**
-- Term sheet is declined
-- Reason for rejection provided
-- No further actions available
-- Can create new term sheet
-
-#### **Changes Requested**
-- Specific changes identified
-- Comments provided for guidance
-- Status changes to "CHANGES_REQUESTED"
-- Can edit and resubmit
-
-## Best Practices
-
-### **Term Sheet Preparation**
-- **Be Thorough**: Complete all required fields accurately
-- **Provide Documentation**: Upload all relevant supporting documents
-- **Review Terms**: Ensure terms are realistic and achievable
-- **Seek Advice**: Consult with financial advisors if needed
-
-### **Documentation**
-- **Financial Statements**: Provide recent, audited financial statements
-- **Business Plan**: Include comprehensive business overview
-- **Collateral Details**: Provide detailed collateral descriptions
-- **Legal Documents**: Include all required corporate documents
-
-### **Communication**
-- **Respond Promptly**: Address facility agent requests quickly
-- **Be Professional**: Maintain professional communication
-- **Provide Clarifications**: Offer additional information when requested
-- **Follow Up**: Monitor progress and follow up as needed
-
-## Troubleshooting
-
-### **Common Issues**
-
-#### **Cannot Edit Term Sheet**
-- **Check Status**: Ensure status is "Draft" or "CHANGES_REQUESTED"
-- **Refresh Page**: Try refreshing the browser
-- **Clear Cache**: Clear browser cache and cookies
-- **Contact Support**: If issues persist, contact support
-
-#### **DocuSign Issues**
-- **Check Email**: Verify DocuSign email was received
-- **Try Different Browser**: Use a different web browser
-- **Check Internet Connection**: Ensure stable internet connection
-- **Contact DocuSign Support**: For DocuSign-specific issues
-
-#### **Document Upload Problems**
-- **Check File Format**: Ensure files are in supported formats
-- **Check File Size**: Verify files are within size limits
-- **Try Different File**: Test with a different file
-- **Contact Support**: For persistent upload issues
-
-## Support and Resources
-
-### **Getting Help**
-
-If you encounter issues or need assistance:
-
-1. **Review Documentation** - Check this guide for detailed steps
-2. **Contact Support** - Reach out to support@intainft.com
-3. **Facility Agent** - Contact your assigned facility agent
-4. **Community** - Access the user community for tips and best practices
-
-### **Additional Resources**
-
-- **Training Materials** - Access comprehensive training resources
-- **Video Tutorials** - Watch step-by-step video guides
-- **FAQ Section** - Find answers to common questions
-- **Best Practices** - Learn from industry best practices
+---
 
 ## Next Steps
 
-<Card title="Master Commitment Setup" icon="handshake" href="/user-guide/credit-facility/master-commitment">
-  Learn about master commitment configuration after term sheet approval
-</Card>
+After your term sheet is accepted:
 
-<Card title="DocuSign Integration" icon="signature" href="/user-guide/documents/docusign-integration">
-  Understand DocuSign electronic signature workflows
-</Card>
-
-<Card title="Document Management" icon="file" href="/user-guide/documents/file-uploads">
-  Learn about document upload and management
+<Card title="Master Commitment Configuration" icon="handshake" href="/user-guide/credit-facility/master-commitment">
+  Learn how the Facility Agent sets up your Master Commitment with lender groups and collateral rules, and how lenders approve it.
 </Card>

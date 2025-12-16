@@ -1,274 +1,175 @@
 ---
-title: "IPFS Storage"
-description: "Complete guide to IPFS document storage and retrieval system"
+title: "Document Storage (IPFS)"
+description: "Understanding how your documents are securely stored in the platform"
 ---
 
-# IPFS Storage
+## How Your Documents Are Stored
 
-The Intain Markets platform uses IPFS (InterPlanetary File System) for decentralized, secure document storage. This guide covers IPFS integration and document management.
+The Intain Markets platform uses **IPFS (InterPlanetary File System)** to store your documents securely. This technology ensures your files are:
 
-## Overview
+<CardGroup cols={2}>
+  <Card title="Permanently Stored" icon="database">
+    Once uploaded, documents cannot be lost or deleted
+  </Card>
+  <Card title="Tamper-Proof" icon="shield-halved">
+    Documents cannot be altered after storage
+  </Card>
+  <Card title="Globally Accessible" icon="globe">
+    Access your documents from anywhere
+  </Card>
+  <Card title="Secure" icon="lock">
+    Protected with encryption and access controls
+  </Card>
+</CardGroup>
 
-IPFS provides:
+---
 
-- **Decentralized Storage** - Distributed file storage network
-- **Content Addressing** - Unique hash-based addressing
-- **Immutable Storage** - Tamper-proof document storage
-- **Global Access** - Worldwide document accessibility
-- **Cost Efficiency** - Reduced storage costs
+## What Happens When You Upload a Document?
 
-## How IPFS Works
+When you upload a document to the platform:
 
-### Content Addressing
+<Steps>
+  <Step title="Upload">
+    You upload your document through the platform interface.
+  </Step>
+  <Step title="Processing">
+    The system generates a unique identifier (hash) for your document.
+  </Step>
+  <Step title="Storage">
+    Your document is securely stored across multiple servers.
+  </Step>
+  <Step title="Confirmation">
+    You receive confirmation that your document is safely stored.
+  </Step>
+</Steps>
 
-**Hash-Based Addressing:**
-- Each document gets unique hash (CID)
-- Hash represents document content
-- Changes to document create new hash
-- Immutable document versioning
+<Note>
+**What is a Hash?** Think of it like a digital fingerprint for your document. It's unique to your file and proves the document hasn't been changed.
+</Note>
 
-### Distributed Network
+---
 
-**Peer-to-Peer Storage:**
-- Documents stored across multiple nodes
-- Redundant storage for reliability
-- No single point of failure
-- Global accessibility
-
-## Document Upload Process
-
-### Step 1: Upload Document
-
-**Upload Methods:**
-- **Direct Upload** - Upload from local device
-- **Drag and Drop** - Drag files to upload area
-- **Bulk Upload** - Upload multiple files
-- **API Upload** - Programmatic upload
-
-### Step 2: IPFS Processing
-
-**Automatic Processing:**
-1. Document uploaded to platform
-2. System generates IPFS hash
-3. Document stored in IPFS network
-4. Hash returned to user
-5. Document linked to record
-
-### Step 3: Hash Storage
-
-**Hash Management:**
-- IPFS hash stored in database
-- Document metadata recorded
-- Access permissions set
-- Audit trail created
-
-## Document Types
+## Types of Documents Stored
 
 ### Credit Facility Documents
 
-**Term Sheet Documents:**
-- Signed term sheet PDFs
-- Supporting documentation
-- Financial statements
-- KYC documents
-
-**Master Commitment Documents:**
-- Signed master commitment PDFs
-- Lender approval documents
-- Legal documentation
-- Compliance certificates
-
-**Funding Request Documents:**
-- Collateral addendum
-- Financial statements
-- KYC documents
-- Supporting materials
-
-**Funding Notice Documents:**
-- Signed funding notice PDFs
-- Token distribution records
-- Transaction confirmations
-- Audit documentation
+| Document Type | When Stored |
+|--------------|-------------|
+| **Term Sheets** | After electronic signature |
+| **Master Commitments** | After lender approval |
+| **Funding Notices** | After FA signature |
+| **Supporting Documents** | When you upload them |
 
 ### Servicer Documents
 
-**Loan Tape Files:**
-- Monthly loan tape uploads
-- Performance reports
-- Delinquency reports
-- Servicing documentation
+| Document Type | When Stored |
+|--------------|-------------|
+| **Loan Tapes** | After successful upload |
+| **Performance Reports** | After generation |
+| **Monthly Reports** | After submission |
 
-## Document Retrieval
+---
 
-### Accessing Documents
+## Accessing Your Documents
 
-**Retrieval Methods:**
-- **Platform Interface** - Access through platform
-- **Direct Hash Access** - Use IPFS hash directly
-- **API Access** - Programmatic retrieval
-- **Bulk Download** - Download multiple documents
+### From the Platform
 
-### Hash-Based Access
+You can access all your stored documents directly through the platform:
 
-**Using IPFS Hash:**
-- Copy IPFS hash (CID)
-- Use IPFS gateway to access
-- Direct content addressing
-- Immutable document access
+<Steps>
+  <Step title="Navigate to Document">
+    Go to the relevant section (Term Sheet, Master Commitment, etc.)
+  </Step>
+  <Step title="View Documents">
+    Find the document you need in the Documents section
+  </Step>
+  <Step title="Download">
+    Click to view or download your document
+  </Step>
+</Steps>
+
+### Document History
+
+Every document maintains a complete history:
+
+- **When it was uploaded** - Date and time
+- **Who uploaded it** - User information
+- **Version history** - If the document was updated
+- **Access logs** - Who has viewed the document
+
+---
 
 ## Security Features
 
-### Access Control
+Your documents are protected by multiple security measures:
 
-**Permission Management:**
-- Role-based access control
-- Document-level permissions
-- Time-based access
-- Audit logging
+<AccordionGroup>
+  <Accordion title="Access Controls" icon="user-lock">
+    - Only authorized users can access documents
+    - Role-based permissions (Issuer, FA, Lender, Servicer)
+    - Activity is logged and monitored
+  </Accordion>
+  
+  <Accordion title="Encryption" icon="key">
+    - Documents are encrypted during transfer
+    - Stored securely with encryption
+    - Only platform can decrypt for authorized users
+  </Accordion>
+  
+  <Accordion title="Immutability" icon="seal">
+    - Once stored, documents cannot be altered
+    - Changes create new versions (original preserved)
+    - Complete audit trail maintained
+  </Accordion>
+</AccordionGroup>
 
-### Encryption
+---
 
-**Data Protection:**
-- End-to-end encryption
-- Secure transmission
-- Encrypted storage
-- Key management
+## Benefits of IPFS Storage
 
-## Best Practices
+### For Compliance
 
-### Document Preparation
+- **Audit Trail** - Complete record of all document activities
+- **Immutable Records** - Documents preserved exactly as uploaded
+- **Verifiable** - Prove documents haven't been changed
 
-**Before Upload:**
-- Ensure document is complete
-- Verify document format (PDF preferred)
-- Check file size limits
-- Remove sensitive metadata
+### For Security
 
-**File Management:**
-- Use descriptive filenames
-- Organize documents logically
-- Maintain version control
-- Regular backup procedures
+- **No Single Point of Failure** - Documents stored across multiple locations
+- **Tamper Detection** - Any attempt to alter is immediately detectable
+- **Permanent Storage** - Documents won't be lost
 
-### Upload Process
+---
 
-**Upload Guidelines:**
-- Use stable internet connection
-- Verify upload completion
-- Save IPFS hash for reference
-- Test document retrieval
+## Frequently Asked Questions
 
-## Troubleshooting
+<Accordion title="Can I delete a document once uploaded?">
+Documents stored in IPFS are permanent by design for audit and compliance purposes. If you need to replace a document, you can upload a new version which will be linked to the original.
+</Accordion>
 
-### Common Issues
+<Accordion title="How long are documents stored?">
+Documents are stored permanently as part of the platform's compliance and audit requirements. You can access your documents at any time.
+</Accordion>
 
-**Upload Failed:**
-- Check file format and size
-- Verify internet connection
-- Try different browser
-- Contact support if persistent
+<Accordion title="Who can access my documents?">
+Document access is controlled by role-based permissions. Only users with appropriate access rights for your credit facility can view your documents.
+</Accordion>
 
-**Cannot Access Document:**
-- Verify IPFS hash is correct
-- Check access permissions
-- Ensure document exists
-- Contact technical support
+<Accordion title="What if I upload the wrong document?">
+Contact support to assist with managing incorrect uploads. You can upload a corrected version which will be properly linked in the system.
+</Accordion>
 
-**Slow Retrieval:**
-- IPFS network may be slow
-- Try different IPFS gateway
-- Check network connectivity
-- Wait and retry
+---
 
-### IPFS Gateway Issues
+## Support
 
-**Gateway Problems:**
-- Try different IPFS gateway
-- Check gateway status
-- Use local IPFS node
-- Contact IPFS support
+Need help with document storage?
 
-## Integration Details
-
-### API Integration
-
-**IPFS API:**
-- RESTful API for uploads
-- Hash-based retrieval
-- Metadata management
-- Status monitoring
-
-### Platform Integration
-
-**Seamless Integration:**
-- Automatic IPFS processing
-- Hash storage in database
-- Document linking
-- Status synchronization
-
-## Performance Optimization
-
-### Upload Optimization
-
-**Best Practices:**
-- Compress large files
-- Use appropriate formats
-- Batch uploads when possible
-- Monitor upload progress
-
-### Retrieval Optimization
-
-**Access Optimization:**
-- Cache frequently accessed documents
-- Use CDN for popular content
-- Optimize document formats
-- Monitor retrieval performance
-
-## Compliance and Audit
-
-### Audit Trail
-
-**Document Tracking:**
-- Complete upload history
-- Access log records
-- Modification tracking
-- Compliance reporting
-
-### Data Retention
-
-**Retention Policies:**
-- Configurable retention periods
-- Automatic archival
-- Compliance requirements
-- Legal hold capabilities
-
-## Cost Management
-
-### Storage Costs
-
-**Cost Factors:**
-- Document size
-- Storage duration
-- Access frequency
-- Network usage
-
-### Optimization Strategies
-
-**Cost Reduction:**
-- Compress documents
-- Archive old documents
-- Optimize access patterns
-- Monitor usage metrics
-
-## Next Steps
-
-After document upload:
-
-1. **Verify Upload** - Confirm document stored correctly
-2. **Save Hash** - Record IPFS hash for reference
-3. **Test Access** - Verify document retrieval
-4. **Monitor Status** - Track document status
-
-<Card title="File Upload Management" icon="upload" href="/user-guide/documents/file-uploads">
-  Learn about file upload management and best practices.
-</Card>
+<CardGroup cols={2}>
+  <Card title="Contact Support" icon="headset" href="mailto:support@intainft.com">
+    Get help with document issues
+  </Card>
+  <Card title="File Uploads" icon="upload" href="/user-guide/documents/file-uploads">
+    Learn about uploading files
+  </Card>
+</CardGroup>

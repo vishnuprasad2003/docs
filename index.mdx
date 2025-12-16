@@ -1,110 +1,183 @@
 ---
-title: "Intain Markets Credit Facility Platform"
-description: "Complete user guide for the credit facility flow from registration to loan management"
+title: "Credit Facility Module"
+description: "Complete user guide for the Credit Facility workflow in Intain Markets - from term sheet creation to funding execution"
+sidebarTitle: "Introduction"
 ---
 
-## Welcome to Intain Markets Credit Facility Platform
+<div style={{ textAlign: 'center', padding: '20px 0' }}>
+  <Icon icon="building-columns" size={80} color="#0F4C81" />
+</div>
 
-A comprehensive digital platform for managing credit facility operations, from initial term sheet creation to ongoing loan servicing and reporting.
+## Welcome to the Credit Facility Module
 
-<Card title="Get Started" icon="rocket" horizontal href="/user-guide/overview">
-  Learn about the complete credit facility workflow and key concepts.
-</Card>
+The **Credit Facility Module** in Intain Markets enables organizations to manage the complete lifecycle of credit facility transactions. This guide will walk you through every step—from creating your initial term sheet to receiving funding from lenders.
 
-## Complete Credit Facility Workflow
-
-Navigate through the entire credit facility process from start to finish.
-
-<Columns cols={2}>
-  <Card title="User Registration & Authentication" icon="user" href="/user-guide/registration">
-    Set up your account and understand the authentication process.
+<CardGroup cols={2}>
+  <Card title="Access Platform" icon="rocket" href="https://intainmarkets.us/" target="_blank">
+    Launch Intain Markets platform
   </Card>
-  <Card title="Credit Facility Flow Overview" icon="diagram-project" href="/user-guide/credit-facility/overview">
-    Understand the complete workflow from term sheet to funding notice.
+  <Card title="Workflow Overview" icon="diagram-project" href="/user-guide/credit-facility/overview">
+    Understand the complete credit facility workflow
   </Card>
-  <Card title="Term Sheet Management" icon="file-contract" href="/user-guide/credit-facility/term-sheet">
-    Create and manage term sheets with DocuSign integration.
-  </Card>
-  <Card title="Master Commitment Setup" icon="handshake" href="/user-guide/credit-facility/master-commitment">
-    Configure master commitments with lender groups and rules.
-  </Card>
-  <Card title="Funding Request Process" icon="money-bill-wave" href="/user-guide/credit-facility/funding-request">
-    Submit and manage funding requests against active commitments.
-  </Card>
-  <Card title="Funding Notice & Token Management" icon="coins" href="/user-guide/credit-facility/funding-notice">
-    Handle funding notices and FT token creation/distribution.
-  </Card>
-  <Card title="Loan Mapping" icon="link" href="/user-guide/credit-facility/loan-mapping">
-    Map loans to credit facilities and manage loan portfolios.
-  </Card>
-</Columns>
+</CardGroup>
 
-## Document Management & Integrations
+---
 
-Learn about the platform's document management capabilities and third-party integrations.
+## How the Credit Facility Works
 
-<Columns cols={2}>
-  <Card title="DocuSign Integration" icon="signature" href="/user-guide/documents/docusign-integration">
-    Electronic signature workflows for all credit facility documents.
+The Credit Facility workflow guides you through four main stages. Each stage builds upon the previous one, creating a streamlined path from initial request to receiving funds.
+
+<Steps>
+  <Step title="Term Sheet Creation" icon="file-contract">
+    **You (the Borrower)** start by creating a term sheet that outlines your credit facility request—how much you need, the terms, and supporting documents. After signing electronically, you submit it for review.
+  </Step>
+  <Step title="Master Commitment Setup" icon="handshake">
+    Once your term sheet is approved, a **Master Commitment** is automatically created. The Facility Agent configures the lenders and rules, then lenders review and approve it.
+  </Step>
+  <Step title="Funding Request" icon="money-bill-wave">
+    With an active Master Commitment, you can now **request funds**. Submit your funding request with the amount you need, and the Facility Agent will review and approve it.
+  </Step>
+  <Step title="Funding & Token Transfer" icon="coins">
+    Approved requests generate **Funding Notices** automatically. Tokens are created and distributed, and lenders transfer funds directly to you.
+  </Step>
+</Steps>
+
+---
+
+## Quick Navigation
+
+Find the guide you need:
+
+<CardGroup cols={2}>
+  <Card title="Roles & Permissions" icon="users" href="/user-guide/credit-facility/roles-permissions">
+    Learn about the different user roles and what each can do in the platform.
   </Card>
-  <Card title="IPFS Storage" icon="cloud" href="/user-guide/documents/ipfs-storage">
-    Decentralized document storage and retrieval system.
+  <Card title="Term Sheet Guide" icon="file-signature" href="/user-guide/credit-facility/term-sheet">
+    Step-by-step instructions to create, sign, and submit your term sheet.
   </Card>
-  <Card title="File Upload Management" icon="upload" href="/user-guide/documents/file-uploads">
-    Upload and manage supporting documents and collateral.
+  <Card title="Master Commitment Guide" icon="building-columns" href="/user-guide/credit-facility/master-commitment">
+    Understand how master commitments are configured and approved.
   </Card>
-</Columns>
-
-## Servicer Operations
-
-Comprehensive guide for loan servicing and monthly reporting.
-
-<Columns cols={2}>
-  <Card title="Loan Tape Upload" icon="table" href="/user-guide/servicer/loan-tape-upload">
-    Upload monthly loan tapes and manage loan data.
+  <Card title="Funding Request Guide" icon="file-invoice-dollar" href="/user-guide/credit-facility/funding-request">
+    Learn how to submit funding requests and track their status.
   </Card>
-  <Card title="Monthly Reporting" icon="chart-line" href="/user-guide/servicer/monthly-reporting">
-    Generate and submit monthly performance reports.
+  <Card title="Funding Notice Guide" icon="coin" href="/user-guide/credit-facility/funding-notice">
+    Understand the funding notice process and token distribution.
   </Card>
-  <Card title="Loan Management" icon="list-check" href="/user-guide/servicer/loan-management">
-    Manage individual loans and track performance metrics.
+  <Card title="Loan Mapping Guide" icon="link" href="/user-guide/credit-facility/loan-mapping">
+    Map your loans to the credit facility for collateral management.
   </Card>
-</Columns>
+</CardGroup>
 
-## Role-Based Access
+---
 
-Understand the different user roles and their specific capabilities.
+## Who Uses This Module?
 
-<Columns cols={2}>
-  <Card title="Issuer Guide" icon="building" href="/user-guide/roles/issuer">
-    Complete guide for borrowers and issuers.
+<AccordionGroup>
+  <Accordion title="Issuer (Borrower)" icon="building" defaultOpen>
+    **You are seeking funding.** As the Borrower, you:
+    - Create and sign term sheets to request credit facilities
+    - Submit funding requests when you need capital
+    - Approve token transfers to receive funds
+    - Map your loans as collateral
+  </Accordion>
+  
+  <Accordion title="Facility Agent" icon="user-tie">
+    **They manage the process.** The Facility Agent:
+    - Reviews and approves/rejects your term sheets
+    - Configures master commitments with lender details
+    - Approves or rejects your funding requests
+    - Signs funding notices on behalf of lenders
+  </Accordion>
+  
+  <Accordion title="Lender" icon="landmark">
+    **They provide the funds.** Lenders:
+    - Review and approve master commitments
+    - View funding notices after your approval
+    - Transfer funds directly to you
+    - Track their investment and token allocations
+  </Accordion>
+  
+  <Accordion title="Servicer" icon="gears">
+    **They manage ongoing operations.** Servicers:
+    - Upload monthly loan performance data
+    - Track loan payments and performance
+    - Support borrowing base calculations
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Complete Workflow at a Glance
+
+```mermaid
+flowchart TD
+    subgraph TermSheet["📄 Term Sheet"]
+        TS1[DRAFT] -->|Sign Electronically| TS2[BorrowerSigned]
+        TS2 -->|Submit| TS3[Under Review]
+        TS3 -->|Approved| TS4[Accepted]
+        TS3 -->|Declined| TS5[Rejected]
+        TS3 -->|Needs Changes| TS6[Revision Needed]
+        TS6 -->|Edit & Resubmit| TS2
+    end
+    
+    subgraph MasterCommitment["🤝 Master Commitment"]
+        TS4 -->|Auto-Created| MC1[Setup in Progress]
+        MC1 -->|FA Submits| MC2[Awaiting Lender Approval]
+        MC2 -->|Lender Approves| MC3[ACTIVE]
+    end
+    
+    subgraph FundingRequest["💰 Funding Request"]
+        MC3 -->|Create Request| FR1[Draft Request]
+        FR1 -->|Submit| FR2[Under Review]
+        FR2 -->|Approved| FR3[Request Approved]
+        FR2 -->|Declined| FR4[Request Rejected]
+        FR2 -->|Needs Changes| FR5[Revision Needed]
+        FR5 -->|Edit & Resubmit| FR1
+    end
+    
+    subgraph FundingNotice["🪙 Funding Notice"]
+        FR3 -->|Auto-Generated| FN1[Preparing Tokens]
+        FN1 -->|Tokens Created| FN2[Ready for Approval]
+        FN2 -->|Borrower Approves| FN3[Visible to Lenders]
+        FN3 -->|Lenders Confirm| FN4[Funds Transferred ✅]
+    end
+```
+
+---
+
+## Key Platform Features
+
+<CardGroup cols={3}>
+  <Card title="Electronic Signatures" icon="signature">
+    Sign documents securely through Zoho Sign at every step of the process.
   </Card>
-  <Card title="Facility Agent Guide" icon="user-tie" href="/user-guide/roles/facility-agent">
-    Guide for facility agents and underwriters.
+  <Card title="Blockchain Security" icon="shield-halved">
+    All transactions are recorded on blockchain for transparency and security.
   </Card>
-  <Card title="Lender Guide" icon="hand-holding-usd" href="/user-guide/roles/lender">
-    Guide for lenders and investors.
+  <Card title="Document Storage" icon="cloud">
+    Documents are stored securely in IPFS with complete version history.
   </Card>
-  <Card title="Servicer Guide" icon="cogs" href="/user-guide/roles/servicer">
-    Guide for loan servicers and administrators.
+  <Card title="Real-time Tracking" icon="bolt">
+    Track status updates and receive notifications as your requests progress.
   </Card>
-</Columns>
+  <Card title="Borrowing Base" icon="calculator">
+    Automated calculations to determine your available borrowing capacity.
+  </Card>
+  <Card title="Token Distribution" icon="coins">
+    Seamless token creation and distribution for funding execution.
+  </Card>
+</CardGroup>
 
-## Support & Resources
+---
 
-Get help and access additional resources for the Intain Markets platform.
+## Need Help?
 
-<Card title="Contact Support" icon="headset" href="mailto:support@intainft.com">
-  Reach out to our support team for assistance with the platform.
-</Card>
-
-## Key Features
-
-- **End-to-End Workflow**: Complete credit facility lifecycle management
-- **DocuSign Integration**: Electronic signatures for all documents
-- **IPFS Storage**: Decentralized, secure document storage
-- **Role-Based Access**: Granular permissions for different user types
-- **Real-Time Updates**: Live status tracking and notifications
-- **Blockchain Integration**: Transparent and immutable record keeping
-- **FT Token Management**: Automated token creation and distribution
-- **Comprehensive Reporting**: Detailed analytics and performance metrics
+<CardGroup cols={2}>
+  <Card title="Contact Support" icon="headset" href="mailto:support@intainft.com">
+    Reach our support team for assistance
+  </Card>
+  <Card title="Platform Access" icon="globe" href="https://intainmarkets.us/" target="_blank">
+    Access the Intain Markets platform
+  </Card>
+</CardGroup>
