@@ -1,183 +1,126 @@
 ---
-title: "Credit Facility Module"
-description: "Complete user guide for the Credit Facility workflow in Intain Markets - from term sheet creation to funding execution"
+title: "Loan Onboarding Module"
 sidebarTitle: "Introduction"
+description: "Complete user guide for loan onboarding, verification, and NFT minting on Intain Markets"
 ---
 
-<div style={{ textAlign: 'center', padding: '20px 0' }}>
-  <Icon icon="building-columns" size={80} color="#0F4C81" />
+<div className="flex items-center justify-center mb-8">
+  <Icon icon="file-upload" size={80} color="#0F4C81" />
 </div>
 
-## Welcome to the Credit Facility Module
+# Welcome to Loan Onboarding
 
-The **Credit Facility Module** in Intain Markets enables organizations to manage the complete lifecycle of credit facility transactions. This guide will walk you through every step—from creating your initial term sheet to receiving funding from lenders.
+Intain Markets provides a comprehensive digital platform for onboarding loans, verifying data accuracy, and creating blockchain-based NFT certificates. This guide walks you through every step of the process, from loan tape upload to NFT minting.
 
-<CardGroup cols={2}>
-  <Card title="Access Platform" icon="rocket" href="https://intainmarkets.us/" target="_blank">
-    Launch Intain Markets platform
+<Info>
+  **Common Process:** Loan onboarding, verification, and NFT minting are common workflows used across all transaction types including Credit Facility, Securitization, and Whole Loan deals.
+</Info>
+
+## What is Loan Onboarding?
+
+Loan onboarding is the process of importing loan data into the Intain Markets platform, standardizing it to a common format, and preparing it for verification and tokenization. This includes:
+
+- **Uploading loan tapes** (Excel/CSV files)
+- **Mapping fields** to standard formats
+- **Processing and validating** loan data
+- **Creating verification batches**
+- **Verifying loan accuracy** (self-certification or VA verification)
+- **Minting NFT certificates** on blockchain
+
+## Key Features
+
+<CardGroup cols={3}>
+  <Card title="Automated Field Mapping" icon="arrows-rotate">
+    AI-powered field mapping from loan tape to standard format
   </Card>
-  <Card title="Workflow Overview" icon="diagram-project" href="/user-guide/credit-facility/overview">
-    Understand the complete credit facility workflow
+  <Card title="Flexible Verification" icon="shield-check">
+    Self-certification or third-party VA verification options
   </Card>
-</CardGroup>
-
----
-
-## How the Credit Facility Works
-
-The Credit Facility workflow guides you through four main stages. Each stage builds upon the previous one, creating a streamlined path from initial request to receiving funds.
-
-<Steps>
-  <Step title="Term Sheet Creation" icon="file-contract">
-    **You (the Borrower)** start by creating a term sheet that outlines your credit facility request—how much you need, the terms, and supporting documents. After signing electronically, you submit it for review.
-  </Step>
-  <Step title="Master Commitment Setup" icon="handshake">
-    Once your term sheet is approved, a **Master Commitment** is automatically created. The Facility Agent configures the lenders and rules, then lenders review and approve it.
-  </Step>
-  <Step title="Funding Request" icon="money-bill-wave">
-    With an active Master Commitment, you can now **request funds**. Submit your funding request with the amount you need, and the Facility Agent will review and approve it.
-  </Step>
-  <Step title="Funding & Token Transfer" icon="coins">
-    Approved requests generate **Funding Notices** automatically. Tokens are created and distributed, and lenders transfer funds directly to you.
-  </Step>
-</Steps>
-
----
-
-## Quick Navigation
-
-Find the guide you need:
-
-<CardGroup cols={2}>
-  <Card title="Roles & Permissions" icon="users" href="/user-guide/credit-facility/roles-permissions">
-    Learn about the different user roles and what each can do in the platform.
+  <Card title="Blockchain NFTs" icon="coins">
+    Immutable NFT certificates for verified loans
   </Card>
-  <Card title="Term Sheet Guide" icon="file-signature" href="/user-guide/credit-facility/term-sheet">
-    Step-by-step instructions to create, sign, and submit your term sheet.
+  <Card title="Batch Processing" icon="layer-group">
+    Efficient batch management for multiple loans
   </Card>
-  <Card title="Master Commitment Guide" icon="building-columns" href="/user-guide/credit-facility/master-commitment">
-    Understand how master commitments are configured and approved.
+  <Card title="IPFS Storage" icon="database">
+    Decentralized document storage for certificates
   </Card>
-  <Card title="Funding Request Guide" icon="file-invoice-dollar" href="/user-guide/credit-facility/funding-request">
-    Learn how to submit funding requests and track their status.
-  </Card>
-  <Card title="Funding Notice Guide" icon="coin" href="/user-guide/credit-facility/funding-notice">
-    Understand the funding notice process and token distribution.
-  </Card>
-  <Card title="Loan Mapping Guide" icon="link" href="/user-guide/credit-facility/loan-mapping">
-    Map your loans to the credit facility for collateral management.
+  <Card title="Status Tracking" icon="chart-line">
+    Real-time status updates throughout the workflow
   </Card>
 </CardGroup>
 
----
+## Platform Participants
 
-## Who Uses This Module?
-
-<AccordionGroup>
-  <Accordion title="Issuer (Borrower)" icon="building" defaultOpen>
-    **You are seeking funding.** As the Borrower, you:
-    - Create and sign term sheets to request credit facilities
-    - Submit funding requests when you need capital
-    - Approve token transfers to receive funds
-    - Map your loans as collateral
-  </Accordion>
-  
-  <Accordion title="Facility Agent" icon="user-tie">
-    **They manage the process.** The Facility Agent:
-    - Reviews and approves/rejects your term sheets
-    - Configures master commitments with lender details
-    - Approves or rejects your funding requests
-    - Signs funding notices on behalf of lenders
-  </Accordion>
-  
-  <Accordion title="Lender" icon="landmark">
-    **They provide the funds.** Lenders:
-    - Review and approve master commitments
-    - View funding notices after your approval
-    - Transfer funds directly to you
-    - Track their investment and token allocations
-  </Accordion>
-  
-  <Accordion title="Servicer" icon="gears">
-    **They manage ongoing operations.** Servicers:
-    - Upload monthly loan performance data
-    - Track loan payments and performance
-    - Support borrowing base calculations
-  </Accordion>
-</AccordionGroup>
-
----
+<CardGroup cols={2}>
+  <Card title="Issuer" icon="building">
+    Uploads loan tapes, creates batches, and manages verification
+  </Card>
+  <Card title="Verification Agent (VA)" icon="user-shield">
+    Reviews and certifies loan data accuracy for third-party verification
+  </Card>
+</CardGroup>
 
 ## Complete Workflow at a Glance
 
 ```mermaid
 flowchart TD
-    subgraph TermSheet["📄 Term Sheet"]
-        TS1[DRAFT] -->|Sign Electronically| TS2[BorrowerSigned]
-        TS2 -->|Submit| TS3[Under Review]
-        TS3 -->|Approved| TS4[Accepted]
-        TS3 -->|Declined| TS5[Rejected]
-        TS3 -->|Needs Changes| TS6[Revision Needed]
-        TS6 -->|Edit & Resubmit| TS2
+    subgraph Phase1["Phase 1: Loan Upload"]
+        A[Upload Loan Tape] --> B[Auto-Map Fields]
+        B --> C[Review Mapping]
+        C --> D[Process & Standardize]
     end
     
-    subgraph MasterCommitment["🤝 Master Commitment"]
-        TS4 -->|Auto-Created| MC1[Setup in Progress]
-        MC1 -->|FA Submits| MC2[Awaiting Lender Approval]
-        MC2 -->|Lender Approves| MC3[ACTIVE]
+    subgraph Phase2["Phase 2: Batch Creation"]
+        D --> E[Select Loans]
+        E --> F[Create Batch]
+        F --> G[Choose Verification Method]
     end
     
-    subgraph FundingRequest["💰 Funding Request"]
-        MC3 -->|Create Request| FR1[Draft Request]
-        FR1 -->|Submit| FR2[Under Review]
-        FR2 -->|Approved| FR3[Request Approved]
-        FR2 -->|Declined| FR4[Request Rejected]
-        FR2 -->|Needs Changes| FR5[Revision Needed]
-        FR5 -->|Edit & Resubmit| FR1
+    subgraph Phase3["Phase 3: Verification"]
+        G --> H{Verification Type}
+        H -->|Self| I[ZohoSign Self-Certify]
+        H -->|VA| J[Submit to VA]
+        I --> K[Batch Verified]
+        J --> L[VA Reviews]
+        L --> K
     end
     
-    subgraph FundingNotice["🪙 Funding Notice"]
-        FR3 -->|Auto-Generated| FN1[Preparing Tokens]
-        FN1 -->|Tokens Created| FN2[Ready for Approval]
-        FN2 -->|Borrower Approves| FN3[Visible to Lenders]
-        FN3 -->|Lenders Confirm| FN4[Funds Transferred ✅]
+    subgraph Phase4["Phase 4: NFT Minting"]
+        K --> M[Select Loans for NFT]
+        M --> N[Mint NFT Certificates]
+        N --> O[Loans Tokenized]
     end
 ```
 
----
-
-## Key Platform Features
-
-<CardGroup cols={3}>
-  <Card title="Electronic Signatures" icon="signature">
-    Sign documents securely through Zoho Sign at every step of the process.
-  </Card>
-  <Card title="Blockchain Security" icon="shield-halved">
-    All transactions are recorded on blockchain for transparency and security.
-  </Card>
-  <Card title="Document Storage" icon="cloud">
-    Documents are stored securely in IPFS with complete version history.
-  </Card>
-  <Card title="Real-time Tracking" icon="bolt">
-    Track status updates and receive notifications as your requests progress.
-  </Card>
-  <Card title="Borrowing Base" icon="calculator">
-    Automated calculations to determine your available borrowing capacity.
-  </Card>
-  <Card title="Token Distribution" icon="coins">
-    Seamless token creation and distribution for funding execution.
-  </Card>
-</CardGroup>
-
----
-
-## Need Help?
+## Quick Navigation
 
 <CardGroup cols={2}>
-  <Card title="Contact Support" icon="headset" href="mailto:support@intainft.com">
-    Reach our support team for assistance
+  <Card title="Overview & Concepts" icon="book-open" href="/user-guide/loan-onboarding/overview">
+    Understand the complete loan onboarding workflow and key concepts
   </Card>
-  <Card title="Platform Access" icon="globe" href="https://intainmarkets.us/" target="_blank">
-    Access the Intain Markets platform
+  <Card title="Roles & Permissions" icon="users" href="/user-guide/loan-onboarding/roles-permissions">
+    Learn about Issuer and VA roles and their responsibilities
+  </Card>
+  <Card title="Loan Onboarding" icon="file-upload" href="/user-guide/loan-onboarding/loan-onboarding">
+    Upload loan tapes and map fields to standard format
+  </Card>
+  <Card title="Batch Management" icon="layer-group" href="/user-guide/loan-onboarding/batch-management">
+    Create and manage verification batches
+  </Card>
+  <Card title="Verification Flow" icon="shield-check" href="/user-guide/loan-onboarding/verification-flow">
+    Self-certification and VA verification processes
+  </Card>
+  <Card title="NFT Minting" icon="coins" href="/user-guide/loan-onboarding/nft-minting">
+    Create blockchain NFT certificates for verified loans
+  </Card>
+  <Card title="VA Operations" icon="user-shield" href="/user-guide/loan-onboarding/va-operations">
+    Verification Agent dashboard and workflows
   </Card>
 </CardGroup>
+
+---
+
+<Card title="Contact Support" icon="headset" href="mailto:support@intainft.com" target="_blank">
+  Need help? Our support team is available to assist you with any questions about loan onboarding and verification.
+</Card>
