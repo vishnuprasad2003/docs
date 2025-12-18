@@ -4,7 +4,9 @@
   "name": "Intain Markets",
   "colors": {
     "primary": "#0F4C81",
+    "primary": "#0F4C81",
     "light": "#3B82F6",
+    "dark": "#0A2E4D"
     "dark": "#0A2E4D"
   },
   "favicon": "/favicon.png",
@@ -47,29 +49,49 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Loan Onboarding",
+        "tab": "Credit Facility",
         "groups": [
           {
             "group": "Getting Started",
             "pages": [
               "index",
-              "user-guide/loan-onboarding/overview",
-              "user-guide/loan-onboarding/roles-permissions"
+              "user-guide/credit-facility/overview",
+              "user-guide/credit-facility/roles-permissions"
             ]
           },
           {
-            "group": "Loan Management",
+            "group": "Workflow Stages",
             "pages": [
-              "user-guide/loan-onboarding/loan-onboarding",
-              "user-guide/loan-onboarding/batch-management",
-              "user-guide/loan-onboarding/verification-flow"
+              "user-guide/credit-facility/term-sheet",
+              "user-guide/credit-facility/master-commitment",
+              "user-guide/credit-facility/funding-request",
+              "user-guide/credit-facility/funding-notice",
+              "user-guide/credit-facility/loan-mapping"
             ]
           },
           {
-            "group": "NFT & Certificates",
+            "group": "Document Management",
             "pages": [
-              "user-guide/loan-onboarding/nft-minting",
-              "user-guide/loan-onboarding/va-operations"
+              "user-guide/documents/zoho-sign-integration",
+              "user-guide/documents/ipfs-storage",
+              "user-guide/documents/file-uploads"
+            ]
+          },
+          {
+            "group": "Servicer Operations",
+            "pages": [
+              "user-guide/servicer/loan-tape-upload",
+              "user-guide/servicer/monthly-reporting",
+              "user-guide/servicer/loan-management"
+            ]
+          },
+          {
+            "group": "Role-Based Guides",
+            "pages": [
+              "user-guide/roles/issuer",
+              "user-guide/roles/facility-agent",
+              "user-guide/roles/lender",
+              "user-guide/roles/servicer"
             ]
           }
         ]
