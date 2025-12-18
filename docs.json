@@ -4,9 +4,7 @@
   "name": "Intain Markets",
   "colors": {
     "primary": "#0F4C81",
-    "primary": "#0F4C81",
     "light": "#3B82F6",
-    "dark": "#0A2E4D"
     "dark": "#0A2E4D"
   },
   "favicon": "/favicon.png",
