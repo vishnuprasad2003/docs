@@ -1,242 +1,324 @@
 ---
-title: "Loan Mapping to Credit Facility"
-description: "Complete guide to mapping loans to credit facilities and managing loan portfolios"
+title: "Loan Mapping"
+description: "How to map your loans to your credit facility for collateral management"
+sidebarTitle: "Loan Mapping"
 ---
 
-# Loan Mapping to Credit Facility
+## What is Loan Mapping?
 
-Loan mapping allows borrowers to associate specific loans with their credit facilities. This process is essential for collateral management and borrowing base calculations.
+**Loan Mapping** is how you connect your loans to your credit facility. When you map loans to your facility, they become part of your collateral pool. This determines how much you can borrow—your **borrowing base** is calculated based on the loans you've mapped.
 
-## Overview
+<Info>
+**Why It Matters:** You must map loans to your facility before they can be counted as collateral. Unmapped loans don't contribute to your borrowing capacity.
+</Info>
 
-The loan mapping process includes:
+---
 
-1. **Loan Selection** - Choose loans to map to credit facility
-2. **Validation** - Ensure loans meet eligibility requirements
-3. **Mapping Process** - Associate loans with credit facility
-4. **Borrowing Base Calculation** - Calculate available borrowing capacity
-5. **Ongoing Management** - Monitor and update loan mappings
+## Before You Can Map Loans
 
-## Prerequisites
+Make sure you have:
 
-Before mapping loans, ensure:
+<Checklist>
+  - An **ACTIVE** Master Commitment
+  - A Servicer assigned to your facility
+  - Loans uploaded and processed in the system
+  - NFTs created for your loans (the system does this automatically)
+  - Loans not already mapped to another facility
+</Checklist>
 
-- Master commitment status is **ACTIVE**
-- Loans are properly uploaded and processed
-- Loan data is complete and validated
-- Servicer organization is assigned
+<Warning>
+**NFT Requirement:** Each loan must have an NFT (digital certificate) created before it can be mapped. If your loans don't have NFTs yet, you'll need to create them first.
+</Warning>
 
-## Accessing Loan Mapping
+---
 
-### Step 1: Navigate to Loan Mapping
+## How to Map Loans
 
-1. Go to your **Issuer Dashboard**
-2. Select an **ACTIVE** master commitment
-3. Click **"Map Loans to Facility"**
+<img src="/images/addLoansToFacility.png" alt="Add Loans to Facility Interface" className="rounded-lg shadow-lg" />
 
-<Image src="/images/addLoansToFacility.png" alt="Add Loans to Facility Interface" />
+### Step 1: Access Loan Mapping
 
-### Step 2: Select Loans
+<Steps>
+  <Step title="Go to Your Dashboard">
+    Log in and navigate to your Credit Facility dashboard.
+  </Step>
+  <Step title="Select Your Master Commitment">
+    Choose the ACTIVE Master Commitment you want to add loans to.
+  </Step>
+  <Step title="Click Map Loans">
+    Find and click the **"Map Loans to Facility"** option.
+  </Step>
+  <Step title="View Available Loans">
+    The system shows all your eligible, unmapped loans.
+  </Step>
+</Steps>
 
-**Available Options:**
-- **Select All** - Map all eligible loans
-- **Individual Selection** - Choose specific loans
-- **Filter by Criteria** - Use filters to narrow selection
+### Step 2: Select Loans to Map
 
-**Selection Criteria:**
-- Loans must belong to the same issuer
-- Loans must not be already mapped to another facility
-- Loans must have "Contract Digitized" = "Yes"
+You have two options for selecting loans:
 
-## Loan Selection Process
+<Tabs>
+  <Tab title="Select Individual Loans">
+    **Choose Specific Loans**
+    
+    Best when you want to control exactly which loans are included.
+    
+    <Steps>
+      <Step title="Browse the List">
+        Review your available loans and their details.
+      </Step>
+      <Step title="Check the Boxes">
+        Click the checkbox next to each loan you want to map.
+      </Step>
+      <Step title="Review Selection">
+        Verify you've selected the right loans.
+      </Step>
+      <Step title="Click Map">
+        Click **"Map Selected Loans"** to proceed.
+      </Step>
+    </Steps>
+  </Tab>
+  
+  <Tab title="Select All Loans">
+    **Map All Available Loans**
+    
+    Best when you want to include your entire eligible portfolio.
+    
+    <Steps>
+      <Step title="Click Select All">
+        Use the **"Select All"** option at the top.
+      </Step>
+      <Step title="Review Total Count">
+        Verify the total number of loans to be mapped.
+      </Step>
+      <Step title="Click Map">
+        Click **"Map Selected Loans"** to proceed.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
-### Individual Loan Selection
+### Step 3: Confirm Mapping
 
-1. **Review Loan List** - Browse available loans
-2. **Check Eligibility** - Verify loan meets requirements
-3. **Select Loans** - Choose loans to map
-4. **Review Selection** - Confirm selected loans
-5. **Submit Mapping** - Complete the mapping process
+<Steps>
+  <Step title="Review Your Selection">
+    Double-check the loans you're about to map.
+  </Step>
+  <Step title="Confirm">
+    Click to confirm the mapping.
+  </Step>
+  <Step title="Processing">
+    The system validates and maps each loan.
+  </Step>
+  <Step title="Confirmation">
+    You receive confirmation with the count of mapped loans.
+  </Step>
+</Steps>
 
-### Bulk Selection
+---
 
-**Select All Option:**
-- Automatically selects all eligible loans
-- Validates all loans meet requirements
-- Processes mapping in batch
+## What Happens When You Map Loans
 
-**Filtered Selection:**
-- Use filters to narrow loan list
-- Apply criteria-based selection
-- Review filtered results before mapping
+When loans are successfully mapped:
 
-## Validation Process
+<AccordionGroup>
+  <Accordion title="Loans Are Linked" icon="link" defaultOpen>
+    Each mapped loan is now associated with your credit facility:
+    - Loan status changes from "Unmapped" to "Mapped"
+    - Facility name is recorded on each loan
+    - Loans appear in your facility's collateral pool
+  </Accordion>
+  
+  <Accordion title="Principal Balance Updates" icon="calculator">
+    Your facility's collateral balance is recalculated:
+    - System adds up the principal balance of all mapped loans
+    - Your Master Commitment's balance is updated
+    - This affects your borrowing capacity
+  </Accordion>
+  
+  <Accordion title="Borrowing Base Recalculates" icon="chart-line">
+    Your available borrowing capacity is updated:
+    - More collateral = higher borrowing base
+    - New available capacity is calculated
+    - You can request more funding if capacity increases
+  </Accordion>
+</AccordionGroup>
 
-### Loan Eligibility Checks
+---
 
-**Required Validations:**
-- **Contract Digitized** - Must be "Yes"
-- **Issuer Match** - Must belong to same issuer
-- **Not Already Mapped** - Cannot be mapped to another facility
-- **Data Completeness** - All required fields populated
+## Understanding Borrowing Base
 
-### System Validation
+Your borrowing base determines how much you can borrow. Here's how it works:
 
-**Automatic Checks:**
-- Loan ID consistency between PostgreSQL and MongoDB
-- Data integrity validation
-- Eligibility rule compliance
-- Capacity calculations
+| Component | Description |
+|-----------|-------------|
+| **Collateral Value** | Total value of your mapped loans |
+| **Advance Rate** | Percentage you can borrow (from your facility terms) |
+| **Borrowing Base** | Collateral Value × Advance Rate |
+| **Outstanding Draws** | What you've already borrowed |
+| **Available Capacity** | Borrowing Base - Outstanding Draws |
 
-## Mapping Process
+<Note>
+**Example Calculation:**
 
-### Submission Details
+- Total Mapped Loan Value: **$50,000,000**
+- Advance Rate: **85%**
+- Borrowing Base: **$42,500,000**
+- Already Borrowed: **$10,000,000**
+- **Available to Borrow: $32,500,000**
+</Note>
 
-**Required Information:**
-- **Job ID** - Unique identifier for mapping job
-- **Selected Loans** - Array of loan IDs
-- **Issuer ID** - Borrower identifier
-- **Deal ID** - Deal identifier
-- **Issuer Org ID** - Organization identifier
-- **Deal Name** - Credit facility name
+---
 
-### Processing Steps
+## Loan Eligibility Requirements
 
-1. **Validation** - Validate all selected loans
-2. **Update Loans** - Update loan records with facility mapping
-3. **Update Previews** - Update loan preview records
-4. **Confirmation** - Confirm successful mapping
+Not all loans can be mapped. The system checks:
 
-## Borrowing Base Calculation
+| Requirement | What It Means |
+|-------------|---------------|
+| **NFT Created** | Loan must have a digital certificate on blockchain |
+| **Not Already Mapped** | Can't be assigned to another facility |
+| **Status: Unmapped** | Must be available for mapping |
+| **Meets Collateral Rules** | Must meet your facility's eligibility criteria |
 
-### Calculation Process
+<Warning>
+**If Loans Can't Be Mapped:**
 
-**Automatic Calculation:**
-- System calculates borrowing base based on mapped loans
-- Applies collateral eligibility rules
-- Determines available borrowing capacity
-- Updates facility capacity metrics
+If you see an error, check:
+- Do the loans have NFTs? Create them if not.
+- Are they already mapped elsewhere?
+- Do they meet your facility's collateral rules?
+</Warning>
 
-### Key Metrics
+---
 
-**Borrowing Base Components:**
-- **Total Loan Value** - Sum of mapped loan values
-- **Advance Rate** - Percentage from master commitment
-- **Eligible Amount** - Calculated borrowing capacity
-- **Available Capacity** - Remaining borrowing capacity
+## Viewing Mapped Loans
 
-## Loan Portfolio Management
+After mapping, you can see your loans in several places:
 
-### Portfolio Overview
+| Where | What You See |
+|-------|-------------|
+| **Master Commitment Details** | Total collateral balance |
+| **Loan List** | All mapped loans with "Mapped" status |
+| **Borrowing Base Report** | How loans contribute to capacity |
 
-**Dashboard Features:**
-- **Total Loans Mapped** - Count of mapped loans
-- **Total Value** - Aggregate loan value
-- **Borrowing Base** - Available borrowing capacity
-- **Utilization** - Current utilization percentage
-
-### Individual Loan Management
-
-**Loan Details:**
-- **Loan ID** - Unique loan identifier
-- **Loan Value** - Original loan amount
-- **Current Balance** - Outstanding balance
-- **Status** - Loan status and performance
-- **Mapping Date** - When loan was mapped
+---
 
 ## Best Practices
 
-### Loan Selection
+### Before Mapping
 
-**Quality Considerations:**
-- **Performance History** - Review loan performance
-- **Documentation** - Ensure complete documentation
-- **Compliance** - Verify regulatory compliance
-- **Risk Assessment** - Evaluate loan risk factors
+<Checklist>
+  - Verify all loans have NFTs created
+  - Review loan data for accuracy
+  - Check that loans meet collateral eligibility rules
+  - Confirm your facility has sufficient capacity for your needs
+</Checklist>
 
-### Portfolio Management
+### During Mapping
 
-**Ongoing Monitoring:**
-- **Regular Reviews** - Monitor loan performance
-- **Update Mappings** - Adjust mappings as needed
-- **Performance Tracking** - Track key metrics
-- **Risk Management** - Manage portfolio risk
+<Checklist>
+  - For large portfolios, consider mapping in batches
+  - Double-check loan counts before confirming
+  - Keep records of which loans you map
+</Checklist>
 
-## Troubleshooting
+### After Mapping
 
-### Common Issues
+<Checklist>
+  - Verify your borrowing base updated correctly
+  - Check that available capacity reflects new collateral
+  - Review monthly reporting requirements with your Servicer
+</Checklist>
 
-**Cannot Map Loans:**
-- Check master commitment status (must be ACTIVE)
-- Verify loan eligibility requirements
-- Ensure loans are not already mapped
-- Confirm servicer organization assignment
+---
 
-**Mapping Failed:**
-- Check loan data completeness
-- Verify contract digitization status
-- Ensure stable network connection
-- Contact support if issue persists
+## Impact on Your Facility
 
-**Borrowing Base Issues:**
-- Review collateral eligibility rules
-- Check loan value calculations
-- Verify advance rate settings
-- Consult with facility agent
+When you map more loans:
 
-### Data Consistency
+<CardGroup cols={2}>
+  <Card title="Increased Collateral" icon="arrow-up">
+    More loans = higher collateral value supporting your facility.
+  </Card>
+  <Card title="Higher Borrowing Capacity" icon="money-bill-wave">
+    More collateral typically means you can borrow more.
+  </Card>
+  <Card title="Updated Utilization" icon="chart-pie">
+    Your utilization percentage may decrease with more collateral.
+  </Card>
+  <Card title="Better Reporting" icon="file-lines">
+    All mapped loans are included in facility reporting.
+  </Card>
+</CardGroup>
 
-**PostgreSQL vs MongoDB:**
-- System checks consistency between databases
-- Reports missing loan IDs
-- Validates data integrity
-- Ensures accurate calculations
+---
 
-## Integration Points
+## Common Questions
 
-### Servicer Integration
+<AccordionGroup>
+  <Accordion title="Why can't I map my loans?" icon="question">
+    Common reasons:
+    - **No NFT:** Create NFTs for your loans first
+    - **Already Mapped:** Loans may be assigned to another facility
+    - **Master Commitment Not Active:** Wait for lender approval
+    - **Missing Permissions:** Verify you have Issuer access
+    
+    Check the specific error message for guidance.
+  </Accordion>
+  
+  <Accordion title="What does 'NFT Not Minted' mean?" icon="certificate">
+    Each loan needs a digital certificate (NFT) on the blockchain before it can be mapped. This creates a secure, verifiable record.
+    
+    **Solution:** Go to Loan Management and initiate NFT creation for your loans, then return to map them.
+  </Accordion>
+  
+  <Accordion title="Can I unmap loans?" icon="unlink">
+    Generally, unmapping loans requires administrator assistance. Contact your Facility Agent or support if you need to remove loans from your facility.
+  </Accordion>
+  
+  <Accordion title="Why didn't my borrowing base change?" icon="calculator">
+    Your borrowing base might not change if:
+    - The loans have zero principal balance
+    - There's a data issue with the loan values
+    - The system is still processing
+    
+    Wait a few minutes and refresh. If it still doesn't update, contact support.
+  </Accordion>
+  
+  <Accordion title="Can I map the same loan to multiple facilities?" icon="clone">
+    No. Each loan can only be mapped to one facility at a time. This ensures collateral isn't counted twice.
+  </Accordion>
+</AccordionGroup>
 
-**Servicer Role:**
-- **Loan Data Upload** - Upload monthly loan tapes
-- **Data Validation** - Ensure data accuracy
-- **Performance Reporting** - Provide performance reports
-- **Ongoing Management** - Manage loan portfolio
+---
 
-### Facility Agent Integration
+## Working with Your Servicer
 
-**Facility Agent Role:**
-- **Rule Configuration** - Set collateral eligibility rules
-- **Capacity Management** - Monitor borrowing capacity
-- **Performance Review** - Review loan performance
-- **Risk Assessment** - Assess portfolio risk
+After loans are mapped, your Servicer handles ongoing operations:
 
-## Reporting and Analytics
+| Servicer Responsibility | Description |
+|------------------------|-------------|
+| **Monthly Loan Tapes** | Upload updated loan performance data |
+| **Performance Tracking** | Monitor payments and delinquencies |
+| **Borrowing Base Support** | Provide data for capacity calculations |
+| **Reporting** | Generate required facility reports |
 
-### Portfolio Reports
+<Info>
+**Servicer Access:** Your Servicer can see and manage loan data for facilities they're assigned to. They'll upload monthly updates that affect your borrowing base calculations.
+</Info>
 
-**Available Reports:**
-- **Loan Summary** - Overview of mapped loans
-- **Performance Metrics** - Key performance indicators
-- **Risk Analysis** - Portfolio risk assessment
-- **Capacity Utilization** - Borrowing capacity usage
-
-### Real-time Updates
-
-**Live Monitoring:**
-- **Status Updates** - Real-time status changes
-- **Performance Tracking** - Live performance metrics
-- **Capacity Alerts** - Capacity threshold notifications
-- **Risk Alerts** - Risk threshold notifications
+---
 
 ## Next Steps
 
-After loan mapping:
+After mapping your loans:
 
-1. **Monitor Performance** - Track loan performance metrics
-2. **Update Mappings** - Adjust mappings as needed
-3. **Regular Reviews** - Conduct periodic portfolio reviews
-4. **Reporting** - Provide required reporting to stakeholders
-
-<Card title="Servicer Operations" icon="cogs" href="/user-guide/servicer/loan-tape-upload">
-  Learn about servicer operations and loan tape uploads.
-</Card>
+<CardGroup cols={2}>
+  <Card title="Create Funding Request" icon="money-bill-wave" href="/user-guide/credit-facility/funding-request">
+    Request funds against your available capacity.
+  </Card>
+  <Card title="Review Your Facility" icon="eye" href="/user-guide/credit-facility/overview">
+    Check your updated borrowing base and capacity.
+  </Card>
+</CardGroup>

@@ -1,350 +1,237 @@
 ---
 title: "Loan Tape Upload & Management"
-description: "Complete guide to uploading monthly loan tapes and managing loan data"
+description: "Guide to uploading monthly loan tapes and managing loan data in the credit facility"
 ---
 
-## Loan Tape Upload Overview
+## What is a Loan Tape?
 
-Loan tape uploads are a critical component of the credit facility platform, allowing servicers to provide monthly performance data for loans within credit facilities. This data is used for monitoring, reporting, and risk management purposes.
+A loan tape is a monthly data file containing detailed performance information about loans in your portfolio. Servicers upload these files regularly to keep the credit facility data current and accurate.
 
-## What are Loan Tapes?
+<Note>
+**Monthly Requirement:** Loan tapes should be uploaded by the end of each month to ensure accurate borrowing base calculations and reporting.
+</Note>
 
-Loan tapes are monthly data files containing detailed information about loan performance, including:
-- **Loan Identifiers**: Unique loan IDs and references
-- **Performance Metrics**: Payment history, delinquency status
-- **Financial Data**: Outstanding balances, interest rates
-- **Collateral Information**: Property values, LTV ratios
-- **Servicing Data**: Collection activities, modifications
+---
 
-## Upload Process
+## What's Included in a Loan Tape?
 
-### **Step 1: Prepare Loan Tape File**
+Loan tapes contain comprehensive information about each loan:
 
-#### **Supported Formats**
-- **Excel Files**: .xlsx, .xls, .xlsm
-- **CSV Files**: .csv (comma-separated values)
-- **File Size**: Maximum 10MB per file
-- **Encoding**: UTF-8 recommended
+| Data Category | Examples |
+|--------------|----------|
+| **Loan Identifiers** | Unique loan IDs, account numbers |
+| **Performance Data** | Payment history, delinquency status |
+| **Financial Information** | Outstanding balances, interest rates |
+| **Collateral Details** | Property values, LTV ratios |
+| **Servicing Notes** | Collection activities, modifications |
 
-#### **Required Columns**
-```csv
-Loan ID, Borrower Name, Outstanding Balance, Interest Rate, Payment Due, Payment Received, Delinquency Status, Property Value, LTV Ratio, Servicing Notes
-```
+---
 
-#### **Data Validation**
-- **Loan ID**: Must be unique and match existing loans
-- **Numeric Fields**: Outstanding balance, interest rate, property value
-- **Date Fields**: Payment due dates, payment received dates
-- **Status Fields**: Delinquency status, loan status
+## Supported File Formats
 
-### **Step 2: Access Upload Interface**
+The platform accepts the following file formats:
 
-1. **Login** as Servicer user
-2. **Navigate** to Loan Management section
-3. **Click** "Upload Loan Tape"
-4. **Select** the credit facility
-5. **Choose** the reporting month/year
+<CardGroup cols={2}>
+  <Card title="Excel Files" icon="file-excel">
+    **.xlsx**, **.xls**, **.xlsm** formats
+  </Card>
+  <Card title="CSV Files" icon="file-csv">
+    Comma-separated values (**.csv**)
+  </Card>
+</CardGroup>
 
-### **Step 3: Upload File**
+<Warning>
+**File Size Limit:** Maximum 10MB per file. For larger datasets, consider splitting into multiple files.
+</Warning>
 
-#### **Upload Form**
-```json
-{
-  "filename": "loan_tape_2024_01.xlsx",
-  "issuerId": "ISSUER-001",
-  "assetClass": "Residential Mortgage",
-  "asOfDate": "2024-01-31",
-  "issuerOrgId": "ORG-12345"
-}
-```
+---
 
-#### **Upload Process**
-1. **Select File**: Choose your loan tape file
-2. **Verify Details**: Confirm issuer and date information
-3. **Upload**: Click upload button
-4. **Processing**: System processes and validates data
-5. **Confirmation**: Receive upload confirmation
+## How to Upload a Loan Tape
 
-### **Step 4: Data Validation**
+### Step 1: Access the Upload Interface
 
-#### **Automatic Validation**
-- **File Format**: Verify file format and structure
-- **Required Columns**: Check for all required columns
-- **Data Types**: Validate numeric and date fields
-- **Loan Matching**: Match loan IDs to existing loans
-- **Duplicate Check**: Identify duplicate entries
+<Steps>
+  <Step title="Login as Servicer">
+    Sign in to [Intain Markets](https://intainmarkets.us/) with your Servicer credentials.
+  </Step>
+  <Step title="Navigate to Loan Management">
+    From your dashboard, find the **Loan Management** or **Upload Loan Tape** section.
+  </Step>
+</Steps>
 
-#### **Validation Results**
-```json
-{
-  "statuscode": 200,
-  "isSuccess": true,
-  "result": {
-    "filename": "loan_tape_2024_01.xlsx",
-    "jobId": "JOB-20240131-123456789",
-    "asOfDate": "2024-01-31T00:00:00Z",
-    "source": ".xlsx",
-    "rows": 1250,
-    "status": "UnMapped",
-    "uploadedBy": "ISSUER-001",
-    "issuerOrgId": "ORG-12345",
-    "assetClass": "Residential Mortgage",
-    "uploadDateAndTime": "2024-01-31T10:30:00Z"
-  }
-}
-```
+<img src="/images/servicerUploadLoanTapesProcesses.png" alt="Servicer Loan Tape Upload" className="rounded-lg shadow-lg" />
 
-## Data Processing
+### Step 2: Prepare Your Upload
 
-### **Processing Stages**
+Before uploading, ensure you have:
 
-#### **Stage 1: File Processing**
-- **File Reading**: Extract data from uploaded file
-- **Format Validation**: Verify file structure and format
-- **Data Extraction**: Parse data into system format
-- **Initial Validation**: Basic data validation
+<Accordion title="Pre-Upload Checklist" icon="clipboard-check" defaultOpen>
+- ✅ File is in supported format (Excel or CSV)
+- ✅ All required columns are present
+- ✅ Loan IDs match existing loans in the system
+- ✅ Numeric values are formatted correctly
+- ✅ Dates are in a consistent format
+- ✅ File size is under 10MB
+</Accordion>
 
-#### **Stage 2: Data Validation**
-- **Loan Matching**: Match loan IDs to existing loans
-- **Data Integrity**: Check for data consistency
-- **Business Rules**: Apply business logic validation
-- **Error Identification**: Flag data issues
+### Step 3: Upload Your File
 
-#### **Stage 3: Data Storage**
-- **Database Storage**: Store validated data
-- **IPFS Upload**: Store file in decentralized storage
-- **Blockchain Record**: Create immutable record
-- **Audit Trail**: Log all processing activities
+<Steps>
+  <Step title="Select File">
+    Click the upload button and choose your loan tape file from your computer.
+  </Step>
+  <Step title="Verify Information">
+    Confirm the issuer, asset class, and reporting date (as-of date).
+  </Step>
+  <Step title="Upload">
+    Click the upload button to submit your file.
+  </Step>
+  <Step title="Wait for Processing">
+    The system will validate and process your data. This may take a few minutes.
+  </Step>
+</Steps>
 
-### **Processing Results**
+### Step 4: Review Results
 
-#### **Success Response**
-```json
-{
-  "statuscode": 200,
-  "isSuccess": true,
-  "message": "Loan tape processed successfully",
-  "result": {
-    "jobId": "JOB-20240131-123456789",
-    "totalLoans": 1250,
-    "processedLoans": 1245,
-    "errors": 5,
-    "warnings": 12,
-    "processingTime": "00:02:30"
-  }
-}
-```
+After processing, you'll see a summary showing:
 
-#### **Error Handling**
-```json
-{
-  "statuscode": 400,
-  "isSuccess": false,
-  "message": "Data validation failed",
-  "errors": [
-    {
-      "row": 15,
-      "column": "Loan ID",
-      "error": "Duplicate loan ID found",
-      "value": "LOAN-12345"
-    },
-    {
-      "row": 23,
-      "column": "Outstanding Balance",
-      "error": "Invalid numeric format",
-      "value": "ABC123"
-    }
-  ]
-}
-```
+- **Total loans processed**
+- **Successfully validated records**
+- **Any errors or warnings**
+- **Processing status**
 
-## Loan Mapping to Credit Facilities
+<Tabs>
+  <Tab title="Success">
+    If all data validates correctly, your loan tape is accepted and the system updates the loan records.
+  </Tab>
+  <Tab title="Errors">
+    If validation fails, you'll see specific errors to fix. Common issues include:
+    - Missing required fields
+    - Invalid data formats
+    - Unmatched loan IDs
+    - Duplicate entries
+  </Tab>
+</Tabs>
 
-### **Mapping Process**
+---
 
-#### **Step 1: Access Mapping Interface**
-1. **Navigate** to Loan Mapping section
-2. **Select** the uploaded loan tape (jobId)
-3. **Choose** target credit facility
-4. **Review** loan eligibility
+## Data Validation
 
-#### **Step 2: Select Loans**
-```json
-{
-  "jobId": "JOB-20240131-123456789",
-  "selectAll": false,
-  "selectedLoans": ["LOAN-001", "LOAN-002", "LOAN-003"],
-  "issuerId": "ISSUER-001",
-  "dealId": "DEAL-20240131-123456789",
-  "issuerOrgId": "ORG-12345",
-  "dealName": "ABC Credit Facility"
-}
-```
+The system automatically validates your upload:
 
-#### **Step 3: Validate Eligibility**
-- **Collateral Rules**: Check against facility collateral rules
-- **Loan Criteria**: Verify loan meets eligibility requirements
-- **Capacity Check**: Ensure facility has available capacity
-- **Duplicate Check**: Prevent duplicate mappings
+### Automatic Checks
 
-#### **Step 4: Complete Mapping**
-```json
-{
-  "statuscode": 200,
-  "isSuccess": true,
-  "message": "Pool Updated Successfully",
-  "data": {
-    "loansUpdated": 3,
-    "previewsUpdated": 3,
-    "loansProcessed": 3
-  }
-}
-```
+| Check Type | What It Verifies |
+|-----------|-----------------|
+| **File Format** | Correct file type and structure |
+| **Required Fields** | All necessary columns are present |
+| **Data Types** | Numbers are numbers, dates are dates |
+| **Loan Matching** | Loan IDs exist in the system |
+| **Duplicate Check** | No duplicate entries |
 
-## Monthly Reporting Workflow
+### Handling Validation Errors
 
-### **Reporting Schedule**
-- **Monthly Uploads**: Required by end of each month
-- **Cut-off Date**: Typically last business day of month
-- **Processing Time**: 2-3 business days for processing
-- **Reporting Deadline**: 5th business day of following month
+If your upload has errors:
 
-### **Reporting Requirements**
+<Steps>
+  <Step title="Review Error Details">
+    Check which rows and columns have issues.
+  </Step>
+  <Step title="Fix in Source File">
+    Correct the errors in your original file.
+  </Step>
+  <Step title="Re-upload">
+    Upload the corrected file.
+  </Step>
+</Steps>
 
-#### **Required Data Elements**
-- **Loan Performance**: Payment history, delinquency status
-- **Financial Metrics**: Outstanding balances, interest rates
-- **Collateral Updates**: Property values, LTV ratios
-- **Servicing Activities**: Collection efforts, modifications
-- **Risk Indicators**: Early warning signals, risk factors
+---
 
-#### **Data Quality Standards**
-- **Completeness**: All required fields must be populated
-- **Accuracy**: Data must be accurate and current
-- **Consistency**: Data must be consistent across reports
-- **Timeliness**: Data must be submitted on schedule
+## What Happens After Upload?
 
-## Data Management
+Once your loan tape is successfully uploaded:
 
-### **Data Storage**
+1. **Data Storage** - Records are securely stored in the system
+2. **IPFS Backup** - A copy is stored in decentralized storage for permanence
+3. **Blockchain Record** - An immutable record is created for audit purposes
+4. **Reports Updated** - Performance reports reflect the new data
+5. **Borrowing Base** - Calculations are updated for credit facility borrowers
 
-#### **IPFS Storage**
-- **Decentralized**: Files stored in IPFS network
-- **Immutable**: Files cannot be modified after upload
-- **Accessible**: Files accessible via IPFS hash
-- **Secure**: Cryptographic hash verification
-
-#### **Database Storage**
-- **Structured Data**: Loan data stored in structured format
-- **Indexed**: Optimized for query performance
-- **Backed Up**: Regular backups and redundancy
-- **Audit Trail**: Complete change history
-
-#### **Blockchain Records**
-- **Immutable**: Records cannot be altered
-- **Transparent**: All transactions visible
-- **Verifiable**: Cryptographic verification
-- **Distributed**: No single point of failure
-
-### **Data Access**
-
-#### **Query Capabilities**
-- **Loan Search**: Search by loan ID, borrower name
-- **Performance Metrics**: Query by performance criteria
-- **Date Ranges**: Filter by date ranges
-- **Facility Filter**: Filter by credit facility
-
-#### **Reporting Tools**
-- **Performance Reports**: Generate performance reports
-- **Trend Analysis**: Analyze performance trends
-- **Risk Reports**: Generate risk assessment reports
-- **Compliance Reports**: Generate regulatory reports
+---
 
 ## Best Practices
 
-### **File Preparation**
-- **Standardize Format**: Use consistent file formats
-- **Validate Data**: Check data before upload
-- **Backup Files**: Keep local backups of uploaded files
-- **Document Changes**: Document any data changes
+<AccordionGroup>
+  <Accordion title="File Preparation" icon="file">
+    - Use consistent file formats each month
+    - Validate data before uploading
+    - Keep local backups of uploaded files
+    - Document any data changes or corrections
+  </Accordion>
+  
+  <Accordion title="Upload Process" icon="upload">
+    - Test with small files first if uncertain
+    - Monitor processing status after upload
+    - Address validation errors promptly
+    - Verify results match expectations
+  </Accordion>
+  
+  <Accordion title="Data Quality" icon="badge-check">
+    - Review data quality regularly
+    - Correct errors as soon as discovered
+    - Ensure consistency across monthly uploads
+    - Document data definitions and business rules
+  </Accordion>
+</AccordionGroup>
 
-### **Upload Process**
-- **Test Uploads**: Test with small files first
-- **Monitor Processing**: Monitor processing status
-- **Handle Errors**: Address validation errors promptly
-- **Verify Results**: Verify upload results
-
-### **Data Quality**
-- **Regular Reviews**: Regularly review data quality
-- **Error Correction**: Correct data errors promptly
-- **Consistency Checks**: Ensure data consistency
-- **Documentation**: Document data definitions and rules
+---
 
 ## Troubleshooting
 
-### **Common Issues**
+<Accordion title="Upload Fails Immediately" icon="circle-xmark">
+**Possible Causes:**
+- File format not supported
+- File too large (over 10MB)
+- Network connection issue
 
-#### **Upload Failures**
-- **File Format**: Ensure file is in supported format
-- **File Size**: Check file size limits
-- **Network Issues**: Verify internet connection
-- **Browser Issues**: Try different browser
+**Solutions:**
+- Save as .xlsx or .csv format
+- Split large files
+- Check internet connection
+</Accordion>
 
-#### **Validation Errors**
-- **Data Format**: Check data format and types
-- **Required Fields**: Ensure all required fields are populated
-- **Business Rules**: Verify data meets business rules
-- **Duplicate Data**: Check for duplicate entries
+<Accordion title="Validation Errors" icon="triangle-exclamation">
+**Possible Causes:**
+- Incorrect data formats
+- Missing required fields
+- Loan IDs don't match system records
 
-#### **Processing Delays**
-- **File Size**: Large files take longer to process
-- **System Load**: High system load can cause delays
-- **Data Complexity**: Complex data requires more processing
-- **Network Issues**: Network issues can cause delays
+**Solutions:**
+- Review error messages for specific rows/columns
+- Check data formatting requirements
+- Verify loan IDs against existing records
+</Accordion>
 
-## API Integration
+<Accordion title="Processing Takes Too Long" icon="clock">
+**Possible Causes:**
+- Large file with many records
+- System under heavy load
 
-### **Upload Loan Tape**
-```http
-POST /uploadloanlms
-Content-Type: multipart/form-data
+**Solutions:**
+- Wait for processing to complete (may take several minutes for large files)
+- Check system status if unusually long
+- Contact support if processing stalls
+</Accordion>
 
-{
-  "filename": "loan_tape_2024_01.xlsx",
-  "issuerId": "ISSUER-001",
-  "assetClass": "Residential Mortgage",
-  "asOfDate": "2024-01-31",
-  "issuerOrgId": "ORG-12345"
-}
-```
-
-### **Map Loans to Facility**
-```http
-POST /cf/maploanstofacility
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "jobId": "JOB-20240131-123456789",
-  "selectAll": false,
-  "selectedLoans": ["LOAN-001", "LOAN-002", "LOAN-003"],
-  "issuerId": "ISSUER-001",
-  "dealId": "DEAL-20240131-123456789",
-  "issuerOrgId": "ORG-12345",
-  "dealName": "ABC Credit Facility"
-}
-```
+---
 
 ## Next Steps
 
-<Card title="Monthly Reporting" icon="chart-line" href="/user-guide/servicer/monthly-reporting">
-  Learn about monthly reporting requirements and processes
-</Card>
-
-<Card title="Loan Management" icon="list-check" href="/user-guide/servicer/loan-management">
-  Understand loan management and performance tracking
-</Card>
-
-<Card title="Document Management" icon="file" href="/user-guide/documents/file-uploads">
-  Learn about document upload and management
-</Card>
+<CardGroup cols={2}>
+  <Card title="Monthly Reporting" icon="chart-line" href="/user-guide/servicer/monthly-reporting">
+    Learn about monthly reporting requirements
+  </Card>
+  <Card title="Loan Management" icon="list-check" href="/user-guide/servicer/loan-management">
+    Understand loan tracking and performance monitoring
+  </Card>
+</CardGroup>

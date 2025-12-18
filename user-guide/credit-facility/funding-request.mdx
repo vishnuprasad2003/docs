@@ -1,252 +1,290 @@
 ---
-title: "Funding Request Process"
-description: "Complete guide to creating, submitting, and managing funding requests against active master commitments"
+title: "Funding Request"
+description: "Step-by-step guide to creating and submitting funding requests against your active credit facility"
+sidebarTitle: "Funding Request"
 ---
 
-# Funding Request Process
+## What is a Funding Request?
 
-The funding request process allows borrowers to request funds against their active master commitments. This guide covers the complete workflow from creation to approval.
+A **Funding Request** is how you request money from your credit facility. Once you have an ACTIVE Master Commitment, you can submit funding requests whenever you need capital. Each request specifies how much you need and when you need it.
 
-## Overview
+<Info>
+**Prerequisite:** You can only create funding requests against Master Commitments that are **ACTIVE**. Make sure a lender has approved your Master Commitment first.
+</Info>
 
-Funding requests are created by borrowers against **ACTIVE** master commitments. The process includes:
+---
 
-1. **Draft Creation** - Create or retrieve existing draft funding request
-2. **Documentation** - Upload collateral addendum and supporting documents
-3. **Submission** - Submit for facility agent review
-4. **Review Process** - Facility agent approval, rejection, or change requests
-5. **Auto-Generation** - Approved requests automatically generate funding notices
+## Funding Request Journey
+
+```mermaid
+flowchart LR
+    A[Create Request] -->|Submit| B[Under Review]
+    B -->|Approved| C[Approved ✅]
+    B -->|Declined| D[Rejected ❌]
+    B -->|Needs Work| E[Changes Requested]
+    E -->|Edit & Resubmit| B
+    C -->|Auto-Generate| F[Funding Notice Created]
+```
+
+---
 
 ## Creating a Funding Request
 
-### Prerequisites
+<img src="/images/fundingRequest.png" alt="Funding Request Interface" className="rounded-lg shadow-lg" />
 
-Before creating a funding request, ensure:
+### Step 1: Start Your Request
 
-- Master commitment status is **ACTIVE**
-- All required master commitment fields are completed
-- You have necessary documentation ready
+<Steps>
+  <Step title="Go to Your Master Commitment">
+    From your dashboard, select your ACTIVE Master Commitment.
+  </Step>
+  <Step title="Click Create Funding Request">
+    Find and click the **"Create Funding Request"** button.
+  </Step>
+  <Step title="Draft Created">
+    A new funding request draft is created and ready for you to fill in.
+  </Step>
+</Steps>
 
-### Step 1: Access Funding Request Creation
+<Note>
+**One at a Time:** You can only have one draft funding request per Master Commitment. Complete or cancel your current request before starting a new one.
+</Note>
 
-1. Navigate to your **Issuer Dashboard**
-2. Select an **ACTIVE** master commitment
-3. Click **"Create Funding Request"**
+### Step 2: Fill in Your Request Details
 
-<Image src="/images/fundingRequest.png" alt="Funding Request Creation Interface" />
+Complete your funding request with the following information:
 
-### Step 2: Complete Funding Request Details
+| Field | What to Enter |
+|-------|--------------|
+| **Draw Amount** | How much money you're requesting |
+| **Currency** | Usually USD (pre-selected) |
+| **Funding Date** | When you need the funds |
+| **Purpose of Funds** | Brief description of how you'll use the money |
+| **Notes** | Any additional information for the Facility Agent |
 
-Fill in the required information:
+<Tip>
+**Auto-Save:** Your changes are saved automatically while in Draft status. You can leave and come back without losing your work.
+</Tip>
 
-**Basic Information:**
-- **Requested Amount** - Amount you want to borrow
-- **Purpose** - Detailed description of fund usage
-- **Collateral Description** - Description of collateral backing the request
-- **Drawdown Schedule** - Preferred funding schedule
-- **Use of Proceeds** - Specific use of the requested funds
+### Step 3: Upload Supporting Documents
 
-**Documentation:**
-- **Collateral Addendum** - Detailed collateral documentation
-- **Financial Statements** - Current financial information
-- **KYC Documents** - Know Your Customer documentation
+You may need to upload documentation to support your request:
 
-### Step 3: Auto-Save Functionality
+<Steps>
+  <Step title="Navigate to Documents">
+    Find the document upload section in your funding request.
+  </Step>
+  <Step title="Upload Collateral Addendum">
+    This is the primary document showing your collateral supporting this request.
+  </Step>
+  <Step title="Add Other Documents">
+    Upload any additional supporting documentation as needed.
+  </Step>
+</Steps>
 
-The system automatically saves your progress:
+| Document Type | Purpose |
+|--------------|---------|
+| **Collateral Addendum** | Primary collateral documentation for this draw |
+| **Financial Statements** | Updated financial information |
+| **KYC Documents** | Compliance documentation if required |
 
-- **Real-time saving** - Changes are saved as you type
-- **Draft preservation** - Work is never lost
-- **Resume capability** - Continue from where you left off
+### Step 4: Review Your Borrowing Base
 
-## Document Upload Process
+The system automatically calculates your **Borrowing Base**—this tells you how much you're eligible to borrow:
 
-### Collateral Addendum
+| Calculation | What It Means |
+|------------|---------------|
+| **Borrowing Base** | Total amount you're eligible to borrow |
+| **Available Capacity** | How much you can currently request |
+| **Utilization** | Percentage of your facility currently in use |
+| **Collateral Value** | Total value of your collateral |
 
-Upload detailed collateral documentation:
+<Warning>
+**Stay Within Limits:** Your draw amount must be within your available capacity. If you request more than available, the Facility Agent may reject or request changes.
+</Warning>
 
-1. Click **"Upload Collateral Addendum"**
-2. Select your document file
-3. Add description and metadata
-4. Confirm upload
+### Step 5: Submit for Review
 
-The document is stored securely in IPFS and linked to your funding request.
+When you're ready:
 
-### Supporting Documents
+<Steps>
+  <Step title="Review Everything">
+    Double-check all your information, amounts, and documents.
+  </Step>
+  <Step title="Submit">
+    Click **"Submit for Review"** to send to the Facility Agent.
+  </Step>
+  <Step title="Confirmation">
+    Your status changes to **"Under Review"** and the Facility Agent is notified.
+  </Step>
+</Steps>
 
-Additional documents may be required:
+---
 
-- **Financial Statements** - Current financial position
-- **KYC Documents** - Identity and compliance verification
-- **Legal Documents** - Any required legal documentation
+## What Happens After Submission?
 
-## Submission Process
+### The Facility Agent's Decision
 
-### Pre-Submission Validation
+<Tabs>
+  <Tab title="Approved ✅">
+    **Your Request is Funded**
+    
+    When approved:
+    - Status changes to **"Approved"**
+    - A **Funding Notice** is automatically generated
+    - You'll receive a notification
+    - The funding process begins
+    
+    <Card title="Next Step" icon="arrow-right" href="/user-guide/credit-facility/funding-notice">
+      Learn about Funding Notices and receiving funds
+    </Card>
+  </Tab>
+  
+  <Tab title="Rejected ❌">
+    **Request Declined**
+    
+    If rejected:
+    - Status changes to **"Rejected"**
+    - The rejection reason is documented
+    - This is a final state
+    
+    **What to Do:** Review the rejection reason. If appropriate, create a new funding request addressing the concerns.
+  </Tab>
+  
+  <Tab title="Changes Requested 🔄">
+    **Revisions Needed**
+    
+    If changes are requested:
+    - Status changes to **"Changes Requested"**
+    - You'll see comments explaining what to change
+    - You can edit your request again
+    - Auto-save is re-enabled
+    
+    **What to Do:** Make the requested changes and resubmit.
+  </Tab>
+</Tabs>
 
-Before submitting, the system validates:
+---
 
-- **Required Fields** - All mandatory fields completed
-- **Document Uploads** - Required documents uploaded
-- **Amount Validation** - Requested amount within available capacity
-- **Master Commitment Status** - Must be ACTIVE
+## Handling Change Requests
 
-### Submit for Review
+If the Facility Agent requests changes:
 
-1. Review all entered information
-2. Click **"Submit for Review"**
-3. Status changes to **FAReview**
-4. Facility agent receives notification
-
-## Review Process
-
-### Facility Agent Actions
-
-The facility agent can take three actions:
-
-#### 1. Approve Funding Request
-
-**Process:**
-- Review all documentation
-- Verify collateral eligibility
-- Check borrowing base calculations
-- Click **"Approve"**
-
-**Result:**
-- Status changes to **APPROVED**
-- Funding notice automatically generated
-- FT tokens created for borrower
-
-#### 2. Reject Funding Request
-
-**Process:**
-- Provide detailed rejection reason
-- Suggest improvements if applicable
-- Click **"Reject"**
-
-**Result:**
-- Status changes to **REJECTED**
-- Final state - no further actions possible
-- Borrower can create new funding request
-
-#### 3. Request Changes
-
-**Process:**
-- Specify required changes
-- Set deadline for resubmission
-- Click **"Request Changes"**
-
-**Result:**
-- Status changes to **CHANGES_REQUESTED**
-- Borrower can edit and resubmit
-- Maintains revision history
-
-## Status Workflow
-
-### Status Progression
-
+```mermaid
+flowchart LR
+    A[Changes Requested] -->|Review Comments| B[Edit Request]
+    B -->|Make Changes| C[Resubmit]
+    C -->|Under Review| D[FA Reviews Again]
 ```
-DRAFT → FAReview → APPROVED ✅
-                    ↓
-            Auto-Generate Funding Notice
-                    ↓
-            Create FT Tokens
-                    ↓
-            Funding Notice: PENDING_ESIGN
 
-Alternative Outcomes:
-FAReview → REJECTED (final)
-FAReview → CHANGES_REQUESTED → DRAFT → FAReview
-```
+<Steps>
+  <Step title="Check the Comments">
+    Review what the Facility Agent needs you to change.
+  </Step>
+  <Step title="Make Changes">
+    Update your funding request accordingly. Changes save automatically.
+  </Step>
+  <Step title="Resubmit">
+    Submit again for another review.
+  </Step>
+</Steps>
 
-### Status Descriptions
+---
 
-- **DRAFT** - Initial creation state, fully editable
-- **FAReview** - Submitted for facility agent review
-- **APPROVED** - Approved by facility agent (triggers funding notice generation)
-- **REJECTED** - Rejected by facility agent (final state)
-- **CHANGES_REQUESTED** - Facility agent requests modifications
+## Understanding Your Status
 
-## Auto-Generation Process
+| Status | What It Means | Can You Edit? |
+|--------|--------------|---------------|
+| **Draft** | You're working on it | ✅ Yes |
+| **Under Review** | FA is reviewing | ❌ No |
+| **Approved** | Request approved! | ❌ No |
+| **Rejected** | Request declined | ❌ No |
+| **Changes Requested** | Revisions needed | ✅ Yes |
 
-### Funding Notice Creation
+---
 
-When a funding request is approved:
+## Pre-populated Information
 
-1. **Automatic Generation** - System creates funding notice
-2. **Pre-population** - Data copied from funding request
-3. **Status Setting** - Initial status: PENDING_ESIGN
-4. **Token Preparation** - FT tokens prepared for creation
+Some information is automatically filled in from your Master Commitment:
 
-### FT Token Creation
+| Information | Source |
+|------------|--------|
+| **Facility Name** | From your Master Commitment |
+| **Total Commitment** | Maximum facility amount |
+| **Advance Rate** | From your facility terms |
+| **Current Balance** | Outstanding amount already borrowed |
+| **Available Capacity** | How much you can still borrow |
 
-After DocuSign completion:
+---
 
-1. **Token Deployment** - FT contract deployed
-2. **Token Minting** - Tokens minted for borrower
-3. **Distribution Setup** - Lender token distribution prepared
-4. **Status Update** - Funding notice status: ESIGN_COMPLETED
+## Email Notifications
 
-## Best Practices
+The Facility Agent receives an email when you submit:
 
-### Documentation
+<Info>
+**What They See:**
+- Your funding request details
+- Link to review in the platform
+- Your contact information
 
-- **Complete Information** - Provide detailed descriptions
-- **Accurate Amounts** - Ensure requested amounts are realistic
-- **Current Documents** - Upload recent financial statements
-- **Clear Purpose** - Specify exact use of funds
+This helps ensure quick review and response.
+</Info>
 
-### Submission Timing
+---
 
-- **Review Period** - Allow time for facility agent review
-- **Documentation Ready** - Have all documents prepared
-- **Capacity Check** - Verify available borrowing capacity
-- **Compliance** - Ensure all regulatory requirements met
+## Common Questions
 
-### Communication
+<AccordionGroup>
+  <Accordion title="Why can't I create a funding request?" icon="question">
+    Make sure your Master Commitment is **ACTIVE**. If it's still Draft or Awaiting Lender Approval, you need to wait for a lender to approve it first.
+  </Accordion>
+  
+  <Accordion title="I have a draft but want to start over" icon="trash">
+    You can only have one draft at a time. Either complete your current draft and submit it, or contact your administrator to help cancel it.
+  </Accordion>
+  
+  <Accordion title="Why was my request rejected?" icon="circle-xmark">
+    Common reasons include:
+    - Request amount exceeds available capacity
+    - Insufficient collateral documentation
+    - Missing required information
+    - Collateral doesn't meet eligibility rules
+    
+    Review the rejection reason and address those issues in a new request.
+  </Accordion>
+  
+  <Accordion title="How is borrowing base calculated?" icon="calculator">
+    The system calculates your borrowing base automatically using:
+    - Your mapped loan values
+    - Advance rate from your facility
+    - Any outstanding draws
+    - Collateral eligibility rules
+    
+    You don't need to calculate this yourself—the platform does it for you.
+  </Accordion>
+  
+  <Accordion title="Can I cancel a submitted request?" icon="ban">
+    Once submitted, you cannot cancel. You must wait for the Facility Agent to either approve, reject, or request changes.
+  </Accordion>
+</AccordionGroup>
 
-- **Clear Descriptions** - Provide detailed explanations
-- **Timely Responses** - Respond quickly to change requests
-- **Professional Tone** - Maintain professional communication
-- **Follow-up** - Check status regularly
+---
 
-## Troubleshooting
+## What Happens When Approved?
 
-### Common Issues
+When your funding request is approved:
 
-**Cannot Submit Funding Request:**
-- Check master commitment status (must be ACTIVE)
-- Verify all required fields completed
-- Ensure documents uploaded successfully
+1. **Status Updates** - Your request shows as "Approved"
+2. **Funding Notice Created** - The system automatically generates a Funding Notice
+3. **Token Process Begins** - FT tokens are prepared for distribution
+4. **Notifications Sent** - All parties are notified of the approval
 
-**Status Not Updating:**
-- Refresh the page
-- Check network connection
-- Contact support if issue persists
-
-**Document Upload Failed:**
-- Check file format (PDF preferred)
-- Verify file size limits
-- Ensure stable internet connection
-
-### Getting Help
-
-If you encounter issues:
-
-1. **Check Status** - Verify current status and requirements
-2. **Review Validation** - Check for any validation errors
-3. **Contact Support** - Reach out to support@intainft.com
-4. **Documentation** - Refer to this guide for detailed steps
+---
 
 ## Next Steps
 
 After your funding request is approved:
 
-1. **Funding Notice** - Review auto-generated funding notice
-2. **DocuSign Process** - Complete electronic signature
-3. **Token Management** - Approve token transfers
-4. **Fund Receipt** - Confirm receipt of funds from lenders
-
-<Card title="Funding Notice Process" icon="coins" href="/user-guide/credit-facility/funding-notice">
-  Learn about the funding notice process and FT token management.
+<Card title="Funding Notice & Token Distribution" icon="coins" href="/user-guide/credit-facility/funding-notice">
+  Learn about how the Funding Notice is generated and how you receive your funds through token distribution.
 </Card>

@@ -1,236 +1,323 @@
 ---
-title: "Credit Facility Flow Overview"
-description: "Complete overview of the credit facility workflow from term sheet to funding notice"
+title: "Workflow Overview"
+description: "Understanding the complete credit facility workflow from term sheet to funding"
+sidebarTitle: "Workflow Overview"
 ---
 
-## Credit Facility Workflow Overview
+## Understanding the Credit Facility Process
 
-The Intain Markets Credit Facility Platform streamlines the entire credit facility lifecycle through a structured, automated workflow that ensures transparency, security, and efficiency. This guide provides a comprehensive overview of the complete process.
+The Credit Facility Module guides you through a structured process to obtain funding. Each stage has clear steps and status indicators so you always know where you are in the process.
 
-## Workflow Stages
+<Card title="Access Platform" icon="rocket" href="https://intainmarkets.us/" target="_blank">
+  Launch Intain Markets to start your credit facility journey
+</Card>
 
-The credit facility process consists of four main stages, each building upon the previous one:
+---
 
-### **Stage 1: Term Sheet Creation & Approval**
-- Borrower creates term sheet with facility terms
-- DocuSign integration for electronic signatures
-- Facility agent review and approval
-- **Auto-trigger**: Master commitment creation upon approval
+## The Four Stages Explained
 
-### **Stage 2: Master Commitment Configuration**
-- Auto-created from approved term sheet
-- Facility agent configures lender groups and rules
-- Lender approval through DocuSign
-- **Auto-trigger**: Status becomes ACTIVE upon lender approval
+<img src="/images/issuerCreditFacilityDashboard.png" alt="Issuer Credit Facility Dashboard" className="rounded-lg shadow-lg" />
 
-### **Stage 3: Funding Request Processing**
-- Borrower creates funding requests against ACTIVE commitments
-- Facility agent review and approval
-- **Auto-trigger**: Funding notice generation upon approval
+### Stage 1: Term Sheet (Your Proposal)
 
-### **Stage 4: Funding Notice & Token Management**
-- Auto-generated funding notice with DocuSign
-- FT token creation and distribution
-- Borrower token transfer approval
-- Lender fund transfer confirmations
+The **Term Sheet** is your initial proposal document. Think of it as your application for a credit facility.
+
+<AccordionGroup>
+  <Accordion title="What You Do (Borrower)" icon="building" defaultOpen>
+    1. **Create** a new term sheet with your facility requirements
+    2. **Upload** supporting documents (financial statements, collateral information)
+    3. **Sign** the term sheet electronically using Zoho Sign
+    4. **Submit** for Facility Agent review
+    5. **Revise** if changes are requested, then resubmit
+  </Accordion>
+  
+  <Accordion title="What the Facility Agent Does" icon="user-tie">
+    1. **Reviews** your term sheet and documentation
+    2. **Decides** to approve, reject, or request changes
+    3. **Approves** → A Master Commitment is automatically created for you
+  </Accordion>
+  
+  <Accordion title="Status Guide" icon="circle-info">
+    | What You See | What It Means |
+    |-------------|---------------|
+    | **Draft** | You're still working on it—edit freely |
+    | **Signed** | You've signed it—ready to submit |
+    | **Under Review** | Facility Agent is reviewing |
+    | **Accepted** | Congratulations! Moving to Master Commitment |
+    | **Rejected** | Declined—you can create a new one |
+    | **Changes Needed** | Make the requested changes and resubmit |
+  </Accordion>
+</AccordionGroup>
+
+---
+
+### Stage 2: Master Commitment (The Agreement)
+
+Once your term sheet is approved, the system automatically creates a **Master Commitment**. This is the formal agreement that defines your credit facility.
+
+```mermaid
+flowchart LR
+    A[Term Sheet Approved] -->|Auto-Create| B[Master Commitment Draft]
+    B -->|FA Configures Lenders| C[Ready for Approval]
+    C -->|Lender Signs| D[ACTIVE - Ready for Funding!]
+```
+
+<AccordionGroup>
+  <Accordion title="What Happens Automatically" icon="bolt">
+    - Master Commitment is created with your term sheet details
+    - Facility Agent is notified to configure the lenders
+    - You don't need to do anything at this stage
+  </Accordion>
+  
+  <Accordion title="What the Facility Agent Does" icon="user-tie">
+    1. **Adds lenders** who will fund your facility
+    2. **Sets rules** for eligible collateral
+    3. **Submits** for lender approval
+  </Accordion>
+  
+  <Accordion title="What Lenders Do" icon="landmark">
+    1. **Review** the master commitment details
+    2. **Sign** electronically to approve participation
+    3. **One approval activates** the commitment
+  </Accordion>
+  
+  <Accordion title="Status Guide" icon="circle-info">
+    | What You See | What It Means |
+    |-------------|---------------|
+    | **Draft** | Facility Agent is setting it up |
+    | **Awaiting Approval** | Lenders are reviewing |
+    | **ACTIVE** | You can now request funding! |
+  </Accordion>
+</AccordionGroup>
+
+<img src="/images/facilityAgentCreditFacilityDashboard1.png" alt="Facility Agent Dashboard - Master Commitment" className="rounded-lg shadow-lg" />
+
+---
+
+### Stage 3: Funding Request (Request Your Funds)
+
+With an **ACTIVE** Master Commitment, you can now request funds whenever you need them.
+
+<AccordionGroup>
+  <Accordion title="What You Do (Borrower)" icon="building" defaultOpen>
+    1. **Create** a new funding request
+    2. **Specify** how much you need and when
+    3. **Upload** collateral documentation if needed
+    4. **Submit** for Facility Agent review
+    5. **Revise** if changes are requested
+  </Accordion>
+  
+  <Accordion title="What the Facility Agent Does" icon="user-tie">
+    1. **Reviews** your funding request and borrowing capacity
+    2. **Checks** collateral documentation
+    3. **Decides** to approve, reject, or request changes
+    4. **Approves** → A Funding Notice is automatically generated
+  </Accordion>
+  
+  <Accordion title="Status Guide" icon="circle-info">
+    | What You See | What It Means |
+    |-------------|---------------|
+    | **Draft** | You're preparing your request |
+    | **Under Review** | Facility Agent is reviewing |
+    | **Approved** | Great! Funding Notice is being created |
+    | **Rejected** | Request declined—review the reason |
+    | **Changes Needed** | Make changes and resubmit |
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+**Tip:** You can only have one draft funding request at a time per Master Commitment. Complete or cancel your current request before starting a new one.
+</Note>
+
+---
+
+### Stage 4: Funding Notice & Tokens (Receive Your Funds)
+
+When your funding request is approved, the system automatically generates a **Funding Notice** and begins the token distribution process.
+
+```mermaid
+flowchart LR
+    A[Request Approved] -->|Auto-Generate| B[Funding Notice Created]
+    B -->|Tokens Prepared| C[Ready for Your Approval]
+    C -->|You Approve| D[Lenders Can See It]
+    D -->|Lenders Transfer| E[Funds Received! ✅]
+```
+
+<AccordionGroup>
+  <Accordion title="What Happens Automatically" icon="bolt">
+    - Funding Notice is created from your approved request
+    - Token amounts are calculated for each lender
+    - Blockchain tokens are prepared
+  </Accordion>
+  
+  <Accordion title="What the Facility Agent Does" icon="user-tie">
+    1. **Reviews** token distribution
+    2. **Signs** funding notice for each lender
+  </Accordion>
+  
+  <Accordion title="What You Do (Borrower)" icon="building">
+    1. **Review** the token distribution
+    2. **Approve** the token transfer
+    3. This makes the funding notice visible to lenders
+  </Accordion>
+  
+  <Accordion title="What Lenders Do" icon="landmark">
+    1. **View** the funding notice (after your approval)
+    2. **Transfer** funds to your account
+    3. **Confirm** the transfer in the platform
+  </Accordion>
+  
+  <Accordion title="Status Guide" icon="circle-info">
+    | What You See | What It Means |
+    |-------------|---------------|
+    | **Preparing Tokens** | System is setting up tokens |
+    | **Tokens Ready** | Waiting for your approval |
+    | **Approved** | Lenders can now see and transfer funds |
+    | **Funds Transferred** | Lenders have confirmed payment |
+  </Accordion>
+</AccordionGroup>
+
+---
 
 ## Complete Workflow Diagram
 
 ```mermaid
-graph TD
-    A[User Registration & Login] --> B[Create Term Sheet]
-    B --> C[DocuSign Term Sheet]
-    C --> D[Submit for Facility Agent Review]
-    D --> E[Facility Agent Review]
-    E --> F{Approved?}
-    F -->|Yes| G[Auto-Create Master Commitment]
-    F -->|No| H[Request Changes]
-    H --> B
-    G --> I[Configure Lender Groups & Rules]
-    I --> J[Submit for Lender Approval]
-    J --> K[Lender DocuSign Approval]
-    K --> L[Master Commitment ACTIVE]
-    L --> M[Create Funding Request]
-    M --> N[Submit for Facility Agent Review]
-    N --> O[Facility Agent Approval]
-    O --> P[Auto-Generate Funding Notice]
-    P --> Q[Borrower DocuSign Funding Notice]
-    Q --> R[Create FT Tokens]
-    R --> S[Borrower Approve Token Transfer]
-    S --> T[Funding Notice ISSUED]
-    T --> U[Lenders Confirm Fund Transfers]
-    U --> V[Map Loans to Credit Facility]
-    V --> W[Monthly Servicer Reports]
+sequenceDiagram
+    participant You as You (Borrower)
+    participant FA as Facility Agent
+    participant L as Lender
+    participant Sys as System
+
+    rect rgb(240, 248, 255)
+        Note over You,Sys: Stage 1: Term Sheet
+        You->>Sys: Create Term Sheet
+        You->>Sys: Upload Documents
+        You->>Sys: Sign Electronically
+        You->>FA: Submit for Review
+        FA->>Sys: Review & Approve
+        Sys->>Sys: Auto-Create Master Commitment
+    end
+
+    rect rgb(240, 255, 240)
+        Note over You,Sys: Stage 2: Master Commitment
+        FA->>Sys: Configure Lenders & Rules
+        FA->>L: Submit for Approval
+        L->>Sys: Sign & Approve
+        Sys->>Sys: Status → ACTIVE
+    end
+
+    rect rgb(255, 250, 240)
+        Note over You,Sys: Stage 3: Funding Request
+        You->>Sys: Create Funding Request
+        You->>FA: Submit for Review
+        FA->>Sys: Approve Request
+        Sys->>Sys: Auto-Generate Funding Notice
+    end
+
+    rect rgb(255, 240, 245)
+        Note over You,Sys: Stage 4: Funding Notice
+        Sys->>FA: Funding Notice Ready
+        FA->>Sys: Sign for Each Lender
+        You->>Sys: Approve Token Transfer
+        L->>You: Transfer Funds
+        L->>Sys: Confirm Transfer
+    end
 ```
 
-## Key Components
+---
 
-### **1. Term Sheet Management**
+## Status Quick Reference
 
-**Purpose**: Define initial terms and conditions for the credit facility
+### Term Sheet Statuses
 
-**Key Features**:
-- Digital term sheet creation
-- DocuSign electronic signatures
-- Facility agent review workflow
-- Version control and revisions
-- Auto-save functionality
+| Status | Can You Edit? | What's Next? |
+|--------|---------------|--------------|
+| **Draft** | ✅ Yes | Sign and submit |
+| **Signed** | ❌ No | Submit for review |
+| **Under Review** | ❌ No | Wait for decision |
+| **Accepted** | ❌ No | Master Commitment created |
+| **Rejected** | ❌ No | Create new term sheet |
+| **Changes Needed** | ✅ Yes | Edit and resubmit |
 
-**Status Flow**:
-```
-Draft → BorrowerSigned → FAReview → Accepted/Rejected/CHANGES_REQUESTED
-```
+### Master Commitment Statuses
 
-### **2. Master Commitment Configuration**
+| Status | What It Means | What's Next? |
+|--------|---------------|--------------|
+| **Draft** | FA is setting up | Wait for lender submission |
+| **Awaiting Approval** | Lenders reviewing | Wait for lender approval |
+| **ACTIVE** | Ready for use! | Create funding requests |
 
-**Purpose**: Formalize the credit facility agreement with detailed terms
+### Funding Request Statuses
 
-**Key Features**:
-- Auto-creation from approved term sheets
-- Lender group management
-- Collateral eligibility rules
-- Commitment amount allocation
-- DocuSign lender approval
+| Status | Can You Edit? | What's Next? |
+|--------|---------------|--------------|
+| **Draft** | ✅ Yes | Complete and submit |
+| **Under Review** | ❌ No | Wait for decision |
+| **Approved** | ❌ No | Funding notice generated |
+| **Rejected** | ❌ No | Create new request |
+| **Changes Needed** | ✅ Yes | Edit and resubmit |
 
-**Status Flow**:
-```
-Draft → PendingLenderApproval → ACTIVE
-```
+### Funding Notice Statuses
 
-### **3. Funding Request Processing**
+| Status | What's Happening? | What's Next? |
+|--------|-------------------|--------------|
+| **Preparing Tokens** | System setup | Wait for tokens |
+| **Tokens Ready** | Waiting for you | Approve transfer |
+| **Approved** | Visible to lenders | Lenders transfer funds |
+| **Funds Transferred** | Complete! | Funds received |
 
-**Purpose**: Request specific funding amounts against active commitments
+---
 
-**Key Features**:
-- Funding request creation
-- Collateral documentation
-- Facility agent approval
-- Auto-generation of funding notices
-- Real-time status tracking
+## Key Things to Remember
 
-**Status Flow**:
-```
-DRAFT → FAReview → APPROVED/REJECTED/CHANGES_REQUESTED
-```
+<Warning>
+**Important Rules:**
 
-### **4. Funding Notice & Token Management**
+1. **Master Commitments are automatic** - You cannot create them manually. They're auto-created when your term sheet is approved.
 
-**Purpose**: Execute funding and manage token distribution
+2. **Funding Notices are automatic** - You cannot create them manually. They're auto-generated when your funding request is approved.
 
-**Key Features**:
-- Auto-generated funding notices
-- FT token creation and distribution
-- Borrower token transfer approval
-- Individual lender tracking
-- Fund transfer confirmations
+3. **One lender approval activates** - Any single lender approval activates the master commitment.
 
-**Status Flow**:
-```
-PENDING_ESIGN → ESIGN_COMPLETED → ISSUED
-```
+4. **Lenders see notices after your approval** - Lenders can only see funding notices after you approve the token transfer.
+</Warning>
 
-## Automation Features
+---
 
-### **Auto-Creation Workflows**
-- **Master Commitment**: Automatically created when term sheet is approved
-- **Funding Notice**: Automatically generated when funding request is approved
-- **FT Tokens**: Automatically created after funding notice DocuSign completion
+## Contract Types
 
-### **Status Transitions**
-- **Automatic Status Updates**: System automatically updates statuses based on actions
-- **Real-Time Notifications**: Users receive notifications for status changes
-- **Audit Trails**: Complete history of all status changes and actions
+Your Master Commitment can be set up in two ways:
 
-### **Document Management**
-- **IPFS Storage**: All documents stored in decentralized IPFS
-- **DocuSign Integration**: Electronic signatures for all documents
-- **Version Control**: Complete document versioning and history
-- **Secure Access**: Role-based document access control
+<Tabs>
+  <Tab title="Single Contract">
+    **Standard Setup**
+    
+    All lenders share one master commitment contract. This is simpler and works well for most credit facilities.
+    
+    - One agreement covers all lenders
+    - Token distribution based on each lender's share
+    - Easier to manage
+  </Tab>
+  <Tab title="Multiple Contracts">
+    **Advanced Setup**
+    
+    Each lender can have their own separate sub-commitment. Used for complex syndication arrangements.
+    
+    - Parent commitment with individual sub-commitments
+    - More flexibility for different lender terms
+    - Used for larger, more complex facilities
+  </Tab>
+</Tabs>
 
-## User Roles & Responsibilities
-
-### **Issuer (Borrower)**
-- Create and manage term sheets
-- Submit funding requests
-- Approve token transfers
-- Manage loan collateral
-- Review facility performance
-
-### **Facility Agent (Underwriter)**
-- Review and approve term sheets
-- Configure master commitments
-- Approve funding requests
-- Manage lender relationships
-- Monitor facility performance
-
-### **Lender (Investor)**
-- Review master commitments
-- Approve funding requests
-- Confirm fund transfers
-- Monitor investment performance
-- Track token distributions
-
-### **Servicer**
-- Upload monthly loan tapes
-- Generate performance reports
-- Manage loan servicing
-- Track loan performance
-- Provide borrower support
-
-## Key Benefits
-
-### **Efficiency**
-- **Automated Workflows**: Reduce manual processing time
-- **Digital Signatures**: Eliminate paper-based processes
-- **Real-Time Updates**: Instant status notifications
-- **Streamlined Approval**: Faster decision-making process
-
-### **Transparency**
-- **Blockchain Records**: Immutable transaction history
-- **Audit Trails**: Complete action tracking
-- **Real-Time Visibility**: Live status updates
-- **Document Integrity**: Secure document storage
-
-### **Security**
-- **Role-Based Access**: Granular permission control
-- **Encrypted Storage**: Secure data protection
-- **Digital Signatures**: Legally binding e-signatures
-- **Audit Compliance**: Complete regulatory compliance
-
-### **Scalability**
-- **Cloud-Based**: Scalable infrastructure
-- **API Integration**: Easy third-party integration
-- **Multi-Tenant**: Support for multiple organizations
-- **Global Access**: Worldwide platform access
-
-## Getting Started
-
-### **For New Users**
-1. **Register Account**: Complete user registration
-2. **Verify Identity**: Complete KYC/AML verification
-3. **Access Platform**: Login to your dashboard
-4. **Start Process**: Create your first term sheet or review opportunities
-
-### **For Existing Users**
-1. **Login**: Access your account
-2. **Review Dashboard**: Check current status and opportunities
-3. **Continue Process**: Resume where you left off
-4. **Monitor Progress**: Track all active processes
+---
 
 ## Next Steps
 
-<Card title="Term Sheet Management" icon="file-contract" href="/user-guide/credit-facility/term-sheet">
-  Learn how to create and manage term sheets
-</Card>
-
-<Card title="Master Commitment Setup" icon="handshake" href="/user-guide/credit-facility/master-commitment">
-  Understand master commitment configuration
-</Card>
-
-<Card title="Funding Request Process" icon="money-bill-wave" href="/user-guide/credit-facility/funding-request">
-  Learn about funding request submission and approval
-</Card>
-
-<Card title="Funding Notice & Tokens" icon="coins" href="/user-guide/credit-facility/funding-notice">
-  Understand funding notice and token management
-</Card>
+<CardGroup cols={2}>
+  <Card title="Roles & Permissions" icon="users" href="/user-guide/credit-facility/roles-permissions">
+    Understand what each user role can do
+  </Card>
+  <Card title="Create Your First Term Sheet" icon="file-contract" href="/user-guide/credit-facility/term-sheet">
+    Step-by-step guide to get started
+  </Card>
+</CardGroup>
