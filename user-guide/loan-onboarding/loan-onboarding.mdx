@@ -1,0 +1,326 @@
+---
+title: "Loan Onboarding"
+sidebarTitle: "Loan Onboarding"
+description: "Complete guide to uploading loan tapes, mapping fields, and processing loans on Intain Markets"
+---
+
+# Loan Onboarding
+
+Loan onboarding is the first step in bringing your loans onto the Intain Markets platform. This guide covers everything you need to know about uploading loan tapes, mapping fields, and processing loans.
+
+## What is Loan Onboarding?
+
+Loan onboarding involves importing loan data from Excel or CSV files, standardizing it to a common format, and preparing it for verification and tokenization. The process ensures data consistency and quality before loans can be verified and minted as NFTs.
+
+## Supported File Formats
+
+<CardGroup cols={2}>
+  <Card title="Excel Files" icon="file-excel">
+    **.xlsx**, **.xls**, **.xlsm** formats supported
+  </Card>
+  <Card title="CSV Files" icon="file-csv">
+    Comma-separated values (**.csv**) format supported
+  </Card>
+</CardGroup>
+
+<Warning>
+  **File Size Limit:** Maximum file size limits apply. For very large datasets, consider splitting into multiple files.
+</Warning>
+
+## Step-by-Step Loan Onboarding Process
+
+### Step 1: Access Imports Tab
+
+Navigate to the **Imports** tab from your Issuer dashboard. This is where you'll upload and process loan tapes.
+
+<Frame caption="Issuer Imports Tab">
+  <img src="/images/Issuer_Imports_Tab.png" alt="Imports Tab" />
+</Frame>
+
+### Step 2: Upload Loan Tape
+
+<Steps>
+  <Step title="Click Upload">
+    Click the **Upload** or **Import** button to open the file selection dialog.
+  </Step>
+  
+  <Step title="Select File">
+    Choose your loan tape file (Excel or CSV) from your local system.
+  </Step>
+  
+  <Step title="Enter Details">
+    Provide required information:
+    - **Asset Class**: Type of loans (Auto Loan, Mortgage, Consumer, etc.)
+    - **As Of Date**: Snapshot date for the loan data
+    - **File Name**: Descriptive name for this upload
+  </Step>
+  
+  <Step title="Upload">
+    Click **Upload** to begin file processing. The system will analyze the file structure.
+  </Step>
+</Steps>
+
+### Step 3: Field Mapping
+
+After upload, the system automatically detects field names and attempts to map them to standard platform fields.
+
+#### Auto-Mapping Process
+
+The platform uses AI-powered field mapping to automatically match your loan tape columns to standard fields:
+
+**Standard Fields Include:**
+- Loan ID
+- Current Principal Balance
+- Original Principal Balance
+- Interest Rate
+- Borrower Information
+- Collateral Details
+- Payment Information
+- And many more...
+
+<Frame caption="Field Mapping Interface">
+  <img src="/images/Issuer_Imports_MapStandardFieldsWithLoanTape.png" alt="Field Mapping" />
+</Frame>
+
+#### AI Mapping Models
+
+The platform offers two AI mapping models:
+
+**Basic AI Model:**
+- Maps fields based on name matching
+- Example: If loan tape column has "interest" in the name, it matches to standard fields containing "interest" (e.g., "Interest Rate", "Gross Interest")
+- Simple and fast matching algorithm
+- Best for standard loan tape formats with clear field names
+
+**Intelligent AI Model:**
+- Analyzes field context and data patterns
+- Understands semantic meaning and relationships
+- Can map fields even with different naming conventions
+- More accurate for non-standard or custom loan tape formats
+
+**How It Works:**
+1. System analyzes your loan tape column headers
+2. AI model (Basic or Intelligent) automatically maps fields to standard format
+3. Only fields that can be mapped are shown in the mapping result
+4. Unmapped columns are preserved in the loan record under `unmappedcolumns` for reference
+
+#### Review and Confirm Mappings
+
+<Steps>
+  <Step title="Review Mapped Fields">
+    The system displays the AI-generated mappings. Review the mapped fields to ensure accuracy.
+  </Step>
+  
+  <Step title="Verify Required Fields">
+    Ensure all required fields are mapped:
+    - **Loan ID**: Unique identifier (required)
+    - **Principal Balance**: Current or original balance (required)
+    - **Interest Rate**: Loan interest rate (recommended)
+  </Step>
+  
+  <Step title="Confirm Mapping">
+    Click **Save Mapping** or **Continue** to proceed with processing.
+    - Mapped fields will be standardized
+    - Unmapped columns will be preserved in `unmappedcolumns`
+  </Step>
+</Steps>
+
+<Info>
+  **Unmapped Columns**: Columns that aren't mapped to standard fields are preserved in the loan record under `unmappedcolumns` for reference but won't be standardized.
+</Info>
+
+### Step 4: Process Loans
+
+After mapping is confirmed, the system processes the loan tape:
+
+**Processing Steps:**
+1. **Standardization**: Converts loan data to standard format
+2. **Validation**: Checks for required fields and data quality
+3. **Data Transformation**: Applies date conversions, number formatting
+4. **PII Encryption**: Encrypts personally identifiable information
+5. **Database Storage**: Stores loans in issuer's database
+
+**Processing Status:**
+- Loans are stored with status: `workflow_status: "STANDARDISED"`
+- Initial status: `Status: "Unmapped"` (not yet mapped to pool)
+- Verification status: `verificationSource: "No"`
+- NFT status: `nftLoanStatus: "Not Minted"`
+
+### Step 5: View Onboarded Loans
+
+After processing, view your onboarded loans in the **Loan Registry** tab.
+
+<Frame caption="View Onboarded Loans">
+  <img src="/images/Issuer_Import_ViewOnboardedLoans.png" alt="Onboarded Loans" />
+</Frame>
+
+**Loan Registry Features:**
+- **Filter Loans**: Filter by asset class, date, status, batch, pool, and more
+- **Search**: Search by Loan ID or other identifiers
+- **View Details**: Click on any loan to see full details including:
+  - **Mapped Columns**: Standardized fields that were successfully mapped
+  - **Unmapped Columns**: Original columns that couldn't be mapped (preserved for reference)
+- **Export**: Download loan data in Excel/CSV format
+- **Batch Actions**: Select loans to add to batch (if eligible)
+- **Pool Actions**: Select loans to map to pool (if eligible)
+
+**Important Eligibility Rules:**
+- Loans already added to a batch **cannot** be added to another batch or mapped to a pool
+- Loans already mapped to a pool **cannot** be mapped to another pool or added to a batch
+- The **Add to Batch** and **Map to Pool** buttons will be **disabled** for ineligible loans
+- Only loans with `workflow_status: "STANDARDISED"` and not in any batch/pool are eligible
+
+<Frame caption="Loan Registry Tab">
+  <img src="/images/Issuer_LoanRegistry_Tab.png" alt="Loan Registry" />
+</Frame>
+
+## Loan Data Structure
+
+### Standard Loan Fields
+
+After processing, loans contain standardized fields:
+
+| Category | Fields |
+|----------|--------|
+| **Identifiers** | Loan ID, Account Number, Deal Name |
+| **Balances** | Current Principal Balance, Original Principal Balance |
+| **Rates** | Interest Rate, APR |
+| **Dates** | Origination Date, Maturity Date, As Of Date |
+| **Borrower** | Borrower Name (encrypted), FICO Score, DTI |
+| **Collateral** | Collateral Type, LTV, Property Value |
+| **Payments** | Payment Amount, Payment Frequency |
+| **Status** | Loan Status, Delinquency Status |
+
+### Static vs Dynamic Fields
+
+**Static Fields** (preserved across monthly updates):
+- `workflow_status`
+- `nftLoanStatus`
+- `verificationSource`
+- `Status` (pool mapping)
+
+**Dynamic Fields** (updated monthly):
+- Current Principal Balance
+- Payment History
+- Delinquency Status
+- As Of Date
+
+## Data Quality Checks
+
+The system performs several quality checks during processing:
+
+<CardGroup cols={2}>
+  <Card title="Required Fields" icon="check-circle">
+    Validates that essential fields (Loan ID, Balance) are present
+  </Card>
+  
+  <Card title="Data Types" icon="database">
+    Ensures numeric fields contain numbers, dates are valid
+  </Card>
+  
+  <Card title="Uniqueness" icon="fingerprint">
+    Checks for duplicate Loan IDs within the same upload
+  </Card>
+  
+  <Card title="Completeness" icon="clipboard-check">
+    Identifies missing or incomplete data fields
+  </Card>
+</CardGroup>
+
+## Handling Errors
+
+### Common Issues and Solutions
+
+<Tabs>
+  <Tab title="Mapping Errors">
+    **Issue**: Fields not mapping correctly
+    
+    **Solution**:
+    1. Review the field names in your loan tape
+    2. Manually adjust mappings in the mapping interface
+    3. Check if field names match standard naming conventions
+    4. Contact support if standard fields are missing
+  </Tab>
+  
+  <Tab title="Data Format Errors">
+    **Issue**: Dates or numbers not recognized
+    
+    **Solution**:
+    1. Ensure dates are in standard format (MM/DD/YYYY or YYYY-MM-DD)
+    2. Remove currency symbols from numeric fields
+    3. Check for hidden characters or formatting
+    4. Re-export from source system if needed
+  </Tab>
+  
+  <Tab title="Duplicate Loans">
+    **Issue**: Same Loan ID appears multiple times
+    
+    **Solution**:
+    1. Review loan tape for duplicates
+    2. Remove duplicate rows before upload
+    3. System will flag duplicates during processing
+  </Tab>
+  
+  <Tab title="Missing Required Fields">
+    **Issue**: Required fields are empty
+    
+    **Solution**:
+    1. Ensure Loan ID is present for all loans
+    2. Fill in required fields in source data
+    3. System will flag loans with missing required data
+  </Tab>
+</Tabs>
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="File Preparation" icon="file-check">
+    - Use consistent column names across uploads
+    - Include all required fields
+    - Remove empty rows/columns
+    - Validate data before upload
+  </Card>
+  
+  <Card title="Field Mapping" icon="arrows-rotate">
+    - Review auto-mappings carefully
+    - Maintain consistent mappings across uploads
+    - Document any custom field mappings
+    - Verify required fields are mapped
+  </Card>
+  
+  <Card title="Data Quality" icon="shield-check">
+    - Validate Loan IDs are unique
+    - Ensure dates are in correct format
+    - Check numeric fields for errors
+    - Review data completeness
+  </Card>
+  
+  <Card title="Organization" icon="folder-tree">
+    - Use descriptive file names
+    - Include As Of Date in filename
+    - Keep backup copies of original files
+    - Document any data transformations
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+After loans are onboarded:
+
+1. **Review Loans**: Check loan registry for data accuracy
+2. **Create Batch**: Group loans for verification
+3. **Verify**: Complete self-certification or submit to VA
+4. **Mint NFTs**: Create blockchain certificates after verification
+
+---
+
+<CardGroup cols={2}>
+  <Card title="Previous: Roles & Permissions" icon="arrow-left" href="/user-guide/loan-onboarding/roles-permissions">
+    Go back to roles and permissions
+  </Card>
+  
+  <Card title="Next: Batch Management" icon="arrow-right" href="/user-guide/loan-onboarding/batch-management">
+    Learn about creating and managing batches
+  </Card>
+</CardGroup>
+
