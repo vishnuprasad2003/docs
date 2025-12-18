@@ -1,0 +1,85 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "docsPath": "docs",
+  "theme": "mint",
+  "name": "Intain Markets",
+  "colors": {
+    "primary": "#0F4C81",
+    "light": "#3B82F6",
+    "dark": "#0A2E4D"
+  },
+  "favicon": "/favicon.png",
+  "logo": {
+    "light": "/logo/intainLogo.jpeg",
+    "dark": "/logo/intainLogo.jpeg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:support@intainft.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Platform Access",
+      "href": "https://intainmarkets.us/"
+    }
+  },
+  "anchors": [
+    {
+      "name": "Platform Access",
+      "url": "https://intainmarkets.us/",
+      "icon": "rocket"
+    },
+    {
+      "name": "Support",
+      "url": "mailto:support@intainft.com",
+      "icon": "headset"
+    }
+  ],
+  "footer": {
+    "socials": {
+      "website": "https://www.intainft.com/",
+      "linkedin": "https://www.linkedin.com/company/intain",
+      "x": "https://x.com/intainft"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Loan Onboarding",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "index",
+              "user-guide/loan-onboarding/overview",
+              "user-guide/loan-onboarding/roles-permissions"
+            ]
+          },
+          {
+            "group": "Loan Management",
+            "pages": [
+              "user-guide/loan-onboarding/loan-onboarding",
+              "user-guide/loan-onboarding/batch-management",
+              "user-guide/loan-onboarding/verification-flow"
+            ]
+          },
+          {
+            "group": "NFT & Certificates",
+            "pages": [
+              "user-guide/loan-onboarding/nft-minting",
+              "user-guide/loan-onboarding/va-operations"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": true
+  }
+}
+
